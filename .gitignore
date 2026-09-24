@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Local databases
+*.db
+*.sqlite3
+backend/aml_dev.db
+backend/test_aml.db
+test_aml.db
+aml_dev.db
+
+# Environment variables
+.env
+.env.production
+.env.local
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# System dotfiles in /root
+.*
+!.gitignore
+!.dockerignore
+
+# Non-code directories
+downloads/
+project/

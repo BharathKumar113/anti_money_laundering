@@ -1,0 +1,33 @@
+# Node dependencies and build artifacts
+frontend/node_modules/
+node_modules/
+
+# Python byte code & caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local databases & logs
+*.db
+*.log
+aml_dev.db
+test_aml.db
+
+# Environment variables
+.env
+.env.local
+
+# Git and OS metadata
+.git/
+.gitignore
+.DS_Store
+.vscode/
+.idea/
+
+# Document folders
+project/
+downloads/
