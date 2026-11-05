@@ -20,18 +20,32 @@ class XGBoostClassifierPlugin(BaseAMLModelPlugin):
             model_type=ModelType.SUPERVISED,
             is_enabled=True,
             weight=1.0,
-            author="K. Chandana (ML Owner)",
+            author="AML Team",
         )
         self.model_path = model_path or os.getenv("XGBOOST_MODEL_PATH", "models/xgb_aml.joblib")
         self.loaded_model = None
         self._try_load_model()
 
     def _try_load_model(self):
-        """Attempt to load physical serialized model if Chandana has provided it."""
-        if os.path.exists(self.model_path):
+        """Attempt to load physical serialized model if available."""
+        candidate_paths = [
+            self.model_path,
+            os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../models/xgb_aml.joblib")),
+            os.path.abspath("models/xgb_aml.joblib"),
+            os.path.abspath("backend/models/xgb_aml.joblib"),
+            "/app/models/xgb_aml.joblib",
+        ]
+        target_path = None
+        for p in candidate_paths:
+            if p and os.path.exists(p):
+                target_path = p
+                break
+
+        if target_path:
             try:
                 import joblib
-                self.loaded_model = joblib.load(self.model_path)
+                self.loaded_model = joblib.load(target_path)
+                self.model_path = target_path
             except Exception:
                 self.loaded_model = None
 
@@ -55,45 +69,40 @@ class XGBoostClassifierPlugin(BaseAMLModelPlugin):
         reasons = []
         shap_values = {}
 
+        # Compute explainability & indicators
+        logit = -4.5
+        if is_transfer or is_cashout:
+            logit += 2.0
+            shap_values["type_TRANSFER_or_CASHOUT"] = 0.25
+
+            # Draining origin balance
+            if new_orig == 0.0 and old_orig > 0:
+                logit += 3.2
+                shap_values["origin_balance_depleted"] = 0.40
+                reasons.append("Complete depletion of originator balance")
+
+            # Discrepancy in destination balance (common mule account indicator)
+            if abs(error_dest) > 1000.0:
+                logit += 1.8
+                shap_values["destination_balance_discrepancy"] = 0.20
+                reasons.append("Irregular destination account balance delta")
+
+            # High transaction amount
+            if amount > 150000.0:
+                amount_factor = min(3.0, math.log10(amount) - 4.5)
+                logit += amount_factor * 1.5
+                shap_values["high_transaction_amount"] = round(amount_factor * 0.15, 3)
+                reasons.append(f"Significant transfer volume (₹{amount:,.2f})")
+        else:
+            logit -= 3.0
+            shap_values["low_risk_tx_type"] = -0.30
+
         if self.loaded_model is not None:
             # Physical model inference
             features = [[amount, old_orig, new_orig, old_dest, new_dest, error_orig, error_dest, is_transfer, is_cashout]]
             prob = float(self.loaded_model.predict_proba(features)[0][1])
         else:
-            # Calibrated PaySim Logistic / Tree Decision Boundary Simulation
-            # In PaySim, fraudulent laundering occurs almost exclusively when:
-            # 1) Type is TRANSFER or CASH_OUT
-            # 2) Origin balance is drained (new_orig close to 0)
-            # 3) High ratio of amount to existing balance
-            logit = -4.5  # Base prior log-odds (~1% fraud prevalence)
-
-            if is_transfer or is_cashout:
-                logit += 2.0
-                shap_values["type_TRANSFER_or_CASHOUT"] = 0.25
-
-                # Draining origin balance
-                if new_orig == 0.0 and old_orig > 0:
-                    logit += 3.2
-                    shap_values["origin_balance_depleted"] = 0.40
-                    reasons.append("Complete depletion of originator balance")
-
-                # Discrepancy in destination balance (common mule account indicator)
-                if abs(error_dest) > 1000.0:
-                    logit += 1.8
-                    shap_values["destination_balance_discrepancy"] = 0.20
-                    reasons.append("Irregular destination account balance delta")
-
-                # High transaction amount
-                if amount > 150000.0:
-                    amount_factor = min(3.0, math.log10(amount) - 4.5)
-                    logit += amount_factor * 1.5
-                    shap_values["high_transaction_amount"] = round(amount_factor * 0.15, 3)
-                    reasons.append(f"Significant transfer volume (₹{amount:,.2f})")
-            else:
-                logit -= 3.0
-                shap_values["low_risk_tx_type"] = -0.30
-
-            # Sigmoid activation to obtain risk probability [0.0, 1.0]
+            # Sigmoid activation to obtain simulated risk probability [0.0, 1.0]
             prob = 1.0 / (1.0 + math.exp(-logit))
 
         prob = round(float(prob), 4)

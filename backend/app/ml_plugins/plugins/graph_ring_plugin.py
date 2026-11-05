@@ -18,7 +18,7 @@ class GraphRingDetectorPlugin(BaseAMLModelPlugin):
             model_type=ModelType.GRAPH_ANALYTICS,
             is_enabled=True,
             weight=0.9,
-            author="A. Karthik (Graph & Data Owner)",
+            author="AML Team",
         )
 
     def predict(self, tx: Dict[str, Any]) -> PluginPrediction:

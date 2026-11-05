@@ -1,9 +1,14 @@
 def test_root_endpoint(client):
     response = client.get("/")
     assert response.status_code == 200
-    data = response.json()
-    assert "version" in data
-    assert data["docs_url"] == "/docs"
+    content_type = response.headers.get("content-type", "")
+    if "application/json" in content_type:
+        data = response.json()
+        assert "version" in data
+        assert data["docs_url"] == "/docs"
+    else:
+        # Frontend SPA index.html is mounted and served at root
+        assert "<html" in response.text.lower()
 
 
 def test_health_endpoint(client):

@@ -28,7 +28,7 @@ class PluginPrediction(BaseModel):
 class BaseAMLModelPlugin(ABC):
     """
     Abstract Base Class for all Anti-Money Laundering Model Plugins.
-    New models (e.g. Chandana's XGBoost, Autoencoder, PyTorch GNN, or Graph link analysis)
+    New models (e.g. XGBoost, Autoencoder, PyTorch GNN, or Graph link analysis)
     can simply subclass this and register with the ModelPluginRegistry.
     """
 
