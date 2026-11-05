@@ -25,10 +25,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     ENVIRONMENT=production \
     DEBUG=False
 
-# Install system dependencies for PostgreSQL
+# Install system dependencies for PostgreSQL and XGBoost OpenMP
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     libpq-dev \
+    libgomp1 \
     curl \
     && rm -rf /var/lib/apt/lists/*
 

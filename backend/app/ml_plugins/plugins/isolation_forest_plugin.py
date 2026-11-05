@@ -100,13 +100,13 @@ class IsolationForestPlugin(BaseAMLModelPlugin):
             # Calibrated mapping from raw isolation score to [0.0, 1.0]
             # When raw_pred is -1, score is >= 0.50
             if raw_pred == -1 or anomaly_score >= 0.50:
-                final_score = max(anomaly_score, min(1.0, 0.60 + abs(raw_score) * 0.7))
+                final_score = min(1.0, max(anomaly_score, 0.60 + abs(raw_score) * 0.7))
                 if "Zero-day anomaly: feature space isolation threshold exceeded" not in reasons:
                     reasons.append("Zero-day anomaly: feature space isolation threshold exceeded")
             else:
                 final_score = min(0.48, max(0.05, anomaly_score * 0.7))
         else:
-            final_score = min(1.0, anomaly_score)
+            final_score = min(1.0, max(0.0, anomaly_score))
 
         final_score = round(float(final_score), 4)
         latency = self._track_latency(t0)

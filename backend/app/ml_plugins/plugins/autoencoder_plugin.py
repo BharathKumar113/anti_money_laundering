@@ -105,16 +105,16 @@ class AutoencoderAnomalyPlugin(BaseAMLModelPlugin):
 
                 # Calibrated score based on model reconstruction & heuristic divergence
                 if mse >= threshold or reconstruction_error >= 0.50:
-                    norm_score = max(reconstruction_error, 0.65 + min(0.35, ((mse - threshold) / max(0.001, threshold))))
+                    norm_score = max(min(1.0, reconstruction_error), 0.65 + min(0.35, ((mse - threshold) / max(0.001, threshold))))
                     if f"Autoencoder latent anomaly: reconstruction MSE ({mse:.4f})" not in reasons:
                         reasons.append(f"Autoencoder latent anomaly: reconstruction MSE ({mse:.4f}) breached baseline ({threshold:.4f})")
                 else:
                     norm_score = min(0.45, max(0.02, (mse / threshold) * 0.40))
-                anomaly_score = norm_score
+                anomaly_score = min(1.0, max(0.0, norm_score))
             except Exception:
-                anomaly_score = min(1.0, reconstruction_error)
+                anomaly_score = min(1.0, max(0.0, reconstruction_error))
         else:
-            anomaly_score = min(1.0, reconstruction_error)
+            anomaly_score = min(1.0, max(0.0, reconstruction_error))
 
         latency = self._track_latency(t0)
 
