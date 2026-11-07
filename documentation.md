@@ -6,7 +6,7 @@
 ## 1. Introduction
 
 ### 1.1 Background of Anti-Money Laundering in the Global Financial Ecosystem
-Money laundering is the illicit process of concealing the origin, ownership, or destination of illegally obtained funds by channeling them through complex sequences of banking transfers or commercial transactions. According to the United Nations Office on Drugs and Crime (UNODC), the estimated amount of money laundered globally in one year is between 2% and 5% of global Gross Domestic Product (GDP), amounting to approximately $800 billion to $2 trillion in US dollars. 
+Money laundering is the illicit process of concealing the origin, ownership, or destination of illegally obtained funds by channeling them through complex sequences of banking transfers or commercial transactions. According to the United Nations Office on Drugs and Crime (UNODC), the estimated amount of money laundered globally in one year is between 2% and 5% of global Gross Domestic Product (GDP), amounting to approximately $800 billion to $2 trillion in US dollars.
 
 Money laundering poses existential threats to economic stability, national security, and institutional integrity. It finances international terrorism, facilitates narcotics trafficking, supports illegal arms sales, and encourages political corruption. In response, global regulatory coalitions—led by the Financial Action Task Force (FATF), the European Union (through its Anti-Money Laundering Directives 5AMLD and 6AMLD), the US Financial Crimes Enforcement Network (FinCEN under the Bank Secrecy Act and USA PATRIOT Act), and regional central banks such as the Reserve Bank of India (RBI)—have imposed rigorous regulatory frameworks. Financial institutions (FIs), including commercial banks, digital payment processors, and fintech platforms, are legally mandated to deploy automated Transaction Monitoring Systems (TMS) and file Suspicious Activity Reports (SARs) or Suspicious Transaction Reports (STRs) with sovereign financial intelligence units.
 
@@ -15,9 +15,20 @@ Laundering operations, irrespective of scale, systematically exploit the three r
 
 ```mermaid
 flowchart LR
-    A["1. Placement"] -->|"Inject illicit cash into formal banking"| B["2. Layering"]
-    B -->|"Complex multi-hop transfers, shell firms & rings"| C["3. Integration"]
-    C -->|"Re-enter legitimate economy as clean wealth"| D["Clean Assets & Real Estate"]
+    Stage1["1. Placement<br/>Inject illicit cash into banking"] -->|"Layered deposits"| Stage2["2. Layering<br/>Multi-hop loops and shell transfers"]
+    Stage2 -->|"Disguised origin"| Stage3["3. Integration<br/>Re-enter as clean commercial wealth"]
+    Stage3 -->|"Investment"| Clean["Clean Assets and Real Estate"]
+```
+
+```
++---------------------------------------------------------------------------------------------+
+|                                MONEY LAUNDERING LIFECYCLE                                    |
++------------------------------+------------------------------+-------------------------------+
+|         1. PLACEMENT         |         2. LAYERING          |        3. INTEGRATION         |
+|  Illicit cash injected into  |  Funds obfuscated through    |  Clean wealth re-enters the   |
+|  banking system via smurfs   |  complex chains, multi-hop   |  economy via luxury assets,   |
+|  and structured deposits.    |  loops, and shell entities.  |  real estate, and investments.|
++------------------------------+------------------------------+-------------------------------+
 ```
 
 1. **Placement**: The initial entry of dirty funds into the legitimate financial infrastructure. Launderers avoid initial detection by "structuring" or "smurfing"—dividing large currency sums into small deposits below the mandatory reporting threshold (e.g., breaking $50,000 into six deposits under $10,000).
@@ -25,7 +36,7 @@ flowchart LR
 3. **Integration**: The seamless re-entry of laundered capital into the mainstream economy. The funds appear to originate from legitimate legal activities (e.g., commercial invoices, luxury asset purchases, real estate transactions, or investment dividends), making law enforcement seizure difficult without comprehensive historical transaction forensics.
 
 ### 1.3 Modern Industry Challenges in Financial Surveillance
-Financial technology (FinTech), open banking APIs, peer-to-peer (P2P) mobile wallets, and instant settlement networks (such as FedNow, SEPA Instant, and UPI) have reduced transaction settlement times from days to milliseconds. While this offers unprecedented consumer convenience, it has equipped financial criminals with high-velocity evasion channels. 
+Financial technology (FinTech), open banking APIs, peer-to-peer (P2P) mobile wallets, and instant settlement networks (such as FedNow, SEPA Instant, and UPI) have reduced transaction settlement times from days to milliseconds. While this offers unprecedented consumer convenience, it has equipped financial criminals with high-velocity evasion channels.
 
 Traditional Anti-Money Laundering systems are failing under this transformation due to three core systemic barriers:
 * **Catastrophic False Positive Rates**: Legacy systems produce between 90% and 98% false-positive alerts. Financial compliance divisions spend millions of hours investigating benign consumer behavior, generating severe analyst fatigue and allowing genuine, sophisticated laundering rings to slip through unnoticed.
@@ -61,9 +72,20 @@ Over the past three decades, anti-money laundering and financial fraud detection
 
 ```mermaid
 flowchart LR
-    E1["1. First Era (1990s)<br>Static Threshold Heuristics"] --> E2["2. Second Era (2000s)<br>Statistical Profiling & Baselines"]
-    E2 --> E3["3. Third Era (2010s)<br>Supervised Machine Learning"]
-    E3 --> E4["4. Fourth Era (2020s+)<br>Hybrid Ensemble & Graph Forensics"]
+    E1["Epoch 1 (1990s)<br/>Static Threshold Rules"] --> E2["Epoch 2 (2000s)<br/>Statistical Profiling"]
+    E2 --> E3["Epoch 3 (2010s)<br/>Supervised ML Models"]
+    E3 --> E4["Epoch 4 (2020s+)<br/>Hybrid Ensemble and Graph Forensics"]
+```
+
+```
++---------------------------------------------------------------------------------------------+
+|                               METHODOLOGY EVOLUTION TIMELINE                                |
++------------------------+------------------------+--------------------+----------------------+
+|     EPOCH 1 (1990s)    |     EPOCH 2 (2000s)    |   EPOCH 3 (2010s)  |   EPOCH 4 (2020s+)   |
+| Hardcoded threshold    | Historical user norms, | Supervised trees,  | Multi-paradigm fusion|
+| rules (Amount > $10K), | Z-scores, moving       | Random Forests,    | + Deep Autoencoders  |
+| 95%+ false positives.  | average deviations.    | XGBoost classifiers| + Graph Forensics    |
++------------------------+------------------------+--------------------+----------------------+
 ```
 
 1. **First Era: Static Rule-Based Systems**: Rule engines based on fixed thresholds (e.g., transaction amount > $10,000, account balance delta > 80%). These systems produce over 90% false positives, lack scalability, and require manual maintenance.
@@ -99,12 +121,12 @@ Traditional AML platforms in tier-1 and tier-2 banks are architected around cent
 
 ```mermaid
 flowchart TD
-    CoreBanking["Core Banking Ledger (OLTP)"] -->|"Nightly Batch ETL (T+1)"| DWH["Data Warehouse / Data Lake"]
-    DWH --> Rules["Rule Engine (Oracle Mantas / NICE Actimize)"]
-    Rules --> Alerts["5,000+ Daily Unfiltered Alerts"]
-    Alerts --> Analysts["Compliance Analysts (Manual Review)"]
-    Analysts -->|"95% False Positives"| Dismissed["Dismissed / Closed Without Action"]
-    Analysts -->|"5% True Positives"| SAR["Manual SAR Filing to FinCEN / FIU"]
+    CoreBanking["Core Banking Ledger (OLTP)"] -->|"Nightly Batch ETL (T+1)"| DWH["Data Warehouse"]
+    DWH --> Rules["Static Rule Engine"]
+    Rules --> Alerts["5,000+ Unfiltered Daily Alerts"]
+    Alerts --> Analysts["Compliance Investigators"]
+    Analysts -->|"95% False Positives"| Dismissed["Dismissed Without Action"]
+    Analysts -->|"5% True Positives"| SAR["Manual SAR Regulatory Filing"]
 ```
 
 ### 3.2 Dominant Commercial Solutions
@@ -127,7 +149,7 @@ Laundering rarely occurs within a single account. It is intrinsically a network 
 
 $$\text{Account } A \xrightarrow{\$100,000} \text{Account } B \xrightarrow{\$98,000} \text{Account } C \xrightarrow{\$96,000} \text{Account } A$$
 
-A traditional tabular monitoring system sees three distinct, seemingly ordinary transfers. It is completely blind to the fact that funds completed a closed loop to simulate legitimate commercial transactions and inflate ledger balances.
+A traditional tabular monitoring system sees three distinct, seemingly ordinary transfers. It is completely blind to the fact that funds completed a closed loop to simulate legitimate commercial turnover and inflate ledger balances.
 
 #### 4. Batch Processing Lag (T+1 to T+3 Settlement Delays)
 Most commercial systems run rules as overnight batch jobs. By the time an alert is generated on Day 2 or Day 3, the illicit funds have already been layered across five digital wallets, converted into non-custodial cryptocurrency, or withdrawn overseas, rendering asset recovery impossible.
@@ -156,29 +178,56 @@ The proposed system addresses the limitations of existing platforms by implement
 
 ```mermaid
 flowchart TD
-    subgraph Input["1. Real-Time Transaction Ingestion"]
+    subgraph Ingestion["1. Ingestion Layer"]
         API["FastAPI High-Speed Ingestion API"]
         Contract["9-Dimensional Feature Engineering Engine"]
     end
 
     subgraph Ensemble["2. Multi-Paradigm Detection Ensemble"]
-        direction TB
-        E1["Engine 1: Heuristic Compliance Engine (Weight: 0.50)<br>• Static thresholds, velocity, and balance depletion"]
-        E2["Engine 2: Supervised XGBoost Classifier (Weight: 1.00)<br>• PaySim-trained decision trees with cost-sensitive weighting"]
-        E3["Engine 3: Unsupervised Isolation Forest (Weight: 0.85)<br>• Multi-dimensional outlier tree isolation"]
-        E4["Engine 4: Deep Autoencoder Neural Network (Weight: 0.80)<br>• 9->16->4->16->9 reconstruction MSE error"]
-        E5["Engine 5: NetworkX Graph Analytics (Weight: 0.90)<br>• Circular cycle detection and mule account tracking"]
+        E1["Engine 1: Heuristic Rules<br/>Static Thresholds and Balance Depletions"]
+        E2["Engine 2: Supervised XGBoost Classifier<br/>Cost-Weighted PaySim Decision Trees"]
+        E3["Engine 3: Unsupervised Isolation Forest<br/>Multi-Dimensional Outlier Partitioning"]
+        E4["Engine 4: Deep Autoencoder Neural Network<br/>9-16-4-16-9 Latent Reconstruction MSE"]
+        E5["Engine 5: NetworkX Graph Analytics<br/>Topological Cycle and Mule Detection"]
     end
 
-    subgraph Output["3. Calibration, Triage & Visualization"]
-        Fusion["Weighted Ensemble Fusion & Probability Calibration"]
-        XAI["SHAP Feature Importance & Natural Language Evidence"]
-        Alert["Automated Compliance Alert Triage (High / Med / Low)"]
-        Dashboard["React 18 + Vis-Network Interactive Forensics UI"]
+    subgraph Output["3. Calibration and Investigator Triage"]
+        Fusion["Weighted Score Aggregation"]
+        XAI["SHAP Explainability and Evidence Engine"]
+        Alert["Automated Compliance Alert Triage"]
+        Dashboard["React 18 Interactive Forensics Dashboard"]
     end
 
-    API --> Contract --> E1 & E2 & E3 & E4 & E5
-    E1 & E2 & E3 & E4 & E5 --> Fusion --> XAI --> Alert --> Dashboard
+    API --> Contract
+    Contract --> E1
+    Contract --> E2
+    Contract --> E3
+    Contract --> E4
+    Contract --> E5
+
+    E1 --> Fusion
+    E2 --> Fusion
+    E3 --> Fusion
+    E4 --> Fusion
+    E5 --> Fusion
+
+    Fusion --> XAI
+    XAI --> Alert
+    Alert --> Dashboard
+```
+
+```
++---------------------------------------------------------------------------------------------+
+|                               DEFENSE-IN-DEPTH SURVEILLANCE                                 |
++---------------------+-------------------------------+---------------------------------------+
+| LAYER               | SPECIALIZATION                | CRIME TYPOLOGY DETECTED               |
++---------------------+-------------------------------+---------------------------------------+
+| 1. Heuristic Rules  | Fixed statutory thresholds    | Large cash dumps, rapid total drains  |
+| 2. XGBoost ML       | High-dimensional tree patterns| Known fraud transfer signatures       |
+| 3. Isolation Forest | Multi-variate outliers        | Extreme deviation from population     |
+| 4. Deep Autoencoder | Manifold reconstruction loss  | Novel / Zero-day unobserved laundering|
+| 5. NetworkX Graph   | Relational topology analysis  | Round-tripping loops, mule clusters   |
++---------------------+-------------------------------+---------------------------------------+
 ```
 
 ### 4.2 Key Novel Innovations and Differentiators
@@ -206,25 +255,29 @@ To satisfy regulatory mandates (such as the EU Artificial Intelligence Act and F
 #### 5. Dynamic Runtime Plugin Architecture
 The system provides a decoupled plugin registry pattern. New models (e.g., PyTorch Graph Neural Networks, LightGBM, or custom institution heuristics) can be added, toggled on/off, or dynamically reweighted at runtime via REST APIs without restarting the server or interrupting active traffic.
 
-### 4.3 Functional and Non-Functional Requirements Matrix
+### 4.3 Functional and Non-Functional Architecture Requirements
 
 ```mermaid
-mindmap
-  root((Platform Requirements))
-    Functional
-      Real-Time Transaction Ingestion
-      PaySim Bulk CSV Ingestion
-      5-Model Concurrent Inference
-      Interactive Graph Canvas
-      Automated Alert Triage
-      Dynamic Plugin Configuration
-    Non-Functional
-      Sub-15ms Latency
-      99.9% Uptime High Availability
-      100% Automated Test Coverage
-      Cross-Platform Docker Deployable
-      Zero-Downtime Dynamic Configuration
-      Strict Pydantic v2 Type Safety
+flowchart TD
+    subgraph Requirements["Platform Architecture Requirements"]
+        subgraph Functional["Functional Requirements"]
+            F1["Real-Time Single Transaction Ingestion"]
+            F2["Batch PaySim CSV Streaming Ingestion"]
+            F3["5-Engine Concurrent Evaluation"]
+            F4["Interactive Graph Topology Canvas"]
+            F5["Automated Risk Triage and SAR Filing"]
+            F6["Dynamic Zero-Downtime Plugin Registry"]
+        end
+
+        subgraph NonFunctional["Non-Functional Requirements"]
+            NF1["Sub-15ms Real-Time Inference Latency"]
+            NF2["99.9% High Availability Production Uptime"]
+            NF3["100% Automated Unit and Integration Test Coverage"]
+            NF4["Cross-Platform Docker Containerization"]
+            NF5["Zero-Downtime Dynamic Rebalancing"]
+            NF6["Strict Pydantic v2 Type Safety and Validation"]
+        end
+    end
 ```
 
 ---
@@ -237,119 +290,127 @@ The platform is structured into eight decoupled, modular architectural layers de
 
 ```mermaid
 flowchart TD
-    subgraph Client["Layer 1: Presentation & Client Layer"]
-        SPA["React 18 Single-Page Application (Vite Bundler)"]
-        Canvas["Vis-Network 2D Graph Canvas (Force-Directed Layout)"]
-        Charts["Chart.js KPI Metrics & Fraud Analytics"]
-        Swagger["OpenAPI / Swagger Interactive Documentation (/docs)"]
+    subgraph Layer1["Layer 1: Presentation Layer"]
+        SPA["React 18 Single-Page Application"]
+        Canvas["Vis-Network 2D Force-Directed Graph"]
+        Charts["Chart.js Analytics and KPI Panels"]
+        Swagger["OpenAPI Swagger Documentation (/docs)"]
     end
 
-    subgraph Gateway["Layer 2: API Routing & Gateway Layer"]
-        Uvicorn["Uvicorn ASGI High-Performance Server"]
-        FastAPI["FastAPI Application Framework"]
-        CORS["CORS & Request Timing Tracing Middleware"]
-        AuthEx["Exception Handlers & AML Base Exception Filter"]
+    subgraph Layer2["Layer 2: API Gateway Layer"]
+        FastAPI["FastAPI High-Performance Framework"]
+        Uvicorn["Uvicorn ASGI Production Server"]
+        Middleware["CORS and Request Timing Middleware"]
     end
 
-    subgraph Ingestion["Layer 3: Ingestion & Feature Engineering"]
-        Pydantic["Pydantic v2 Strict Schema Validation"]
-        Transform["9-Feature Contract Mathematical Transformer"]
-        PaySimParser["PaySim CSV Bulk Streaming Parser"]
+    subgraph Layer3["Layer 3: Ingestion and Engineering"]
+        Pydantic["Pydantic v2 Schema Validator"]
+        Transform["9-Feature Contract Transformer"]
     end
 
-    subgraph PluginRegistry["Layer 4: Dynamic ML Plugin Registry"]
-        Registry["ModelPluginRegistry (Thread-Safe Dispatcher)"]
-        P_Rules["HeuristicRulePlugin"]
-        P_XGB["XGBoostClassifierPlugin"]
-        P_Iso["IsolationForestPlugin"]
-        P_AE["AutoencoderAnomalyPlugin"]
-        P_Graph["GraphRingDetectorPlugin"]
+    subgraph Layer4["Layer 4: Dynamic Plugin Registry"]
+        Registry["ModelPluginRegistry Dispatcher"]
+        P1["HeuristicRulePlugin"]
+        P2["XGBoostClassifierPlugin"]
+        P3["IsolationForestPlugin"]
+        P4["AutoencoderAnomalyPlugin"]
+        P5["GraphRingDetectorPlugin"]
     end
 
-    subgraph Analytics["Layer 5: Graph Forensics & Scoring Engine"]
+    subgraph Layer5["Layer 5: Analytics and Forensics"]
         NetworkX["NetworkX Directed Multigraph Engine"]
         Subgraphs["k-Hop Bounded Subgraph Extractor"]
-        CycleDetect["Johnson & Tarjan Bounded Cycle Algorithms"]
-        Ensemble["Weighted Ensemble Fusion & Sigmoid Calibrator"]
-        SHAP["SHAP & Local Explainability Calculator"]
+        Fusion["Weighted Ensemble Calibrator"]
+        SHAP["SHAP Explainability Calculator"]
     end
 
-    subgraph Service["Layer 6: Core Business Logic Services"]
-        AMLService["AML Transaction Processing Service"]
-        AlertService["Investigator Alert & Case Triage Service"]
-        GraphService["Graph Forensics Service"]
-        AnalyticsService["Executive KPI & Distribution Service"]
+    subgraph Layer6["Layer 6: Persistence Layer"]
+        SQLAlchemy["SQLAlchemy 2.0 ORM Engine"]
+        Postgres[("PostgreSQL 16 Cloud DB")]
+        SQLite[("SQLite 3 Dev DB")]
     end
 
-    subgraph Persistence["Layer 7: Persistence & ORM Layer"]
-        SQLAlchemy["SQLAlchemy 2.0 Modern ORM (Mapped Declarative)"]
-        Postgres[("PostgreSQL 16 / 17 (Production Cloud DB)")]
-        SQLite[("SQLite 3 (Local Embedded Dev DB)")]
-    end
+    SPA --> FastAPI
+    Canvas --> FastAPI
+    Charts --> FastAPI
+    Swagger --> FastAPI
+    FastAPI --> Middleware
+    Middleware --> Pydantic
+    Pydantic --> Transform
+    Transform --> Registry
 
-    subgraph DevOps["Layer 8: Containerization & Cloud Infrastructure"]
-        Docker["Multi-Stage Production Dockerfile (Node 20 + Python 3.11-slim)"]
-        Compose["Docker Compose (Postgres + Backend + PgAdmin)"]
-        Render["Render.com Continuous Integration & Auto-Deploy"]
-    end
+    Registry --> P1
+    Registry --> P2
+    Registry --> P3
+    Registry --> P4
+    Registry --> P5
 
-    SPA & Canvas & Charts & Swagger --> Gateway
-    Gateway --> Ingestion
-    Ingestion --> Service
-    Service --> PluginRegistry
-    PluginRegistry --> P_Rules & P_XGB & P_Iso & P_AE & P_Graph
-    P_Graph --> Analytics
-    PluginRegistry --> Ensemble --> SHAP
-    Service --> Persistence
-    SQLAlchemy --> Postgres & SQLite
+    P5 --> NetworkX
+    NetworkX --> Subgraphs
+
+    P1 --> Fusion
+    P2 --> Fusion
+    P3 --> Fusion
+    P4 --> Fusion
+    P5 --> Fusion
+
+    Fusion --> SHAP
+    SHAP --> SQLAlchemy
+    SQLAlchemy --> Postgres
+    SQLAlchemy --> SQLite
 ```
 
-### 5.2 Component Interaction & Data Flow Pipeline
+```
++---------------------------------------------------------------------------------------------+
+|                                8-LAYER ENTERPRISE ARCHITECTURE                              |
++---------------------------------------------------------------------------------------------+
+| Layer 1: Presentation Layer   | React 18, Vite, Vis-Network 2D Graph, Chart.js, Swagger Docs|
+| Layer 2: API Gateway Layer    | FastAPI (Async ASGI), Uvicorn Server, Timing Middleware     |
+| Layer 3: Ingestion Layer      | Pydantic v2 Validation, 9-Feature Contract Transformer      |
+| Layer 4: ML Plugin Registry   | Dynamic Registry, 5 Modular Pluggable Model Engines         |
+| Layer 5: Forensics & Scoring  | NetworkX Graph Forensics, Weighted Fusion, SHAP Calculator  |
+| Layer 6: Core Services Layer  | AML Processing Service, Alert Triage Service, Graph Service |
+| Layer 7: Persistence Layer    | SQLAlchemy 2.0 ORM, PostgreSQL (Cloud) / SQLite (Dev)       |
+| Layer 8: DevOps & CI/CD       | Multi-Stage Docker Build (Node + Python), Render Auto-Deploy|
++---------------------------------------------------------------------------------------------+
+```
+
+### 5.2 Real-Time Transaction Ingestion & Scoring Sequence
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Client as Client / Banking Core
-    participant API as FastAPI Router
+    actor Client as Banking Core System
+    participant Router as FastAPI Router
     participant Service as AML Service
     participant Registry as Plugin Registry
     participant Models as 5-Model Ensemble
-    participant Graph as NetworkX Engine
     participant DB as Database (SQLAlchemy)
-    actor Analyst as Compliance Investigator
 
-    Client->>API: POST /api/v1/transactions/ (Raw Tx JSON)
-    API->>Service: Ingest & validate (Pydantic v2)
-    Service->>Service: Compute 9-Feature Contract (Balance deltas)
+    Client->>Router: POST /api/v1/transactions/ (Raw JSON Payload)
+    Router->>Service: Ingest and validate (Pydantic v2)
+    Service->>Service: Transform 9-Feature Contract (Balance deltas)
     Service->>Registry: execute_ensemble(feature_vector)
     
-    par Concurrent Model Inference
+    par Concurrent Model Evaluation
         Registry->>Models: HeuristicRulePlugin.predict()
         Registry->>Models: XGBoostClassifierPlugin.predict()
         Registry->>Models: IsolationForestPlugin.predict()
         Registry->>Models: AutoencoderAnomalyPlugin.predict()
-        Registry->>Graph: GraphRingDetectorPlugin.predict()
+        Registry->>Models: GraphRingDetectorPlugin.predict()
     end
 
-    Models-->>Registry: Return scores, reasons & SHAP vectors
-    Graph-->>Registry: Return cycle scores & ring descriptions
-    Registry->>Service: Return EnsembleResult (Weighted Score: 0.0 - 1.0)
-    
+    Models-->>Registry: Return scores, reasons and SHAP vectors
+    Registry->>Registry: Compute weighted aggregate score (0.0 to 1.0)
+    Registry-->>Service: Return EnsembleResult (Risk Score and Reasons)
+
+    Service->>DB: INSERT transaction record
     alt Risk Score >= 0.70 (HIGH) or >= 0.40 (MEDIUM)
-        Service->>DB: Create Transaction & Auto-Generate Alert (Status: PENDING)
-    else Risk Score < 0.40 (LOW)
-        Service->>DB: Create Transaction (Clean / Cleared)
+        Service->>DB: Auto-generate Alert (Status: PENDING)
     end
 
-    Service-->>API: Return TransactionResponse with full explainability
-    API-->>Client: 201 Created (JSON Response with risk & explanations)
-    
-    Analyst->>API: GET /api/v1/alerts/ (Review pending alerts)
-    API->>DB: Query pending compliance cases
-    DB-->>API: Alerts with transaction context
-    API-->>Analyst: Display alerts on React Dashboard
-    Analyst->>API: PATCH /api/v1/alerts/{id} (Resolve / File SAR)
-    API->>DB: Update alert status to RESOLVED
+    Service-->>Router: TransactionResponse (Enriched with SHAP)
+    Router-->>Client: 201 Created (JSON Response)
 ```
 
 ---
@@ -416,10 +477,12 @@ Isolation Forest operates on the principle that anomalies are "few and different
 
 ```mermaid
 flowchart TD
-    Root["Root Node (Full Data)"] --> Split1{"Split: amount > ₹250,000?"}
+    Root["Root Node: Full Population"] --> Split1{"Split: Amount > 250,000?"}
     Split1 -->|"YES (Path Length = 1)"| Anomaly["ANOMALY: Outlier Isolated Immediately"]
-    Split1 -->|"NO"| NormalCluster["Normal Inlier Cluster (Path Length > 12)"]
-    NormalCluster --> Split2{"Further random recursive splits..."}
+    Split1 -->|"NO"| Normal["Normal Inlier Cluster (Deep Path Length)"]
+    Normal --> Split2{"Split: Balance Conservation Error > 1,000?"}
+    Split2 -->|"YES"| FlaggedCluster["Secondary Outlier Branch"]
+    Split2 -->|"NO"| DenseCluster["Standard Banking Activity (Path > 12)"]
 ```
 
 #### Anomaly Score Formulation
@@ -451,13 +514,30 @@ Our deep neural autoencoder is engineered to learn a non-linear low-dimensional 
 
 ```mermaid
 flowchart LR
-    In["Input Layer<br>(9 Features)"] --> Enc1["Encoder Hidden<br>(16 Neurons, ReLU)"]
-    Enc1 --> Bottleneck["Latent Bottleneck<br>(4 Neurons)"]
-    Bottleneck --> Dec1["Decoder Hidden<br>(16 Neurons, ReLU)"]
-    Dec1 --> Out["Reconstruction Layer<br>(9 Features)"]
+    In["Input Layer<br/>(9 Engineered Features)"] --> Enc1["Encoder Layer 1<br/>(16 Neurons, ReLU)"]
+    Enc1 --> Bottleneck["Latent Bottleneck<br/>(4 Neurons)"]
+    Bottleneck --> Dec1["Decoder Layer 1<br/>(16 Neurons, ReLU)"]
+    Dec1 --> Out["Reconstruction Output<br/>(9 Features)"]
     
-    In -.->|"Compute MSE Loss"| Loss{"$\mathcal{L}_{\text{MSE}} = \frac{1}{9}\sum (x_i - \hat{x}_i)^2$"}
-    Out -.->|"Compare"| Loss
+    In -.->|"Calculate MSE Error"| Loss["Reconstruction Loss:<br/>MSE = (1/9) * sum(x_i - x_hat_i)^2"]
+    Out -.->|"Compare Output"| Loss
+    Loss --> Threshold{"MSE >= 0.0341 Baseline?"}
+    Threshold -->|"YES"| FlagAnomaly["FLAG AS NOVEL ANOMALY"]
+    Threshold -->|"NO"| CleanTx["BENIGN MANIFOLD"]
+```
+
+```
++---------------------------------------------------------------------------------------------+
+|                          DEEP AUTOENCODER TOPOLOGY (9-16-4-16-9)                            |
++---------------------+-------------------+-------------------------------+-------------------+
+| LAYER               | DIMENSION         | ACTIVATION                    | PURPOSE           |
++---------------------+-------------------+-------------------------------+-------------------+
+| Input Tensor        | 9 Features        | Identity / StandardScaler     | Feature Contract  |
+| Encoder Dense 1     | 16 Neurons        | Rectified Linear Unit (ReLU)  | Feature Expansion |
+| Latent Bottleneck   | 4 Neurons         | Rectified Linear Unit (ReLU)  | Low-dim Manifold  |
+| Decoder Dense 1     | 16 Neurons        | Rectified Linear Unit (ReLU)  | Reconstruction    |
+| Output Tensor       | 9 Features        | Linear Projection             | Output Feat Vector|
++---------------------+-------------------+-------------------------------+-------------------+
 ```
 
 1. **Standardization Preprocessing**: Input vector $\vec{x}$ is transformed using a fitted `StandardScaler`:
@@ -474,7 +554,7 @@ The model is trained solely on legitimate banking records to minimize Mean Squar
 
 $$\text{MSE}(\vec{z}_0, \hat{\vec{z}}) = \frac{1}{9} \sum_{j=1}^9 \left(z_{0, j} - \hat{z}_j\right)^2$$
 
-During inference, when a novel or structured laundering transaction enters the system, the bottleneck manifold cannot accurately reconstruct the abnormal feature combinations, resulting in an elevated reconstruction error. 
+During inference, when a novel or structured laundering transaction enters the system, the bottleneck manifold cannot accurately reconstruct the abnormal feature combinations, resulting in an elevated reconstruction error.
 
 Let $\tau = 0.0341$ denote the calibrated 99th-percentile anomaly threshold derived from validation baseline distributions:
 - If $\text{MSE} \ge \tau$: The transaction is flagged as an anomaly. The score scales proportionally:
@@ -537,28 +617,43 @@ The aggregated score $R$ maps directly to regulatory triage classifications:
 ```mermaid
 flowchart TD
     subgraph Actors["System Actors"]
-        Client["Banking Core / API Ingestion Client"]
-        Analyst["Compliance Investigator / AML Analyst"]
+        Client["Banking Core / Ingestion Client"]
+        Analyst["Compliance Investigator / AML Officer"]
         Admin["AML System Administrator"]
     end
 
-    subgraph Cases["AML Platform Use Cases"]
-        UC1["Ingest Single Transaction (REST API)"]
-        UC2["Stream PaySim CSV Batch File"]
+    subgraph TransactionsUC["Transaction Processing"]
+        UC1["Ingest Single Transaction"]
+        UC2["Stream PaySim CSV Batch"]
         UC3["Execute 5-Model Multi-Paradigm Scoring"]
-        UC4["View Real-Time Forensic KPI Dashboard"]
-        UC5["Explore Interactive Account Graph Network"]
-        UC6["Review & Triage High-Risk Alerts"]
-        UC7["Assign, Add Notes, & Resolve Cases"]
-        UC8["Toggle Plugin On/Off at Runtime"]
-        UC9["Rebalance Model Ensemble Weights"]
-        UC10["Inspect SHAP Explainability & Audit Logs"]
     end
 
-    Client --> UC1 & UC2
-    UC1 & UC2 --> UC3
-    Analyst --> UC4 & UC5 & UC6 & UC7 & UC10
-    Admin --> UC8 & UC9
+    subgraph ForensicsUC["Forensics and Case Management"]
+        UC4["View Real-Time KPI Dashboard"]
+        UC5["Explore Interactive Graph Network"]
+        UC6["Review and Triage Alerts"]
+        UC7["Assign, Document, and Resolve Cases"]
+        UC8["Inspect SHAP Explainability Logs"]
+    end
+
+    subgraph AdminUC["System Administration"]
+        UC9["Toggle Plugin Runtime State"]
+        UC10["Rebalance Model Weights"]
+    end
+
+    Client --> UC1
+    Client --> UC2
+    UC1 --> UC3
+    UC2 --> UC3
+
+    Analyst --> UC4
+    Analyst --> UC5
+    Analyst --> UC6
+    Analyst --> UC7
+    Analyst --> UC8
+
+    Admin --> UC9
+    Admin --> UC10
 ```
 
 ---
@@ -572,51 +667,47 @@ classDiagram
         +str name
         +str version
         +str description
-        +ModelType model_type
+        +str model_type
         +bool is_enabled
         +float weight
         +str author
-        +predict(dict tx)* PluginPrediction
-        #_track_latency(float t0) float
+        +predict(tx) PluginPrediction
     }
 
     class HeuristicRulePlugin {
-        +predict(dict tx) PluginPrediction
+        +predict(tx) PluginPrediction
     }
 
     class XGBoostClassifierPlugin {
         +str model_path
-        +Booster loaded_model
-        +predict(dict tx) PluginPrediction
-        -_try_load_model()
+        +object loaded_model
+        +predict(tx) PluginPrediction
     }
 
     class IsolationForestPlugin {
         +str model_path
-        +IsolationForest loaded_model
-        +predict(dict tx) PluginPrediction
-        -_try_load_model()
+        +object loaded_model
+        +predict(tx) PluginPrediction
     }
 
     class AutoencoderAnomalyPlugin {
         +str model_path
         +dict loaded_bundle
-        +predict(dict tx) PluginPrediction
-        -_try_load_model()
+        +predict(tx) PluginPrediction
     }
 
     class GraphRingDetectorPlugin {
-        +predict(dict tx) PluginPrediction
+        +predict(tx) PluginPrediction
     }
 
     class ModelPluginRegistry {
         -dict plugins
-        +register_plugin(BaseAMLModelPlugin plugin)
-        +unregister_plugin(str name)
-        +toggle_plugin(str name, bool enabled)
-        +update_weight(str name, float weight)
-        +execute_ensemble(dict tx) EnsembleResult
-        +get_all_plugins() List
+        +register_plugin(plugin)
+        +unregister_plugin(name)
+        +toggle_plugin(name, enabled)
+        +update_weight(name, weight)
+        +execute_ensemble(tx) EnsembleResult
+        +get_all_plugins() list
     }
 
     class Transaction {
@@ -657,57 +748,46 @@ classDiagram
     BaseAMLModelPlugin <|-- AutoencoderAnomalyPlugin
     BaseAMLModelPlugin <|-- GraphRingDetectorPlugin
     ModelPluginRegistry o-- BaseAMLModelPlugin
-    Transaction "1" <-- "0..1" Alert : triggers
+    Alert --> Transaction : references
 ```
 
 ---
 
-### 7.3 UML Sequence Diagram: End-to-End Ingestion, Inference & Alert Generation
+### 7.3 UML Sequence Diagram: Investigator Case Triage & Graph Forensics
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Core as Core Banking System
-    participant Router as API Router (/transactions)
-    participant AML as AMLService
-    participant Reg as ModelPluginRegistry
-    participant XGB as XGBoostPlugin
-    participant AE as AutoencoderPlugin
-    participant Graph as GraphRingPlugin
-    participant DB as SQLite / PostgreSQL
-    participant UI as Investigator Dashboard
+    actor Officer as Compliance Officer
+    participant UI as React 18 SPA
+    participant Router as Alerts API Router
+    participant AlertSvc as Alert Service
+    participant GraphSvc as Graph Service
+    participant DB as PostgreSQL Database
 
-    Core->>Router: POST /api/v1/transactions/ (JSON payload)
-    Router->>AML: process_and_save_transaction(db, tx_in)
-    AML->>AML: Transform 9-dimensional features (balance deltas)
-    AML->>Reg: execute_ensemble(tx_dict)
-    
-    par Parallel Inference across Plugins
-        Reg->>XGB: predict(tx_dict)
-        XGB-->>Reg: Score: 0.9999 (High Depletion)
-        Reg->>AE: predict(tx_dict)
-        AE-->>Reg: Score: 0.8500 (Reconstruction Breach)
-        Reg->>Graph: predict(tx_dict)
-        Graph-->>Reg: Score: 0.8500 (Circular Loop Detected)
-    end
+    Officer->>UI: Open Investigator Dashboard
+    UI->>Router: GET /api/v1/alerts/?status=PENDING
+    Router->>AlertSvc: get_pending_alerts()
+    AlertSvc->>DB: Query alerts with join on transactions
+    DB-->>AlertSvc: Return pending alerts
+    AlertSvc-->>Router: List of AlertDetails
+    Router-->>UI: Display Alert Feed (Sorted by Severity)
 
-    Reg->>Reg: Calculate weighted score & aggregate SHAP attributions
-    Reg-->>AML: EnsembleResult(Score: 0.8711, HIGH, Reasons: 12)
+    Officer->>UI: Select Alert (e.g. Case #5, Risk: 0.8711)
+    UI->>Router: GET /api/v1/graph/account/C_PROD_TEST_SENDER
+    Router->>GraphSvc: get_account_subgraph(account_id, max_hops=2)
+    GraphSvc->>DB: Fetch adjacent transfer edges
+    DB-->>GraphSvc: Transfer graph records
+    GraphSvc-->>Router: GraphNetworkResponse (Nodes and Directed Edges)
+    Router-->>UI: Render Vis-Network Interactive Force Graph
 
-    AML->>DB: INSERT into transactions table
-    
-    opt Score >= 0.70 (Suspicious)
-        AML->>DB: INSERT into alerts table (status: PENDING, severity: HIGH)
-    end
-
-    DB-->>AML: Saved Transaction Record
-    AML-->>Router: TransactionResponse (with SHAP & Plugin breakdown)
-    Router-->>Core: 201 Created (JSON Response)
-    
-    UI->>Router: GET /api/v1/alerts/
-    Router->>DB: Query pending alerts
-    DB-->>Router: Return pending alert records
-    Router-->>UI: Real-time alert list (Triggers red badge & audio ping)
+    Officer->>UI: Click "Resolve Case" (Status: CONFIRMED_FRAUD, Notes: "Mule Ring")
+    UI->>Router: PATCH /api/v1/alerts/5/status
+    Router->>AlertSvc: update_alert_status(alert_id=5, update_data)
+    AlertSvc->>DB: UPDATE alert SET status='CONFIRMED_FRAUD', resolved_at=NOW()
+    DB-->>AlertSvc: Updated Alert Record
+    AlertSvc-->>Router: Success Response
+    Router-->>UI: Refresh Alert Grid and update KPI Metrics
 ```
 
 ---
@@ -720,7 +800,7 @@ stateDiagram-v2
     Ingested --> Cleared: Ensemble Score < 0.40 (LOW)
     Cleared --> [*]: Straight-Through Settlement
 
-    Ingested --> PendingAlert: Ensemble Score >= 0.40 (MEDIUM / HIGH)
+    Ingested --> PendingAlert: Ensemble Score >= 0.40 (MEDIUM or HIGH)
     
     state PendingAlert {
         [*] --> Unassigned
@@ -730,16 +810,16 @@ stateDiagram-v2
     PendingAlert --> UnderInvestigation: Investigator Opens Audit Workspace
     
     state UnderInvestigation {
-        [*] --> ReviewEvidence: Examine SHAP & Balance Deltas
+        [*] --> ReviewEvidence: Examine SHAP and Balance Deltas
         ReviewEvidence --> ExploreNetwork: Trace Vis-Network Graph Loop
         ExploreNetwork --> InterviewCustomer: Request Source of Wealth
     }
 
-    UnderInvestigation --> FalsePositive: Legitimate Commercial Justification
-    UnderInvestigation --> ConfirmedFraud: Illicit Structuring / Circular Loop Confirmed
+    UnderInvestigation --> FalsePositive: Legitimate Commercial Rationale
+    UnderInvestigation --> ConfirmedFraud: Illicit Structuring or Circular Loop Confirmed
 
     FalsePositive --> ClosedDismissed: Document Audit Rationale
-    ConfirmedFraud --> SARFiled: Export SAR to Sovereign Financial Intelligence Unit
+    ConfirmedFraud --> SARFiled: Export SAR to Financial Intelligence Unit
     
     ClosedDismissed --> [*]
     SARFiled --> [*]
@@ -765,4 +845,4 @@ stateDiagram-v2
 14. **Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., et al.** (2011). *Scikit-learn: Machine learning in Python*. Journal of Machine Learning Research, 12, pp. 2825–2830.
 
 ---
-*Document Version: 1.0.0 | Generated by AML Team | Anti-Money Laundering Detection System*
+*Document Version: 2.0.0 | Produced by AML Team | Anti-Money Laundering Surveillance Platform*
