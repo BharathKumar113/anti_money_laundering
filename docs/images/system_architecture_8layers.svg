@@ -1,120 +1,139 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" width="1000" height="660">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" width="920" height="480">
     
     <defs>
-        <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1e293b" />
-            <stop offset="100%" stop-color="#0f172a" />
-        </linearGradient>
-        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#2563eb" />
-            <stop offset="100%" stop-color="#1d4ed8" />
-        </linearGradient>
-        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#059669" />
-            <stop offset="100%" stop-color="#047857" />
-        </linearGradient>
-        <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#d97706" />
-            <stop offset="100%" stop-color="#b45309" />
-        </linearGradient>
-        <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#dc2626" />
-            <stop offset="100%" stop-color="#b91c1c" />
-        </linearGradient>
-        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#7c3aed" />
-            <stop offset="100%" stop-color="#6d28d9" />
-        </linearGradient>
-        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="100%" stop-color="#f8fafc" />
-        </linearGradient>
-        <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
-            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+        <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#64748b" flood-opacity="0.08" />
         </filter>
-        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+        <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
         </marker>
-        <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+        <marker id="arrowSlate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
         </marker>
-        <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+        </marker>
+        <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
         </marker>
-        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+        <marker id="umlInh" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+            <polygon points="1,1 11,6 1,11" fill="#ffffff" stroke="#334155" stroke-width="1.5" />
         </marker>
     </defs>
 
-    <rect width="1000" height="660" rx="12" fill="#0f172a" />
-    <text x="500" y="38" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">8-Layer Enterprise System Architecture</text>
-    <text x="500" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">Modular decomposition of production AML surveillance platform</text>
+    <rect width="920" height="480" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" />
+    <text x="460" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#0f172a">Anti-Money Laundering Platform: System Architecture</text>
+    <text x="460" y="52" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">High-level interaction between Client Layer, FastAPI Backend, 5 ML Detection Engines, and Persistence</text>
 
-    <!-- Layers Stack -->
-    <!-- Layer 1 -->
-    <g transform="translate(50, 80)">
-        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" />
-        <rect width="140" height="55" rx="8" fill="url(#blueGrad)" />
-        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">1. Presentation</text>
-        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">React 18 SPA • Vite Bundler • Vis-Network 2D Force Graph • Chart.js Metrics • Swagger Docs (/docs)</text>
+    <!-- 1. Client Layer -->
+    <g transform="translate(30, 80)">
+        <rect width="180" height="350" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" />
+        <rect width="180" height="36" rx="8" fill="#2563eb" />
+        <text x="90" y="23" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#ffffff">Client Layer</text>
+
+        <!-- Sub box 1 -->
+        <rect x="15" y="55" width="150" height="75" rx="6" fill="#ffffff" stroke="#cbd5e1" />
+        <text x="90" y="80" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#0f172a">React 18 SPA</text>
+        <text x="90" y="100" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Vis-Network Graph</text>
+        <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Chart.js KPI Dashboard</text>
+
+        <!-- Sub box 2 -->
+        <rect x="15" y="150" width="150" height="75" rx="6" fill="#ffffff" stroke="#cbd5e1" />
+        <text x="90" y="175" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#0f172a">Banking Core</text>
+        <text x="90" y="195" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">REST Payment Stream</text>
+        <text x="90" y="210" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">JSON Transactions</text>
+
+        <!-- Sub box 3 -->
+        <rect x="15" y="245" width="150" height="75" rx="6" fill="#ffffff" stroke="#cbd5e1" />
+        <text x="90" y="270" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#0f172a">Swagger Docs</text>
+        <text x="90" y="290" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">OpenAPI at /docs</text>
+        <text x="90" y="305" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Interactive API Tests</text>
     </g>
 
-    <!-- Layer 2 -->
-    <g transform="translate(50, 145)">
-        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#0ea5e9" stroke-width="1.5" />
-        <rect width="140" height="55" rx="8" fill="#0284c7" />
-        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">2. API Gateway</text>
-        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">FastAPI Async Framework • Uvicorn High-Speed ASGI • CORS Middleware • X-Process-Time Tracing</text>
+    <!-- Arrow Client -> Backend -->
+    <path d="M 210 240 L 255 240" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)" />
+    <path d="M 255 260 L 210 260" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrowSlate)" />
+
+    <!-- 2. Backend Server Box -->
+    <g transform="translate(265, 80)">
+        <rect width="410" height="350" rx="8" fill="#f8fafc" stroke="#2563eb" stroke-width="1.5" />
+        <rect width="410" height="36" rx="8" fill="#1e293b" />
+        <text x="205" y="23" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#ffffff">FastAPI Application Server (Python 3.11)</text>
+
+        <!-- Router & Middleware -->
+        <rect x="20" y="48" width="370" height="38" rx="5" fill="#ffffff" stroke="#cbd5e1" />
+        <text x="205" y="72" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#1e293b">API Router Layer &amp; Pydantic v2 Schema Validation</text>
+
+        <!-- Feature Transformer -->
+        <rect x="20" y="94" width="370" height="34" rx="5" fill="#eff6ff" stroke="#93c5fd" />
+        <text x="205" y="116" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#1d4ed8">9-Feature Contract Transformer (Balance Conservation Deltas)</text>
+
+        <!-- 5 Model Detection Ensemble Container -->
+        <g transform="translate(20, 138)">
+            <rect width="370" height="120" rx="6" fill="#ffffff" stroke="#cbd5e1" />
+            <text x="185" y="18" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#0f172a">Multi-Model Detection Ensemble (Concurrent Inference)</text>
+
+            <!-- 5 mini boxes -->
+            <rect x="10" y="28" width="64" height="48" rx="4" fill="#f1f5f9" stroke="#94a3b8" />
+            <text x="42" y="46" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="#0f172a">XGBoost</text>
+            <text x="42" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Tree ML</text>
+
+            <rect x="82" y="28" width="64" height="48" rx="4" fill="#f1f5f9" stroke="#94a3b8" />
+            <text x="114" y="46" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="#0f172a">Autoenc.</text>
+            <text x="114" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Deep MSE</text>
+
+            <rect x="154" y="28" width="64" height="48" rx="4" fill="#f1f5f9" stroke="#94a3b8" />
+            <text x="186" y="46" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="#0f172a">IsoForest</text>
+            <text x="186" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Outliers</text>
+
+            <rect x="226" y="28" width="64" height="48" rx="4" fill="#f1f5f9" stroke="#94a3b8" />
+            <text x="258" y="46" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="#0f172a">NetworkX</text>
+            <text x="258" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Graph Loop</text>
+
+            <rect x="298" y="28" width="62" height="48" rx="4" fill="#f1f5f9" stroke="#94a3b8" />
+            <text x="329" y="46" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="#0f172a">Rules</text>
+            <text x="329" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">Threshold</text>
+
+            <!-- Fusion bar -->
+            <rect x="10" y="84" width="350" height="26" rx="4" fill="#ecfdf5" stroke="#6ee7b7" />
+            <text x="185" y="101" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#065f46">Weighted Risk Score Fusion &amp; SHAP Explainability Engine</text>
+        </g>
+
+        <!-- Services Layer -->
+        <rect x="20" y="268" width="370" height="68" rx="5" fill="#ffffff" stroke="#cbd5e1" />
+        <text x="205" y="288" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#0f172a">Core Business Services</text>
+        <text x="205" y="306" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#475569">AMLService (Scoring &amp; Dispatch) • AlertService (Triage &amp; SAR) • GraphService</text>
+        <text x="205" y="322" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#059669">Average Synchronous Response Time: 11.20 ms</text>
     </g>
 
-    <!-- Layer 3 -->
-    <g transform="translate(50, 210)">
-        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" />
-        <rect width="140" height="55" rx="8" fill="#4f46e5" />
-        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">3. Ingestion Layer</text>
-        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">Pydantic v2 Schema Validation • PaySim Streaming CSV Reader • 9-Feature Mathematical Transformer</text>
+    <!-- Arrow Backend -> Database -->
+    <path d="M 675 250 L 710 250" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)" />
+
+    <!-- 3. Persistence & Deployment -->
+    <g transform="translate(720, 80)">
+        <rect width="170" height="350" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" />
+        <rect width="170" height="36" rx="8" fill="#059669" />
+        <text x="85" y="23" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#ffffff">Persistence &amp; Cloud</text>
+
+        <!-- Database -->
+        <rect x="12" y="55" width="146" height="110" rx="6" fill="#ffffff" stroke="#cbd5e1" />
+        <text x="85" y="78" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#0f172a">PostgreSQL 16</text>
+        <text x="85" y="98" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">SQLAlchemy 2.0 ORM</text>
+        <text x="18" y="120" font-family="sans-serif" font-size="9" fill="#334155">• transactions table</text>
+        <text x="18" y="136" font-family="sans-serif" font-size="9" fill="#334155">• alerts table</text>
+        <text x="18" y="152" font-family="sans-serif" font-size="9" fill="#334155">• plugin_configs</text>
+
+        <!-- Cloud Deploy -->
+        <rect x="12" y="180" width="146" height="145" rx="6" fill="#ffffff" stroke="#cbd5e1" />
+        <text x="85" y="205" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#0f172a">Render Cloud</text>
+        <text x="85" y="224" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">Docker Multi-Stage</text>
+        <text x="18" y="248" font-family="sans-serif" font-size="9" fill="#334155">• Node 20 (Build SPA)</text>
+        <text x="18" y="264" font-family="sans-serif" font-size="9" fill="#334155">• Python 3.11-slim</text>
+        <text x="18" y="280" font-family="sans-serif" font-size="9" fill="#334155">• libgomp1 OpenMP</text>
+        <text x="18" y="306" font-family="sans-serif" font-size="9" font-weight="700" fill="#059669">Live: onrender.com</text>
     </g>
 
-    <!-- Layer 4 -->
-    <g transform="translate(50, 275)">
-        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5" />
-        <rect width="140" height="55" rx="8" fill="#7c3aed" />
-        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">4. ML Registry</text>
-        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">ModelPluginRegistry • 5 Modular Plugins • Zero-Downtime Toggles • Dynamic Weight Rebalancing</text>
-    </g>
-
-    <!-- Layer 5 -->
-    <g transform="translate(50, 340)">
-        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="1.5" />
-        <rect width="140" height="55" rx="8" fill="#db2777" />
-        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">5. Scoring &amp; Graph</text>
-        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">NetworkX Multigraph • k-Hop Bounded Cycle Forensics • Weighted Ensemble Fusion • SHAP XAI Engine</text>
-    </g>
-
-    <!-- Layer 6 -->
-    <g transform="translate(50, 405)">
-        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
-        <rect width="140" height="55" rx="8" fill="#d97706" />
-        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">6. Core Services</text>
-        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">AMLService • AlertService (Triage &amp; SAR Filing) • GraphService • AnalyticsService (Executive KPIs)</text>
-    </g>
-
-    <!-- Layer 7 -->
-    <g transform="translate(50, 470)">
-        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5" />
-        <rect width="140" height="55" rx="8" fill="#059669" />
-        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">7. Persistence</text>
-        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">SQLAlchemy 2.0 ORM • PostgreSQL 16 (Production Cloud DB) • SQLite 3 (Embedded Dev Database)</text>
-    </g>
-
-    <!-- Layer 8 -->
-    <g transform="translate(50, 535)">
-        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1.5" />
-        <rect width="140" height="55" rx="8" fill="#475569" />
-        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">8. DevOps &amp; Cloud</text>
-        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">Multi-Stage Dockerfile (Node 20 + Python 3.11-slim) • Render CI/CD Auto-Deploy • Pytest (14/14 Passed)</text>
-    </g>
-
-    <!-- Connecting vertical pipe -->
-    <line x1="120" y1="135" x2="120" y2="535" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 4" />
+    <!-- Bottom Legend -->
+    <rect x="30" y="445" width="860" height="24" rx="4" fill="#f1f5f9" />
+    <text x="460" y="461" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">Production Architecture: Sub-15ms Ingestion • 14/14 Pytest Test Coverage • 0.942 AUC-ROC</text>
 </svg>
