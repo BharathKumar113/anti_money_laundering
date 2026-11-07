@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520">
+    
+    <defs>
+        <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#0f172a" />
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2563eb" />
+            <stop offset="100%" stop-color="#1d4ed8" />
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#059669" />
+            <stop offset="100%" stop-color="#047857" />
+        </linearGradient>
+        <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d97706" />
+            <stop offset="100%" stop-color="#b45309" />
+        </linearGradient>
+        <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#dc2626" />
+            <stop offset="100%" stop-color="#b91c1c" />
+        </linearGradient>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7c3aed" />
+            <stop offset="100%" stop-color="#6d28d9" />
+        </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#f8fafc" />
+        </linearGradient>
+        <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+        </filter>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+        </marker>
+        <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+        </marker>
+        <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+        </marker>
+    </defs>
+
+    <rect width="960" height="520" rx="12" fill="#0f172a" />
+    <text x="480" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">UML Use Case Diagram: AML Surveillance Platform</text>
+    <text x="480" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">Actor interactions across ingestion, forensics, case triage, and system administration</text>
+
+    <!-- System Boundary Box -->
+    <rect x="220" y="80" width="520" height="410" rx="10" fill="#1e293b" stroke="#334155" stroke-width="2" />
+    <text x="480" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#38bdf8">AML Surveillance &amp; Analytics System Boundary</text>
+
+    <!-- Actor 1: Ingestion Client -->
+    <g transform="translate(60, 140)">
+        <circle cx="40" cy="30" r="16" fill="url(#blueGrad)" />
+        <line x1="40" y1="46" x2="40" y2="80" stroke="#93c5fd" stroke-width="3" />
+        <line x1="20" y1="58" x2="60" y2="58" stroke="#93c5fd" stroke-width="3" />
+        <line x1="40" y1="80" x2="25" y2="105" stroke="#93c5fd" stroke-width="3" />
+        <line x1="40" y1="80" x2="55" y2="105" stroke="#93c5fd" stroke-width="3" />
+        <text x="40" y="125" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#f8fafc">Banking Core</text>
+        <text x="40" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8">(Client / API)</text>
+    </g>
+
+    <!-- Actor 2: Compliance Officer -->
+    <g transform="translate(820, 140)">
+        <circle cx="40" cy="30" r="16" fill="url(#emeraldGrad)" />
+        <line x1="40" y1="46" x2="40" y2="80" stroke="#6ee7b7" stroke-width="3" />
+        <line x1="20" y1="58" x2="60" y2="58" stroke="#6ee7b7" stroke-width="3" />
+        <line x1="40" y1="80" x2="25" y2="105" stroke="#6ee7b7" stroke-width="3" />
+        <line x1="40" y1="80" x2="55" y2="105" stroke="#6ee7b7" stroke-width="3" />
+        <text x="40" y="125" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#f8fafc">AML Officer</text>
+        <text x="40" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8">(Investigator)</text>
+    </g>
+
+    <!-- Actor 3: System Administrator -->
+    <g transform="translate(820, 320)">
+        <circle cx="40" cy="30" r="16" fill="url(#amberGrad)" />
+        <line x1="40" y1="46" x2="40" y2="80" stroke="#fcd34d" stroke-width="3" />
+        <line x1="20" y1="58" x2="60" y2="58" stroke="#fcd34d" stroke-width="3" />
+        <line x1="40" y1="80" x2="25" y2="105" stroke="#fcd34d" stroke-width="3" />
+        <line x1="40" y1="80" x2="55" y2="105" stroke="#fcd34d" stroke-width="3" />
+        <text x="40" y="125" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#f8fafc">Admin</text>
+        <text x="40" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8">(ML Engineer)</text>
+    </g>
+
+    <!-- Use Cases (Ovals) -->
+    <!-- UC1 -->
+    <g transform="translate(260, 130)">
+        <ellipse cx="100" cy="22" rx="90" ry="20" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5" />
+        <text x="100" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">UC-1: Ingest Single Tx (REST)</text>
+    </g>
+    <!-- UC2 -->
+    <g transform="translate(260, 185)">
+        <ellipse cx="100" cy="22" rx="90" ry="20" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5" />
+        <text x="100" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">UC-2: Stream PaySim CSV</text>
+    </g>
+    <!-- UC3 -->
+    <g transform="translate(260, 240)">
+        <ellipse cx="100" cy="22" rx="90" ry="20" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5" />
+        <text x="100" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">UC-3: 5-Model Concurrent Scoring</text>
+    </g>
+
+    <!-- UC4 -->
+    <g transform="translate(500, 130)">
+        <ellipse cx="100" cy="22" rx="90" ry="20" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+        <text x="100" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">UC-4: View Real-Time Dashboard</text>
+    </g>
+    <!-- UC5 -->
+    <g transform="translate(500, 185)">
+        <ellipse cx="100" cy="22" rx="90" ry="20" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+        <text x="100" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">UC-5: Explore Graph Topology</text>
+    </g>
+    <!-- UC6 -->
+    <g transform="translate(500, 240)">
+        <ellipse cx="100" cy="22" rx="90" ry="20" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+        <text x="100" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">UC-6: Review &amp; Resolve Alerts</text>
+    </g>
+    <!-- UC7 -->
+    <g transform="translate(500, 295)">
+        <ellipse cx="100" cy="22" rx="90" ry="20" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+        <text x="100" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">UC-7: Export SAR Filings</text>
+    </g>
+
+    <!-- UC8 -->
+    <g transform="translate(380, 370)">
+        <ellipse cx="100" cy="22" rx="90" ry="20" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" />
+        <text x="100" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">UC-8: Toggle Plugins On/Off</text>
+    </g>
+    <!-- UC9 -->
+    <g transform="translate(380, 425)">
+        <ellipse cx="100" cy="22" rx="90" ry="20" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" />
+        <text x="100" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">UC-9: Rebalance Model Weights</text>
+    </g>
+
+    <!-- Connecting Lines -->
+    <line x1="120" y1="190" x2="260" y2="152" stroke="#475569" stroke-width="1.5" />
+    <line x1="120" y1="190" x2="260" y2="207" stroke="#475569" stroke-width="1.5" />
+    <line x1="120" y1="190" x2="260" y2="262" stroke="#475569" stroke-width="1.5" />
+
+    <line x1="820" y1="190" x2="700" y2="152" stroke="#475569" stroke-width="1.5" />
+    <line x1="820" y1="190" x2="700" y2="207" stroke="#475569" stroke-width="1.5" />
+    <line x1="820" y1="190" x2="700" y2="262" stroke="#475569" stroke-width="1.5" />
+    <line x1="820" y1="190" x2="700" y2="317" stroke="#475569" stroke-width="1.5" />
+
+    <line x1="820" y1="370" x2="580" y2="392" stroke="#475569" stroke-width="1.5" />
+    <line x1="820" y1="370" x2="580" y2="447" stroke="#475569" stroke-width="1.5" />
+</svg>

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" width="960" height="320">
+    
+    <defs>
+        <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#0f172a" />
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2563eb" />
+            <stop offset="100%" stop-color="#1d4ed8" />
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#059669" />
+            <stop offset="100%" stop-color="#047857" />
+        </linearGradient>
+        <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d97706" />
+            <stop offset="100%" stop-color="#b45309" />
+        </linearGradient>
+        <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#dc2626" />
+            <stop offset="100%" stop-color="#b91c1c" />
+        </linearGradient>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7c3aed" />
+            <stop offset="100%" stop-color="#6d28d9" />
+        </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#f8fafc" />
+        </linearGradient>
+        <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+        </filter>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+        </marker>
+        <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+        </marker>
+        <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+        </marker>
+    </defs>
+
+    <rect width="960" height="320" rx="12" fill="#0f172a" />
+    <text x="480" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">Evolution of Anti-Money Laundering Surveillance Methodologies</text>
+    <text x="480" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">Historical shift from static rules to hybrid machine learning and graph network forensics</text>
+
+    <!-- Timeline Axis -->
+    <line x1="80" y1="180" x2="880" y2="180" stroke="#334155" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Epoch 1 -->
+    <g transform="translate(60, 90)">
+        <rect width="180" height="150" rx="8" fill="#1e293b" stroke="#475569" stroke-width="2" />
+        <rect width="180" height="32" rx="8" fill="#334155" />
+        <text x="90" y="21" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#f1f5f9">1990s: Static Rules</text>
+        <text x="15" y="55" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Hardcoded limits (&gt; $10k)</text>
+        <text x="15" y="75" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 95%+ False Positives</text>
+        <text x="15" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Nightly SQL Batch ETL</text>
+        <text x="15" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#ef4444">• Blind to Smurfing</text>
+        <circle cx="90" cy="90" r="8" fill="#64748b" stroke="#0f172a" stroke-width="3" />
+    </g>
+
+    <!-- Epoch 2 -->
+    <g transform="translate(280, 90)">
+        <rect width="180" height="150" rx="8" fill="#1e293b" stroke="#475569" stroke-width="2" />
+        <rect width="180" height="32" rx="8" fill="#334155" />
+        <text x="90" y="21" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#f1f5f9">2000s: Statistical</text>
+        <text x="15" y="55" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• User Moving Averages</text>
+        <text x="15" y="75" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Z-Score Outlier Checks</text>
+        <text x="15" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Historical Profiling</text>
+        <text x="15" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#f59e0b">• Cold-Start Failures</text>
+        <circle cx="90" cy="90" r="8" fill="#64748b" stroke="#0f172a" stroke-width="3" />
+    </g>
+
+    <!-- Epoch 3 -->
+    <g transform="translate(500, 90)">
+        <rect width="180" height="150" rx="8" fill="#1e293b" stroke="#2563eb" stroke-width="2" />
+        <rect width="180" height="32" rx="8" fill="url(#blueGrad)" />
+        <text x="90" y="21" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">2010s: Supervised ML</text>
+        <text x="15" y="55" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Random Forest / Trees</text>
+        <text x="15" y="75" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Tabular Feature Vectors</text>
+        <text x="15" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Higher Classification F1</text>
+        <text x="15" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#f59e0b">• Blind to Zero-Day ML</text>
+        <circle cx="90" cy="90" r="8" fill="#3b82f6" stroke="#0f172a" stroke-width="3" />
+    </g>
+
+    <!-- Epoch 4 -->
+    <g transform="translate(720, 90)" filter="url(#dropShadow)">
+        <rect width="180" height="150" rx="8" fill="#1e293b" stroke="#059669" stroke-width="2" />
+        <rect width="180" height="32" rx="8" fill="url(#emeraldGrad)" />
+        <text x="90" y="21" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">2020s+: Our System</text>
+        <text x="15" y="55" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• 5-Model Hybrid Fusion</text>
+        <text x="15" y="75" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• Deep Autoencoder MSE</text>
+        <text x="15" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">• NetworkX Graph Loops</text>
+        <text x="15" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#34d399">• Sub-15ms Latency</text>
+        <circle cx="90" cy="90" r="9" fill="#10b981" stroke="#ffffff" stroke-width="3" />
+    </g>
+</svg>

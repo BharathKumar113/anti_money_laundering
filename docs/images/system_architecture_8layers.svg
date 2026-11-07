@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" width="1000" height="660">
+    
+    <defs>
+        <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#0f172a" />
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2563eb" />
+            <stop offset="100%" stop-color="#1d4ed8" />
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#059669" />
+            <stop offset="100%" stop-color="#047857" />
+        </linearGradient>
+        <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d97706" />
+            <stop offset="100%" stop-color="#b45309" />
+        </linearGradient>
+        <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#dc2626" />
+            <stop offset="100%" stop-color="#b91c1c" />
+        </linearGradient>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7c3aed" />
+            <stop offset="100%" stop-color="#6d28d9" />
+        </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#f8fafc" />
+        </linearGradient>
+        <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+        </filter>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+        </marker>
+        <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+        </marker>
+        <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+        </marker>
+    </defs>
+
+    <rect width="1000" height="660" rx="12" fill="#0f172a" />
+    <text x="500" y="38" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">8-Layer Enterprise System Architecture</text>
+    <text x="500" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">Modular decomposition of production AML surveillance platform</text>
+
+    <!-- Layers Stack -->
+    <!-- Layer 1 -->
+    <g transform="translate(50, 80)">
+        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" />
+        <rect width="140" height="55" rx="8" fill="url(#blueGrad)" />
+        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">1. Presentation</text>
+        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">React 18 SPA • Vite Bundler • Vis-Network 2D Force Graph • Chart.js Metrics • Swagger Docs (/docs)</text>
+    </g>
+
+    <!-- Layer 2 -->
+    <g transform="translate(50, 145)">
+        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#0ea5e9" stroke-width="1.5" />
+        <rect width="140" height="55" rx="8" fill="#0284c7" />
+        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">2. API Gateway</text>
+        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">FastAPI Async Framework • Uvicorn High-Speed ASGI • CORS Middleware • X-Process-Time Tracing</text>
+    </g>
+
+    <!-- Layer 3 -->
+    <g transform="translate(50, 210)">
+        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" />
+        <rect width="140" height="55" rx="8" fill="#4f46e5" />
+        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">3. Ingestion Layer</text>
+        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">Pydantic v2 Schema Validation • PaySim Streaming CSV Reader • 9-Feature Mathematical Transformer</text>
+    </g>
+
+    <!-- Layer 4 -->
+    <g transform="translate(50, 275)">
+        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5" />
+        <rect width="140" height="55" rx="8" fill="#7c3aed" />
+        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">4. ML Registry</text>
+        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">ModelPluginRegistry • 5 Modular Plugins • Zero-Downtime Toggles • Dynamic Weight Rebalancing</text>
+    </g>
+
+    <!-- Layer 5 -->
+    <g transform="translate(50, 340)">
+        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="1.5" />
+        <rect width="140" height="55" rx="8" fill="#db2777" />
+        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">5. Scoring &amp; Graph</text>
+        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">NetworkX Multigraph • k-Hop Bounded Cycle Forensics • Weighted Ensemble Fusion • SHAP XAI Engine</text>
+    </g>
+
+    <!-- Layer 6 -->
+    <g transform="translate(50, 405)">
+        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
+        <rect width="140" height="55" rx="8" fill="#d97706" />
+        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">6. Core Services</text>
+        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">AMLService • AlertService (Triage &amp; SAR Filing) • GraphService • AnalyticsService (Executive KPIs)</text>
+    </g>
+
+    <!-- Layer 7 -->
+    <g transform="translate(50, 470)">
+        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5" />
+        <rect width="140" height="55" rx="8" fill="#059669" />
+        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">7. Persistence</text>
+        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">SQLAlchemy 2.0 ORM • PostgreSQL 16 (Production Cloud DB) • SQLite 3 (Embedded Dev Database)</text>
+    </g>
+
+    <!-- Layer 8 -->
+    <g transform="translate(50, 535)">
+        <rect width="900" height="55" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1.5" />
+        <rect width="140" height="55" rx="8" fill="#475569" />
+        <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">8. DevOps &amp; Cloud</text>
+        <text x="160" y="33" font-family="system-ui, sans-serif" font-size="12" fill="#cbd5e1">Multi-Stage Dockerfile (Node 20 + Python 3.11-slim) • Render CI/CD Auto-Deploy • Pytest (14/14 Passed)</text>
+    </g>
+
+    <!-- Connecting vertical pipe -->
+    <line x1="120" y1="135" x2="120" y2="535" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 4" />
+</svg>

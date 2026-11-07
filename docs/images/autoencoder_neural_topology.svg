@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" width="960" height="380">
+    
+    <defs>
+        <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#0f172a" />
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2563eb" />
+            <stop offset="100%" stop-color="#1d4ed8" />
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#059669" />
+            <stop offset="100%" stop-color="#047857" />
+        </linearGradient>
+        <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d97706" />
+            <stop offset="100%" stop-color="#b45309" />
+        </linearGradient>
+        <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#dc2626" />
+            <stop offset="100%" stop-color="#b91c1c" />
+        </linearGradient>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7c3aed" />
+            <stop offset="100%" stop-color="#6d28d9" />
+        </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#f8fafc" />
+        </linearGradient>
+        <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+        </filter>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+        </marker>
+        <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+        </marker>
+        <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+        </marker>
+    </defs>
+
+    <rect width="960" height="380" rx="12" fill="#0f172a" />
+    <text x="480" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">Deep Autoencoder Neural Network Topology (9-16-4-16-9)</text>
+    <text x="480" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">Unsupervised anomaly detection via latent space compression and reconstruction error</text>
+
+    <!-- Layer 1: Input -->
+    <g transform="translate(50, 100)">
+        <rect width="140" height="230" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2" />
+        <rect width="140" height="34" rx="8" fill="url(#blueGrad)" />
+        <text x="70" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Input Tensor</text>
+        <text x="70" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#93c5fd">9 Features</text>
+        <text x="15" y="80" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">1. amount</text>
+        <text x="15" y="96" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">2. oldbalanceOrg</text>
+        <text x="15" y="112" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">3. newbalanceOrig</text>
+        <text x="15" y="128" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">4. oldbalanceDest</text>
+        <text x="15" y="144" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">5. newbalanceDest</text>
+        <text x="15" y="160" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">6. error_orig</text>
+        <text x="15" y="176" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">7. error_dest</text>
+        <text x="15" y="192" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">8. is_transfer</text>
+        <text x="15" y="208" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">9. is_cashout</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <path d="M 195 215 L 235 215" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)" />
+
+    <!-- Layer 2: Encoder 16 -->
+    <g transform="translate(245, 120)">
+        <rect width="130" height="190" rx="8" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" />
+        <rect width="130" height="34" rx="8" fill="#4f46e5" />
+        <text x="65" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Encoder 1</text>
+        <text x="65" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#a5b4fc">16 Neurons</text>
+        <text x="65" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">ReLU Activation</text>
+        <text x="65" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Dense Linear</text>
+        <text x="65" y="150" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Projection</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <path d="M 380 215 L 415 215" fill="none" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)" />
+
+    <!-- Layer 3: Bottleneck 4 -->
+    <g transform="translate(425, 150)" filter="url(#dropShadow)">
+        <rect width="110" height="130" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2" />
+        <rect width="110" height="34" rx="8" fill="url(#amberGrad)" />
+        <text x="55" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Bottleneck</text>
+        <text x="55" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#fcd34d">4 Neurons</text>
+        <text x="55" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">Latent Manifold</text>
+        <text x="55" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8">Representation</text>
+    </g>
+
+    <!-- Arrow 3 -->
+    <path d="M 540 215 L 575 215" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)" />
+
+    <!-- Layer 4: Decoder 16 -->
+    <g transform="translate(585, 120)">
+        <rect width="130" height="190" rx="8" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" />
+        <rect width="130" height="34" rx="8" fill="#4f46e5" />
+        <text x="65" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Decoder 1</text>
+        <text x="65" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#a5b4fc">16 Neurons</text>
+        <text x="65" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#cbd5e1">ReLU Activation</text>
+        <text x="65" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Feature Space</text>
+        <text x="65" y="150" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">Expansion</text>
+    </g>
+
+    <!-- Arrow 4 -->
+    <path d="M 720 215 L 755 215" fill="none" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)" />
+
+    <!-- Layer 5: Output 9 -->
+    <g transform="translate(765, 100)">
+        <rect width="145" height="230" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2" />
+        <rect width="145" height="34" rx="8" fill="url(#emeraldGrad)" />
+        <text x="72" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Reconstruction</text>
+        <text x="72" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#6ee7b7">9 Features (x_hat)</text>
+        <text x="15" y="80" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">Linear Output</text>
+        <line x1="15" y1="90" x2="130" y2="90" stroke="#334155" />
+        <text x="72" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">MSE LOSS</text>
+        <text x="72" y="135" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">sum(x - x_hat)^2 / 9</text>
+        <text x="72" y="165" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#fca5a5">Baseline Threshold:</text>
+        <text x="72" y="182" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ef4444">tau = 0.0341</text>
+        <text x="72" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#cbd5e1">MSE &gt; tau -&gt; Anomaly</text>
+    </g>
+
+    <!-- Comparison Feedback Arrow -->
+    <path d="M 837 335 L 837 355 L 120 355 L 120 335" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrowRed)" />
+    <text x="480" y="350" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#f87171">Compare Input x with Reconstruction x_hat (Calculate MSE)</text>
+</svg>

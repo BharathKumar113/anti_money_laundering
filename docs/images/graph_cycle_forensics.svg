@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400">
+    
+    <defs>
+        <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#0f172a" />
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2563eb" />
+            <stop offset="100%" stop-color="#1d4ed8" />
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#059669" />
+            <stop offset="100%" stop-color="#047857" />
+        </linearGradient>
+        <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d97706" />
+            <stop offset="100%" stop-color="#b45309" />
+        </linearGradient>
+        <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#dc2626" />
+            <stop offset="100%" stop-color="#b91c1c" />
+        </linearGradient>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7c3aed" />
+            <stop offset="100%" stop-color="#6d28d9" />
+        </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#f8fafc" />
+        </linearGradient>
+        <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+        </filter>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6" />
+        </marker>
+        <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+        </marker>
+        <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+        </marker>
+    </defs>
+
+    <rect width="960" height="400" rx="12" fill="#0f172a" />
+    <text x="480" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#f8fafc">NetworkX Topological Graph Forensics &amp; Laundering Ring Detection</text>
+    <text x="480" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">Exposing circular layering loops and mule account clustering in transaction graphs</text>
+
+    <!-- Circular Ring Subgraph -->
+    <g transform="translate(150, 100)">
+        <rect width="360" height="260" rx="10" fill="#1e293b" stroke="#059669" stroke-width="2" />
+        <text x="180" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#34d399">Circular Round-Tripping Ring (k = 3)</text>
+
+        <!-- Node A -->
+        <circle cx="90" cy="110" r="28" fill="url(#emeraldGrad)" filter="url(#dropShadow)" />
+        <text x="90" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff">ACC_A</text>
+
+        <!-- Node B -->
+        <circle cx="270" cy="110" r="28" fill="url(#emeraldGrad)" filter="url(#dropShadow)" />
+        <text x="270" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff">ACC_B</text>
+
+        <!-- Node C -->
+        <circle cx="180" cy="200" r="28" fill="url(#emeraldGrad)" filter="url(#dropShadow)" />
+        <text x="180" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff">ACC_C</text>
+
+        <!-- Edge A -> B -->
+        <path d="M 120 110 L 235 110" fill="none" stroke="#10b981" stroke-width="3" marker-end="url(#arrowGreen)" />
+        <text x="180" y="100" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#a7f3d0">Rs. 175,000</text>
+
+        <!-- Edge B -> C -->
+        <path d="M 250 130 L 205 180" fill="none" stroke="#10b981" stroke-width="3" marker-end="url(#arrowGreen)" />
+        <text x="250" y="165" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#a7f3d0">Rs. 175,000</text>
+
+        <!-- Edge C -> A -->
+        <path d="M 155 180 L 110 130" fill="none" stroke="#10b981" stroke-width="3" marker-end="url(#arrowGreen)" />
+        <text x="105" y="165" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#a7f3d0">Rs. 175,000</text>
+    </g>
+
+    <!-- Mule Fan-In / Fan-Out Subgraph -->
+    <g transform="translate(550, 100)">
+        <rect width="360" height="260" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2" />
+        <text x="180" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#60a5fa">Mule Consolidation Hub (Fan-In)</text>
+
+        <!-- Central Mule Hub -->
+        <circle cx="250" cy="140" r="30" fill="url(#blueGrad)" filter="url(#dropShadow)" />
+        <text x="250" y="145" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#ffffff">MULE_HUB</text>
+
+        <!-- Smurf 1 -->
+        <circle cx="60" cy="75" r="20" fill="#334155" />
+        <text x="60" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#cbd5e1">SMURF_1</text>
+        <path d="M 85 85 L 215 125" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)" />
+        <text x="140" y="95" font-family="system-ui, sans-serif" font-size="9" fill="#93c5fd">Rs. 9,800</text>
+
+        <!-- Smurf 2 -->
+        <circle cx="60" cy="140" r="20" fill="#334155" />
+        <text x="60" y="145" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#cbd5e1">SMURF_2</text>
+        <path d="M 85 140 L 210 140" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)" />
+        <text x="140" y="135" font-family="system-ui, sans-serif" font-size="9" fill="#93c5fd">Rs. 9,900</text>
+
+        <!-- Smurf 3 -->
+        <circle cx="60" cy="205" r="20" fill="#334155" />
+        <text x="60" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#cbd5e1">SMURF_3</text>
+        <path d="M 85 195 L 215 155" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)" />
+        <text x="140" y="185" font-family="system-ui, sans-serif" font-size="9" fill="#93c5fd">Rs. 9,750</text>
+
+        <!-- Consolidated Drain Out -->
+        <circle cx="310" cy="220" r="22" fill="url(#redGrad)" />
+        <text x="310" y="225" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" font-weight="700" fill="#ffffff">EXIT_WIRE</text>
+        <path d="M 270 165 L 295 200" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arrowRed)" />
+        <text x="245" y="195" font-family="system-ui, sans-serif" font-size="9" fill="#fca5a5">Rs. 29,450</text>
+    </g>
+</svg>

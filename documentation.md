@@ -56,7 +56,7 @@ The system processes incoming transactions with an average synchronous latency o
    - 4.5 System Feasibility Analysis
 5. [Chapter 5: System Architecture](#5-chapter-5-system-architecture)
    - 5.1 Layered Enterprise Architecture
-   - 5.2 High-Level System Architecture Diagram
+   - 5.2 High-Level System Architecture
    - 5.3 Data Flow Architecture (DFD Levels 0, 1, and 2)
    - 5.4 Modular Component Decomposition
    - 5.5 Hardware, Software & Cloud Environment Specification
@@ -96,22 +96,7 @@ In response, international standard-setting bodies led by the Financial Action T
 ### 1.2 The Three Fundamental Stages of Money Laundering
 Laundering schemes, regardless of scale, operate across three sequential stages:
 
-```
-+---------------------------------------------------------------------------------------------+
-|                                MONEY LAUNDERING LIFECYCLE                                    |
-+------------------------------+------------------------------+-------------------------------+
-|         1. PLACEMENT         |         2. LAYERING          |        3. INTEGRATION         |
-|  Illicit cash injected into  |  Funds obfuscated through    |  Clean wealth re-enters the   |
-|  banking system via smurfs   |  complex chains, multi-hop   |  economy via luxury assets,   |
-|  and structured deposits.    |  loops, and shell entities.  |  real estate, and investments.|
-+------------------------------+------------------------------+-------------------------------+
-```
-
-```mermaid
-flowchart LR
-    Stage1["1. Placement: Cash Injection"] -->|"Layered Transfers"| Stage2["2. Layering: Multi-Hop Obfuscation"]
-    Stage2 -->|"Disguised Clean Capital"| Stage3["3. Integration: Real Estate & Assets"]
-```
+![Figure 1: The Three Fundamental Stages of Money Laundering](docs/images/placement_layering_integration.svg)
 
 1. **Placement**: The physical or digital entry of illicit proceeds into financial institutions. Criminals bypass currency reporting thresholds ($10,000 in the US, ₹10,00,000 in India) through "smurfing"—distributing cash across dozens of third-party runners ("mules") who deposit amounts just below reporting limits.
 2. **Layering**: The systematic obfuscation of the financial audit trail. Funds are rapidly routed through multiple accounts, commercial shell entities, cross-border wires, and diverse transaction types (`TRANSFER`, `CASH_OUT`, `PAYMENT`). Launderers utilize circular fund loops ("round-tripping") and mule networks (fan-in and fan-out topologies) to break the mathematical relationship between source and destination.
@@ -151,25 +136,9 @@ The project covers end-to-end financial surveillance:
 ## 2. Chapter 2: Literature Survey
 
 ### 2.1 Chronological Evolution of AML Methodologies
-The technological approaches to financial surveillance over the past three decades are summarized below:
+The technological approaches to financial surveillance over the past three decades have evolved across four distinct epochs:
 
-```
-+---------------------------------------------------------------------------------------------+
-|                               METHODOLOGY EVOLUTION TIMELINE                                |
-+------------------------+------------------------+--------------------+----------------------+
-|     EPOCH 1 (1990s)    |     EPOCH 2 (2000s)    |   EPOCH 3 (2010s)  |   EPOCH 4 (2020s+)   |
-| Hardcoded threshold    | Historical user norms, | Supervised trees,  | Multi-paradigm fusion|
-| rules (Amount > $10K), | Z-scores, moving       | Random Forests,    | + Deep Autoencoders  |
-| 95%+ false positives.  | average deviations.    | XGBoost classifiers| + Graph Forensics    |
-+------------------------+------------------------+--------------------+----------------------+
-```
-
-```mermaid
-flowchart LR
-    E1["Epoch 1: Static Rules (1990s)"] --> E2["Epoch 2: Statistical Baselines (2000s)"]
-    E2 --> E3["Epoch 3: Supervised ML (2010s)"]
-    E3 --> E4["Epoch 4: Hybrid Ensembles & Graph Analytics (2020s+)"]
-```
+![Figure 2: Evolution of Financial Fraud Surveillance Methodologies](docs/images/aml_evolution_timeline.svg)
 
 ### 2.2 Review of Foundational Literature
 
@@ -214,29 +183,7 @@ flowchart LR
 ### 3.1 Overview of Traditional Rule-Based TMS
 Traditional Transaction Monitoring Systems in commercial banking are architected around relational database management systems executing scheduled batch SQL queries overnight:
 
-```
-+---------------------------------------------------------------------------------------------+
-|                                TRADITIONAL RULE-BASED PIPELINE                              |
-+---------------------------------------------------------------------------------------------+
-|  [Core Banking OLTP]  --->  (Nightly Batch ETL)  --->  [Data Warehouse / Data Marts]        |
-|                                                                    |                        |
-|                                                                    v                        |
-|  [Closed / Dismissed] <--- (95% False Positives) <---  [Static Rule Engine (SQL/Mantas)]    |
-|                                                                    |                        |
-|                                                                    v (5% True Cases)        |
-|                                                        [Manual SAR Regulatory Filing]       |
-+---------------------------------------------------------------------------------------------+
-```
-
-```mermaid
-flowchart TD
-    CoreBanking["Core Banking Ledger (OLTP)"] -->|"Nightly Batch ETL (T+1)"| DWH["Data Warehouse"]
-    DWH --> Rules["Static Rule Engine"]
-    Rules --> Alerts["5,000+ Daily Unfiltered Alerts"]
-    Alerts --> Analysts["Compliance Investigators"]
-    Analysts -->|"95% False Positives"| Dismissed["Dismissed Without Action"]
-    Analysts -->|"5% True Positives"| SAR["Manual SAR Regulatory Filing"]
-```
+![Figure 3: Failure Modes of Traditional Rule-Based Surveillance Systems](docs/images/legacy_rule_failure.svg)
 
 ### 3.2 Dominant Commercial Solutions & Industry Implementations
 1. **Oracle Financial Services Analytical Applications (Mantas)**: Long-standing market leader using scenario-based rules and threshold matching. Robust for enterprise auditability, but suffers from high operational maintenance costs, rigid rule modification workflows, and heavy false-positive alert volumes.
@@ -281,36 +228,7 @@ Legacy monitoring operates on overnight batch schedules. By the time an alert re
 ### 4.1 System Overview & Architectural Philosophy
 The proposed platform establishes a **Multi-Layer Defense-in-Depth Architecture**. Every transaction entering the system is evaluated simultaneously across five specialized detection engines representing deterministic rules, supervised learning, unsupervised anomaly detection, and graph theory:
 
-```
-+---------------------------------------------------------------------------------------------+
-|                               DEFENSE-IN-DEPTH SURVEILLANCE                                 |
-+---------------------+-------------------------------+---------------------------------------+
-| LAYER               | SPECIALIZATION                | CRIME TYPOLOGY DETECTED               |
-+---------------------+-------------------------------+---------------------------------------+
-| 1. Heuristic Rules  | Fixed statutory thresholds    | Large cash dumps, rapid total drains  |
-| 2. XGBoost ML       | High-dimensional tree patterns| Known fraud transfer signatures       |
-| 3. Isolation Forest | Multi-variate outliers        | Extreme deviation from population     |
-| 4. Deep Autoencoder | Manifold reconstruction loss  | Novel / Zero-day unobserved laundering|
-| 5. NetworkX Graph   | Relational topology analysis  | Round-tripping loops, mule clusters   |
-+---------------------+-------------------------------+---------------------------------------+
-```
-
-```mermaid
-flowchart TD
-    API["FastAPI Transaction Ingestion API"] --> Transformer["9-Feature Contract Transformer"]
-    Transformer --> E1["Engine 1: Heuristic Compliance Rules"]
-    Transformer --> E2["Engine 2: Supervised XGBoost Classifier"]
-    Transformer --> E3["Engine 3: Unsupervised Isolation Forest"]
-    Transformer --> E4["Engine 4: Deep Neural Autoencoder"]
-    Transformer --> E5["Engine 5: NetworkX Graph Analytics"]
-    E1 --> Aggregator["Weighted Ensemble Fusion & Calibrator"]
-    E2 --> Aggregator
-    E3 --> Aggregator
-    E4 --> Aggregator
-    E5 --> Aggregator
-    Aggregator --> XAI["SHAP Explainability & Triage Engine"]
-    XAI --> Output["Database & React 18 Investigator Dashboard"]
-```
+![Figure 4: Proposed Multi-Paradigm Defense-in-Depth Surveillance Pipeline](docs/images/defense_in_depth_pipeline.svg)
 
 ### 4.2 Key Novel Innovations & Differentiators
 1. **Multi-Paradigm Ensemble Fusion**: Combines supervised, unsupervised, graph-based, and heuristic methods to eliminate single-point detection vulnerabilities.
@@ -348,133 +266,30 @@ flowchart TD
 ### 5.1 Layered Enterprise Architecture
 The platform is organized into eight modular architectural layers:
 
-```
-+---------------------------------------------------------------------------------------------+
-|                                8-LAYER ENTERPRISE ARCHITECTURE                              |
-+---------------------------------------------------------------------------------------------+
-| Layer 1: Presentation Layer   | React 18, Vite, Vis-Network 2D Graph, Chart.js, Swagger Docs|
-| Layer 2: API Gateway Layer    | FastAPI (Async ASGI), Uvicorn Server, Timing Middleware     |
-| Layer 3: Ingestion Layer      | Pydantic v2 Validation, 9-Feature Contract Transformer      |
-| Layer 4: ML Plugin Registry   | Dynamic Registry, 5 Modular Pluggable Model Engines         |
-| Layer 5: Forensics & Scoring  | NetworkX Graph Forensics, Weighted Fusion, SHAP Calculator  |
-| Layer 6: Core Services Layer  | AML Processing Service, Alert Triage Service, Graph Service |
-| Layer 7: Persistence Layer    | SQLAlchemy 2.0 ORM, PostgreSQL (Cloud) / SQLite (Dev)       |
-| Layer 8: DevOps & CI/CD       | Multi-Stage Docker Build (Node + Python), Render Auto-Deploy|
-+---------------------------------------------------------------------------------------------+
-```
+![Figure 5: 8-Layer Enterprise System Architecture](docs/images/system_architecture_8layers.svg)
 
-```mermaid
-flowchart TD
-    subgraph L1["Presentation Layer"]
-        SPA["React 18 Dashboard"]
-        Canvas["Vis-Network Canvas"]
-        Docs["Swagger Docs (/docs)"]
-    end
-    subgraph L2["API Gateway"]
-        Uvicorn["Uvicorn ASGI Server"]
-        FastAPI["FastAPI Framework"]
-    end
-    subgraph L3["Ingestion Layer"]
-        Pydantic["Pydantic v2 Validation"]
-        Transformer["9-Feature Transformer"]
-    end
-    subgraph L4["ML Plugin Registry"]
-        Registry["ModelPluginRegistry"]
-        P_Rules["HeuristicPlugin"]
-        P_XGB["XGBoostPlugin"]
-        P_Iso["IsolationForestPlugin"]
-        P_AE["AutoencoderPlugin"]
-        P_Graph["GraphRingPlugin"]
-    end
-    subgraph L5["Analytics & Persistence"]
-        NetworkX["NetworkX Graph Engine"]
-        Fusion["Weighted Ensemble Fusion"]
-        DB[("PostgreSQL / SQLite")]
-    end
+### 5.2 High-Level System Architecture
+The platform coordinates clients, microservices, and persistence layers:
 
-    SPA --> FastAPI
-    Canvas --> FastAPI
-    Docs --> FastAPI
-    FastAPI --> Pydantic
-    Pydantic --> Transformer
-    Transformer --> Registry
-    Registry --> P_Rules
-    Registry --> P_XGB
-    Registry --> P_Iso
-    Registry --> P_AE
-    Registry --> P_Graph
-    P_Graph --> NetworkX
-    P_Rules --> Fusion
-    P_XGB --> Fusion
-    P_Iso --> Fusion
-    P_AE --> Fusion
-    P_Graph --> Fusion
-    Fusion --> DB
-```
-
-### 5.2 High-Level System Architecture Diagram
-The end-to-end data processing pipeline flows from client ingestion to persistence:
-
-```
-+---------------------------------------------------------------------------------------------+
-|                                END-TO-END DATA FLOW PIPELINE                                |
-+---------------------------------------------------------------------------------------------+
-|  [Client Ingestion]                                                                         |
-|         |  (JSON Payload: step, type, amount, name_orig, old_orig, new_orig, name_dest...)    |
-|         v                                                                                   |
-|  [FastAPI Router & Pydantic Validation]                                                     |
-|         |                                                                                   |
-|         v                                                                                   |
-|  [9-Feature Contract Transformer: balance deltas error_orig, error_dest, type flags]       |
-|         |                                                                                   |
-|         +-------------------+-------------------+-------------------+-------------------+   |
-|         |                   |                   |                   |                   |   |
-|         v                   v                   v                   v                   v   |
-|  [Heuristic Rules]   [XGBoost Classifier] [Isolation Forest]  [Deep Autoencoder] [Graph Ring]|
-|    (Score: 0.0-1.0)    (Score: 0.0-1.0)     (Score: 0.0-1.0)    (Score: 0.0-1.0) (Score)    |
-|         |                   |                   |                   |                   |   |
-|         +-------------------+-------------------+-------------------+-------------------+   |
-|         |                                                                                   |
-|         v                                                                                   |
-|  [Weighted Ensemble Fusion: R = sum(w_i * s_i) / sum(w_i)]                                  |
-|         |                                                                                   |
-|         v                                                                                   |
-|  [SHAP Attributions & Human-Readable Evidence Generation]                                   |
-|         |                                                                                   |
-|         v                                                                                   |
-|  [Decision Engine: High (>=0.70) | Medium (>=0.40) | Low (<0.40)]                            |
-|         |                                                                                   |
-|         v                                                                                   |
-|  [Database Persistence & React 18 Investigator Dashboard Broadcast]                        |
-+---------------------------------------------------------------------------------------------+
-```
+| Architectural Layer | Core Technologies | Primary Operational Responsibility |
+| :--- | :--- | :--- |
+| **Layer 1: Presentation** | React 18, Vite, Vis-Network, Chart.js | Investigator dashboard, graph visualizer, KPI monitors, Swagger documentation. |
+| **Layer 2: API Gateway** | FastAPI, Uvicorn, Timing Middleware | Async HTTP request routing, CORS headers, process-time metrics. |
+| **Layer 3: Ingestion & Validation**| Pydantic v2, PaySim Streaming Parser | Schema validation, type enforcement, 9-feature transformation. |
+| **Layer 4: ML Plugin Registry** | `ModelPluginRegistry`, Dynamic Toggles | Thread-safe model dispatch, runtime weight rebalancing. |
+| **Layer 5: Forensics & Scoring**| NetworkX, Weighted Calibrator, SHAP | $k$-hop cycle detection, ensemble fusion, explainability attributions. |
+| **Layer 6: Core Services** | `AMLService`, `AlertService`, `GraphService`| Business orchestration, alert generation, case management. |
+| **Layer 7: Persistence** | SQLAlchemy 2.0, PostgreSQL 16, SQLite 3 | Declarative ORM models, transaction storage, alert lifecycle logs. |
+| **Layer 8: DevOps & CI/CD** | Docker Multi-Stage, Render Cloud | Containerization, automated CI/CD deployment, regression testing. |
 
 ### 5.3 Data Flow Architecture (DFD Levels 0, 1, and 2)
 
 #### Level-0 DFD (Context Diagram)
-```mermaid
-flowchart LR
-    CoreBanking["Core Banking Ledger"] -->|"Raw Transaction Data"| AML["AML Surveillance Platform"]
-    AML -->|"Transaction Risk Score & Status"| CoreBanking
-    AML -->|"Automated Alerts & Evidence"| Investigator["Compliance Investigator"]
-    Investigator -->|"Case Triage & Audit Rationale"| AML
-    AML -->|"Suspicious Activity Reports (SARs)"| FIU["Financial Intelligence Unit"]
-```
-
-#### Level-1 DFD (Subsystem Breakdown)
-```mermaid
-flowchart TD
-    TxIn["Incoming Transaction"] --> P1["1.0 Validation & Feature Transformation"]
-    P1 --> FeatVec["9-Dimensional Feature Vector"]
-    FeatVec --> P2["2.0 Multi-Model Inference Dispatcher"]
-    P2 --> ModelScores["Plugin Prediction Results"]
-    ModelScores --> P3["3.0 Weighted Ensemble Aggregator"]
-    P3 --> RiskScore["Calibrated Risk Score (0.0 to 1.0)"]
-    RiskScore --> P4["4.0 Compliance Alert Decision Engine"]
-    P4 -->|"Score >= 0.40"| AlertStore[("Alerts Table")]
-    P4 --> TxStore[("Transactions Table")]
-    AlertStore --> P5["5.0 Investigator Workspace & SAR Reporting"]
-```
+1. **Core Banking System** transmits raw transaction payloads via JSON REST endpoints.
+2. **Surveillance Engine** validates data, computes feature contracts, and executes 5 models.
+3. **Decision Engine** returns real-time risk scores and triggers compliance alerts.
+4. **Compliance Officer** accesses the investigation workspace to inspect SHAP narratives and graph networks.
+5. **Regulatory Export** generates standardized SAR reports for sovereign Financial Intelligence Units (FIUs).
 
 ### 5.4 Modular Component Decomposition
 1. **API Router Layer (`backend/app/api/`)**: Dispatches HTTP requests across modular endpoints:
@@ -562,34 +377,6 @@ This scales the gradient $g_i$ and hessian $h_i$ of positive instances by $768.4
 #### Principle of Recursive Space Partitioning
 Isolation Forest isolates multi-dimensional anomalies by exploiting their geometric sparsity. Anomalous transactions reside far from dense clusters and are isolated near the root of random binary isolation trees ($iTrees$).
 
-```
-+---------------------------------------------------------------------------------------------+
-|                               ISOLATION FOREST PARTITIONING                                 |
-+---------------------------------------------------------------------------------------------+
-|                               [Full Population Root]                                        |
-|                                         |                                                   |
-|                        Split: Amount > 250,000?                                             |
-|                                /                 \                                          |
-|            YES (Path Length = 1)                 NO                                         |
-|                      v                           v                                          |
-|        [ANOMALY: Outlier Isolated]       Split: Balance Discrepancy > 1,000?                |
-|                                                   /                 \                       |
-|                                            YES (Path = 2)           NO (Path > 12)          |
-|                                                  v                  v                       |
-|                                       [Secondary Outlier]     [Normal Cluster Inliers]      |
-+---------------------------------------------------------------------------------------------+
-```
-
-```mermaid
-flowchart TD
-    Root["Root: Full Population"] --> Split1{"Split: Amount > 250,000?"}
-    Split1 -->|"YES (Path = 1)"| Anomaly["ANOMALY: Isolated Outlier"]
-    Split1 -->|"NO"| Cluster["Normal Cluster"]
-    Cluster --> Split2{"Split: Balance Discrepancy > 1,000?"}
-    Split2 -->|"YES (Path = 2)"| Outlier2["Secondary Outlier Branch"]
-    Split2 -->|"NO"| DeepLeaf["Normal Activity (Path > 12)"]
-```
-
 #### Average Path Length & Anomaly Score Formulation
 For a dataset of size $n$, the average path length of an unsuccessful search in a Binary Search Tree (BST) represents the normalization constant:
 
@@ -615,29 +402,7 @@ $$\text{score}_{\text{iso}} = \min\left(1.0, \max\left(0.0, 0.60 + 0.70 \times |
 #### Neural Architecture Topology
 The Autoencoder network is configured as a symmetrical Multi-Layer Perceptron ($9 \to 16 \to 4 \to 16 \to 9$):
 
-```
-+---------------------------------------------------------------------------------------------+
-|                          DEEP AUTOENCODER TOPOLOGY (9-16-4-16-9)                            |
-+---------------------+-------------------+-------------------------------+-------------------+
-| LAYER               | DIMENSION         | ACTIVATION                    | PURPOSE           |
-+---------------------+-------------------+-------------------------------+-------------------+
-| Input Tensor        | 9 Features        | Identity / StandardScaler     | Feature Contract  |
-| Encoder Dense 1     | 16 Neurons        | Rectified Linear Unit (ReLU)  | Feature Expansion |
-| Latent Bottleneck   | 4 Neurons         | Rectified Linear Unit (ReLU)  | Low-dim Manifold  |
-| Decoder Dense 1     | 16 Neurons        | Rectified Linear Unit (ReLU)  | Reconstruction    |
-| Output Tensor       | 9 Features        | Linear Projection             | Output Feat Vector|
-+---------------------+-------------------+-------------------------------+-------------------+
-```
-
-```mermaid
-flowchart LR
-    In["Input: 9 Features"] --> Enc["Encoder Layer: 16 Neurons (ReLU)"]
-    Enc --> Bottle["Bottleneck: 4 Neurons"]
-    Bottle --> Dec["Decoder Layer: 16 Neurons (ReLU)"]
-    Dec --> Out["Output: 9 Features"]
-    In -.->|"Calculate MSE Error"| Loss["Reconstruction Loss: MSE"]
-    Out -.->|"Compare Output"| Loss
-```
+![Figure 6: Deep Autoencoder Neural Network Topology and MSE Thresholding](docs/images/autoencoder_neural_topology.svg)
 
 1. **Standardization Preprocessing**:
    $$\vec{z}_0 = \frac{\vec{x} - \vec{\mu}}{\vec{\sigma}}$$
@@ -668,6 +433,8 @@ The ledger is modeled as a directed weighted multigraph $G = (V, E, W)$:
 - $V$: Nodes representing unique bank accounts.
 - $E = \{(u, v, t)\}$: Directed edges representing transfers from originator $u$ to recipient $v$ at timestamp $t$.
 - $W: E \to \mathbb{R}^+$: Edge weights representing monetary transfer amounts.
+
+![Figure 7: Topological Graph Forensics & Circular Laundering Ring Detection](docs/images/graph_cycle_forensics.svg)
 
 #### Cycle & Ring Detection Algorithm
 Money launderers route funds in closed loops ($A \to B \to C \to A$) to fabricate commercial turnover while returning funds to the originating syndicate.
@@ -728,327 +495,71 @@ Where $\phi_j$ represents the attribution of feature $j$. Every flagged transact
 
 ## 7. Chapter 7: Unified Modeling Language (UML) Diagrams
 
-### 7.1 UML Use Case Diagram
+### 7.1 UML Use Case Diagram & Actor Descriptions
 The Use Case Diagram defines interactions between external actors and system capabilities:
 
-```
-+---------------------------------------------------------------------------------------------+
-|                                    UML USE CASE DIAGRAM                                     |
-+---------------------------------------------------------------------------------------------+
-|  [Banking Core System]                                                                      |
-|      |---> (UC-1: Ingest Single Transaction via REST API)                                   |
-|      |---> (UC-2: Stream PaySim CSV Batch File)                                             |
-|                                                                                             |
-|  [AML Surveillance Platform Core]                                                           |
-|      |---> (UC-3: Execute 5-Model Ensemble Inference)                                       |
-|      |---> (UC-4: Evaluate Graph Topological Cycles)                                        |
-|      |---> (UC-5: Auto-Generate High/Medium Compliance Alerts)                              |
-|                                                                                             |
-|  [Compliance Investigator / AML Officer]                                                    |
-|      |---> (UC-6: View Real-Time KPI Dashboard & Heatmaps)                                  |
-|      |---> (UC-7: Explore Interactive 2D Account Graph Canvas)                               |
-|      |---> (UC-8: Review, Triage, & Document Pending Cases)                                 |
-|      |---> (UC-9: Export Formal SAR Reports to FIU)                                         |
-|                                                                                             |
-|  [AML System Administrator]                                                                 |
-|      |---> (UC-10: Toggle Plugins On/Off at Runtime)                                        |
-|      |---> (UC-11: Rebalance Ensemble Weights Dynamically)                                   |
-+---------------------------------------------------------------------------------------------+
-```
+![Figure 8: UML Use Case Diagram](docs/images/uml_use_case_diagram.svg)
 
-```mermaid
-flowchart TD
-    subgraph Actors["System Actors"]
-        Client["Banking Core / Client"]
-        Analyst["Compliance Investigator"]
-        Admin["System Administrator"]
-    end
-    subgraph UC_Ingest["Transaction Ingestion"]
-        UC1["Ingest Single Transaction"]
-        UC2["Stream PaySim CSV Batch"]
-        UC3["Execute 5-Model Ensemble"]
-    end
-    subgraph UC_Investigate["Investigation Workspace"]
-        UC4["View KPI Dashboard"]
-        UC5["Explore Graph Topology"]
-        UC6["Review & Resolve Alerts"]
-        UC7["Export SAR Filings"]
-    end
-    subgraph UC_Admin["System Administration"]
-        UC8["Toggle Plugin State"]
-        UC9["Rebalance Model Weights"]
-    end
-
-    Client --> UC1
-    Client --> UC2
-    UC1 --> UC3
-    UC2 --> UC3
-    Analyst --> UC4
-    Analyst --> UC5
-    Analyst --> UC6
-    Analyst --> UC7
-    Admin --> UC8
-    Admin --> UC9
-```
+* **Banking Core System**: Primary transactional client submitting JSON payment streams and CSV batch files.
+* **Compliance Investigator**: Reviews high-risk alerts, traces graph network rings, documents evidence, and exports SARs.
+* **System Administrator**: Manages dynamic plugin states and rebalances model ensemble weights at runtime.
 
 ---
 
 ### 7.2 UML Class Diagram (Domain Model & Plugin Hierarchy)
 The Class Diagram models object-oriented relationships across the core entities:
 
-```mermaid
-classDiagram
-    class BaseAMLModelPlugin {
-        +str name
-        +str version
-        +str description
-        +str model_type
-        +bool is_enabled
-        +float weight
-        +str author
-        +predict(tx) PluginPrediction
-    }
-    class HeuristicRulePlugin {
-        +predict(tx) PluginPrediction
-    }
-    class XGBoostClassifierPlugin {
-        +str model_path
-        +object loaded_model
-        +predict(tx) PluginPrediction
-    }
-    class IsolationForestPlugin {
-        +str model_path
-        +object loaded_model
-        +predict(tx) PluginPrediction
-    }
-    class AutoencoderAnomalyPlugin {
-        +str model_path
-        +dict loaded_bundle
-        +predict(tx) PluginPrediction
-    }
-    class GraphRingDetectorPlugin {
-        +predict(tx) PluginPrediction
-    }
-    class ModelPluginRegistry {
-        -dict plugins
-        +register_plugin(plugin)
-        +toggle_plugin(name, enabled)
-        +update_weight(name, weight)
-        +execute_ensemble(tx) EnsembleResult
-    }
-    class Transaction {
-        +str id
-        +int step
-        +str type
-        +float amount
-        +str name_orig
-        +float old_balance_orig
-        +float new_balance_orig
-        +str name_dest
-        +float old_balance_dest
-        +float new_balance_dest
-        +float risk_score
-        +bool is_suspicious
-        +str risk_level
-        +list flag_reasons
-        +dict shap_values
-    }
-    class Alert {
-        +int id
-        +str transaction_id
-        +float risk_score
-        +str severity
-        +str status
-        +str assigned_to
-        +str investigator_notes
-        +datetime created_at
-        +datetime resolved_at
-    }
-
-    BaseAMLModelPlugin <|-- HeuristicRulePlugin
-    BaseAMLModelPlugin <|-- XGBoostClassifierPlugin
-    BaseAMLModelPlugin <|-- IsolationForestPlugin
-    BaseAMLModelPlugin <|-- AutoencoderAnomalyPlugin
-    BaseAMLModelPlugin <|-- GraphRingDetectorPlugin
-    ModelPluginRegistry o-- BaseAMLModelPlugin
-    Alert --> Transaction : references
-```
+![Figure 9: UML Class Diagram: Plugin Architecture & Domain Entities](docs/images/uml_class_diagram.svg)
 
 ---
 
 ### 7.3 UML Sequence Diagram 1: Real-Time Transaction Ingestion & Scoring
 Traces execution flow from initial API call through concurrent inference and persistence:
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Client as Banking Core
-    participant Router as FastAPI Router
-    participant Service as AML Service
-    participant Registry as Plugin Registry
-    participant Models as 5-Model Ensemble
-    participant DB as PostgreSQL Database
-
-    Client->>Router: POST /api/v1/transactions/ (JSON payload)
-    Router->>Service: Ingest and validate (Pydantic v2)
-    Service->>Service: Compute 9-Feature Contract
-    Service->>Registry: execute_ensemble(feature_vector)
-    
-    par Concurrent Model Evaluation
-        Registry->>Models: HeuristicRulePlugin.predict()
-        Registry->>Models: XGBoostClassifierPlugin.predict()
-        Registry->>Models: IsolationForestPlugin.predict()
-        Registry->>Models: AutoencoderAnomalyPlugin.predict()
-        Registry->>Models: GraphRingDetectorPlugin.predict()
-    end
-
-    Models-->>Registry: Return scores, reasons and SHAP attributions
-    Registry->>Registry: Compute weighted aggregate score (0.0 to 1.0)
-    Registry-->>Service: Return EnsembleResult
-
-    Service->>DB: INSERT into transactions table
-    alt Score >= 0.70 (HIGH) or >= 0.40 (MEDIUM)
-        Service->>DB: INSERT into alerts table (status: PENDING)
-    end
-
-    Service-->>Router: TransactionResponse with SHAP explainability
-    Router-->>Client: 201 Created (JSON Response)
-```
+![Figure 10: UML Sequence Diagram: Transaction Ingestion & Scoring](docs/images/uml_sequence_ingestion.svg)
 
 ---
 
 ### 7.4 UML Sequence Diagram 2: Compliance Case Management & Graph Forensics
 Traces investigator triage workflows, graph exploration, and alert resolution:
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Officer as Compliance Officer
-    participant UI as React 18 SPA
-    participant Router as Alerts API Router
-    participant AlertSvc as Alert Service
-    participant GraphSvc as Graph Service
-    participant DB as PostgreSQL Database
-
-    Officer->>UI: Open Investigator Dashboard
-    UI->>Router: GET /api/v1/alerts/?status=PENDING
-    Router->>AlertSvc: get_pending_alerts()
-    AlertSvc->>DB: Query pending alerts
-    DB-->>AlertSvc: Return alert records
-    AlertSvc-->>Router: Alert Details List
-    Router-->>UI: Display Alert Feed (Sorted by Severity)
-
-    Officer->>UI: Select Alert (e.g. Case #5, Risk: 0.8711)
-    UI->>Router: GET /api/v1/graph/account/C_PROD_TEST_SENDER
-    Router->>GraphSvc: get_account_subgraph(account_id, max_hops=2)
-    GraphSvc->>DB: Fetch transfer edges
-    DB-->>GraphSvc: Subgraph records
-    GraphSvc-->>Router: GraphNetworkResponse
-    Router-->>UI: Render Vis-Network 2D Force-Directed Graph
-
-    Officer->>UI: Resolve Case (CONFIRMED_FRAUD, Notes: "Mule Ring")
-    UI->>Router: PATCH /api/v1/alerts/5/status
-    Router->>AlertSvc: update_alert_status(id=5, update_data)
-    AlertSvc->>DB: UPDATE alert SET status='CONFIRMED_FRAUD'
-    DB-->>AlertSvc: Updated Alert
-    AlertSvc-->>Router: Success Response
-    Router-->>UI: Refresh Dashboard Feed & Update KPIs
-```
+1. **Case Retrieval**: Investigator opens the dashboard; frontend calls `GET /api/v1/alerts/?status=PENDING`.
+2. **Graph Subgraph Query**: Selecting an alert triggers `GET /api/v1/graph/account/{account_id}?max_hops=2`.
+3. **Forensic Canvas Rendering**: The backend returns directed edges and node balances; the frontend renders an interactive Vis-Network 2D canvas.
+4. **Resolution Update**: The investigator submits `PATCH /api/v1/alerts/{id}/status` with classification `CONFIRMED_FRAUD` and documentation notes.
 
 ---
 
 ### 7.5 UML Activity Diagram: Transaction Screening & Triage Flow
 Models operational decision logic for transaction routing:
 
-```
-+---------------------------------------------------------------------------------------------+
-|                                TRANSACTION SCREENING FLOW                                   |
-+---------------------------------------------------------------------------------------------+
-|  (*) ---> [Receive Transaction Payload via API]                                             |
-|                 |                                                                           |
-|                 v                                                                           |
-|           [Validate Schemas via Pydantic v2]                                                |
-|                 |                                                                           |
-|                 v                                                                           |
-|           [Compute 9-Feature Mathematical Discrepancy Vectors]                              |
-|                 |                                                                           |
-|                 v                                                                           |
-|           [Execute Concurrent Inference Across 5 Models]                                    |
-|                 |                                                                           |
-|                 v                                                                           |
-|           [Calculate Normalized Weighted Score R]                                           |
-|                 |                                                                           |
-|                 v                                                                           |
-|           <Is Risk Score R >= 0.70?>                                                        |
-|             /                     \                                                         |
-|         YES                        NO                                                       |
-|          v                          v                                                       |
-|  [Generate CRITICAL Alert]     <Is Score R >= 0.40?>                                        |
-|  [Queue for Immediate Review]    /               \                                          |
-|  [Attach Full SHAP Audit]     YES                 NO                                        |
-|          |                     v                   v                                        |
-|          |             [Generate MEDIUM Alert]  [Classify as CLEAN]                         |
-|          |             [Standard Compliance]    [Straight-Through Settlement]               |
-|          |                     |                   |                                        |
-|          +---------------------+-------------------+                                        |
-|                                |                                                            |
-|                                v                                                            |
-|                    [Persist Record to Database] ---> (*)                                    |
-+---------------------------------------------------------------------------------------------+
-```
+1. **Ingest Payload**: Receive incoming transaction via REST API.
+2. **Validate**: Pydantic v2 verifies schema types and constraints.
+3. **Transform**: Compute 9-dimensional mathematical discrepancy vector.
+4. **Concurrent Inference**: Execute Heuristics, XGBoost, Isolation Forest, Autoencoder, and Graph Ring algorithms in parallel.
+5. **Weighted Aggregation**: Compute $R = \sum w_i s_i / \sum w_i$.
+6. **Decision Branch**:
+   - If $R \ge 0.70$: Generate CRITICAL Alert; queue for immediate review.
+   - If $0.40 \le R < 0.70$: Generate MEDIUM Alert; schedule for standard review.
+   - If $R < 0.40$: Classify as CLEAN; approve for straight-through settlement.
+7. **Persist**: Commit transaction record, SHAP values, and alert metadata to PostgreSQL.
 
 ---
 
 ### 7.6 UML State Machine Diagram: Alert Lifecycle
 Models state transitions of compliance cases from creation to resolution:
 
-```mermaid
-stateDiagram-v2
-    [*] --> Ingested: Transaction Evaluated
-    Ingested --> Cleared: Risk Score < 0.40 (LOW)
-    Cleared --> [*]: Straight-Through Settlement
-
-    Ingested --> PendingAlert: Risk Score >= 0.40 (MEDIUM or HIGH)
-    
-    PendingAlert --> UnderInvestigation: Officer Claims Case
-    UnderInvestigation --> FalsePositive: Benign Commercial Rationale
-    UnderInvestigation --> ConfirmedFraud: Illicit Structuring or Loop Confirmed
-
-    FalsePositive --> ClosedDismissed: Document Audit Rationale
-    ConfirmedFraud --> SARFiled: Export SAR to Financial Intelligence Unit
-
-    ClosedDismissed --> [*]
-    SARFiled --> [*]
-```
+![Figure 11: UML State Machine Diagram: Compliance Alert Lifecycle](docs/images/uml_state_machine.svg)
 
 ---
 
 ### 7.7 UML Component & Deployment Architecture
 Models physical infrastructure deployment across Docker containers and Render cloud services:
 
-```
-+---------------------------------------------------------------------------------------------+
-|                              DEPLOYMENT ARCHITECTURE (DOCKER / CLOUD)                       |
-+---------------------------------------------------------------------------------------------+
-|  [Client Browser / Workstation]                                                             |
-|         |  HTTPS (Port 443)                                                                 |
-|         v                                                                                   |
-|  [Render Cloud Host: anti-money-laundering.onrender.com]                                    |
-|         |                                                                                   |
-|         +-- [Docker Container: Unified Web & Backend Service]                               |
-|         |         |                                                                         |
-|         |         +-- Static Assets Mount (Port 8000)                                       |
-|         |         |     React 18 SPA Distribution (`frontend/dist`)                         |
-|         |         |                                                                         |
-|         |         +-- FastAPI Async Server (Uvicorn ASGI)                                   |
-|         |         |     REST Routing, Pydantic v2 Validation                                |
-|         |         |     5-Model Inference Engine (`backend/models/*.joblib`)                |
-|         |         |                                                                         |
-|         +-- [Managed Cloud Database Service]                                                |
-|                   PostgreSQL 16 / 17 Database Engine                                        |
-|                   Tables: transactions, alerts, plugin_configs                              |
-+---------------------------------------------------------------------------------------------+
-```
+* **Presentation Component**: React 18 Single-Page Application bundled with Vite and served statically by FastAPI.
+* **API Component**: Python 3.11 / 3.13 ASGI server managed by Uvicorn.
+* **ML Inference Component**: Pre-compiled binary bundles (`xgb_aml.joblib`, `isolation_forest.joblib`, `autoencoder.joblib`) loaded in memory with OpenMP multi-threading (`libgomp1`).
+* **Database Component**: Managed PostgreSQL 16 instance with automated connection pooling and schema migrations.
 
 ---
 
