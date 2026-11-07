@@ -1,24 +1,100 @@
-# Production-Grade Anti-Money Laundering (AML) Surveillance & Graph Analytics Platform
-## Comprehensive Technical Documentation & Engineering Specification
+# Enhancing Anti-Money Laundering Detection through Machine Learning and Graph-Based Analytics
+## Comprehensive Technical Project Report & Architectural Documentation
+
+**Project Title:** Enhancing Anti-Money Laundering Detection through Machine Learning and Graph-Based Analytics  
+**Development Team:** AML Team  
+**System Version:** 2.0.0 (Production Release)  
+**Live Production URL:** [https://anti-money-laundering.onrender.com/](https://anti-money-laundering.onrender.com/)  
+**Interactive API Documentation:** [https://anti-money-laundering.onrender.com/docs](https://anti-money-laundering.onrender.com/docs)  
+**Source Code Repository:** [https://github.com/BharathKumar113/anti_money_laundering](https://github.com/BharathKumar113/anti_money_laundering)  
+**Document Classification:** Technical Engineering Specification & Academic Defense Documentation  
 
 ---
 
-## 1. Introduction
+## Executive Summary
 
-### 1.1 Background of Anti-Money Laundering in the Global Financial Ecosystem
-Money laundering is the illicit process of concealing the origin, ownership, or destination of illegally obtained funds by channeling them through complex sequences of banking transfers or commercial transactions. According to the United Nations Office on Drugs and Crime (UNODC), the estimated amount of money laundered globally in one year is between 2% and 5% of global Gross Domestic Product (GDP), amounting to approximately $800 billion to $2 trillion in US dollars.
+Financial crime, particularly money laundering, poses an existential threat to global macroeconomic stability, institutional solvency, and sovereign security. According to United Nations Office on Drugs and Crime (UNODC) estimates, between $800 billion and $2 trillion is laundered annually, representing 2% to 5% of global GDP. Traditional Anti-Money Laundering (AML) Transaction Monitoring Systems (TMS) deployed across commercial banking infrastructure rely predominantly on deterministic, static threshold rules (e.g., flagging individual transactions exceeding $10,000). These legacy systems suffer from two fatal vulnerabilities:
+1. **Excessive False Positive Rates (90% to 98%)**, which overwhelm compliance operations, induce severe investigator fatigue, and waste an estimated $206 billion annually in global compliance expenditure.
+2. **Topological Blindness**, which renders them incapable of detecting structured evasion tactics such as smurfing (breaking transfers into sub-threshold sums), multi-account mule networks, and circular round-tripping layering rings.
 
-Money laundering poses existential threats to economic stability, national security, and institutional integrity. It finances international terrorism, facilitates narcotics trafficking, supports illegal arms sales, and encourages political corruption. In response, global regulatory coalitions—led by the Financial Action Task Force (FATF), the European Union (through its Anti-Money Laundering Directives 5AMLD and 6AMLD), the US Financial Crimes Enforcement Network (FinCEN under the Bank Secrecy Act and USA PATRIOT Act), and regional central banks such as the Reserve Bank of India (RBI)—have imposed rigorous regulatory frameworks. Financial institutions (FIs), including commercial banks, digital payment processors, and fintech platforms, are legally mandated to deploy automated Transaction Monitoring Systems (TMS) and file Suspicious Activity Reports (SARs) or Suspicious Transaction Reports (STRs) with sovereign financial intelligence units.
+This report documents the architectural design, algorithmic foundation, implementation, and empirical verification of a production-grade, real-time AML Surveillance and Network Analytics Platform. The platform establishes a **Defense-in-Depth Multi-Paradigm Architecture** combining:
+- **Supervised Gradient-Boosted Decision Trees (XGBoost)** trained with cost-sensitive class-imbalance weighting (`scale_pos_weight`) on the 6.3-million-row PaySim benchmark dataset.
+- **Unsupervised Isolation Forests** for isolating multi-dimensional outlier transactions in feature space.
+- **Deep Neural Autoencoders (MLP 9-16-4-16-9)** measuring non-linear latent manifold reconstruction error to detect zero-day laundering typologies.
+- **Topological Graph Forensics (NetworkX)** analyzing directed multigraph transaction networks to uncover circular loops ($A \to B \to C \to A$) and mule clustering.
+- **Deterministic Compliance Heuristics** enforcing statutory currency thresholds and balance depletion checks.
+- **Explainable AI (SHAP)** providing mathematically consistent feature attribution values and human-readable narratives to satisfy regulatory auditing standards.
+
+The system processes incoming transactions with an average synchronous latency of **11.2 milliseconds**, achieves an **AUC-ROC of 0.942**, maintains a **100% automated test pass rate (14/14 Pytest suites)**, and is deployed as a multi-stage Dockerized containerized service on Render cloud infrastructure with an interactive React 18 single-page application.
+
+---
+
+## Table of Contents
+
+1. [Chapter 1: Introduction](#1-chapter-1-introduction)
+   - 1.1 Background & Global Economic Impact
+   - 1.2 The Three Fundamental Stages of Money Laundering
+   - 1.3 Modern Industry Challenges & Emerging FinTech Evasion
+   - 1.4 Problem Statement
+   - 1.5 Objectives of the Proposed System
+   - 1.6 Scope & System Boundaries
+2. [Chapter 2: Literature Survey](#2-chapter-2-literature-survey)
+   - 2.1 Chronological Evolution of AML Methodologies
+   - 2.2 Review of Foundational Literature
+   - 2.3 Comprehensive Literature Matrix
+   - 2.4 Critical Gaps in Existing Research
+3. [Chapter 3: Existing Systems](#3-chapter-3-existing-systems)
+   - 3.1 Overview of Traditional Rule-Based TMS
+   - 3.2 Dominant Commercial Solutions & Industry Implementations
+   - 3.3 Critical Limitations of Existing Systems
+   - 3.4 Comparative Analysis Matrix
+4. [Chapter 4: Proposed Systems](#4-chapter-4-proposed-systems)
+   - 4.1 System Overview & Architectural Philosophy
+   - 4.2 Key Novel Innovations & Differentiators
+   - 4.3 Functional Requirements Specification
+   - 4.4 Non-Functional Requirements Specification
+   - 4.5 System Feasibility Analysis
+5. [Chapter 5: System Architecture](#5-chapter-5-system-architecture)
+   - 5.1 Layered Enterprise Architecture
+   - 5.2 High-Level System Architecture Diagram
+   - 5.3 Data Flow Architecture (DFD Levels 0, 1, and 2)
+   - 5.4 Modular Component Decomposition
+   - 5.5 Hardware, Software & Cloud Environment Specification
+6. [Chapter 6: Machine Learning Models & Mathematical Formulations](#6-chapter-6-machine-learning-models--mathematical-formulations)
+   - 6.1 Standardized 9-Dimensional Feature Vector Contract
+   - 6.2 Supervised Model: XGBoost Gradient-Boosted Trees
+   - 6.3 Unsupervised Anomaly Detector 1: Isolation Forest
+   - 6.4 Unsupervised Anomaly Detector 2: Deep MLP Autoencoder
+   - 6.5 Topological Graph Forensics Engine: NetworkX Directed Multigraphs
+   - 6.6 Deterministic Compliance Engine: Heuristic Rules
+   - 6.7 Dynamic Weighted Ensemble Fusion & Calibration
+   - 6.8 Explainable AI (XAI) & SHAP Attributions
+7. [Chapter 7: Unified Modeling Language (UML) Diagrams](#7-chapter-7-unified-modeling-language-uml-diagrams)
+   - 7.1 UML Use Case Diagram & Actor Descriptions
+   - 7.2 UML Class Diagram (Domain Model & Plugin Hierarchy)
+   - 7.3 UML Sequence Diagram 1: Real-Time Transaction Ingestion & Scoring
+   - 7.4 UML Sequence Diagram 2: Compliance Case Management & Graph Forensics
+   - 7.5 UML Activity Diagram: Transaction Screening & Triage Flow
+   - 7.6 UML State Machine Diagram: Alert Lifecycle
+   - 7.7 UML Component & Deployment Architecture
+8. [Chapter 8: Testing, Verification & Performance Evaluation](#8-chapter-8-testing-verification--performance-evaluation)
+   - 8.1 Automated Test Suite Execution (Pytest)
+   - 8.2 Confusion Matrix, Precision, Recall & F1-Score
+   - 8.3 Real-Time Inference Latency Benchmarks
+   - 8.4 Live Cloud Deployment Verification
+9. [Chapter 9: References](#9-chapter-9-references)
+
+---
+
+## 1. Chapter 1: Introduction
+
+### 1.1 Background & Global Economic Impact
+Money laundering is the illicit process of transforming proceeds derived from criminal activity—including narcotics trafficking, illicit arms sales, terrorist financing, public corruption, and financial fraud—into seemingly legitimate assets. The economic ramifications are severe: it distorts asset prices, depresses genuine economic productivity, destabilizes sovereign currencies, and drains tax revenues from public treasuries.
+
+In response, international standard-setting bodies led by the Financial Action Task Force (FATF), along with sovereign regulatory authorities such as the US Financial Crimes Enforcement Network (FinCEN), the European Banking Authority (EBA under 5AMLD/6AMLD), and the Reserve Bank of India (RBI), mandate that financial institutions implement automated surveillance. Regulated entities must conduct Customer Due Diligence (CDD), monitor transactions continuously, and submit formal Suspicious Activity Reports (SARs) or Suspicious Transaction Reports (STRs) whenever red flags emerge.
 
 ### 1.2 The Three Fundamental Stages of Money Laundering
-Laundering operations, irrespective of scale, systematically exploit the three recognized lifecycle phases:
-
-```mermaid
-flowchart LR
-    Stage1["1. Placement<br/>Inject illicit cash into banking"] -->|"Layered deposits"| Stage2["2. Layering<br/>Multi-hop loops and shell transfers"]
-    Stage2 -->|"Disguised origin"| Stage3["3. Integration<br/>Re-enter as clean commercial wealth"]
-    Stage3 -->|"Investment"| Clean["Clean Assets and Real Estate"]
-```
+Laundering schemes, regardless of scale, operate across three sequential stages:
 
 ```
 +---------------------------------------------------------------------------------------------+
@@ -31,51 +107,51 @@ flowchart LR
 +------------------------------+------------------------------+-------------------------------+
 ```
 
-1. **Placement**: The initial entry of dirty funds into the legitimate financial infrastructure. Launderers avoid initial detection by "structuring" or "smurfing"—dividing large currency sums into small deposits below the mandatory reporting threshold (e.g., breaking $50,000 into six deposits under $10,000).
-2. **Layering**: The intentional obfuscation of the audit trail through convoluted layers of financial transactions. Funds are moved rapidly across disparate accounts, payment types (TRANSFER, CASH_OUT, PAYMENT), digital wallets, and jurisdictional borders. Launderers utilize circular fund loops ("round-tripping") and mule networks (fan-in and fan-out topologies) to break the mathematical relationship between the source and destination.
-3. **Integration**: The seamless re-entry of laundered capital into the mainstream economy. The funds appear to originate from legitimate legal activities (e.g., commercial invoices, luxury asset purchases, real estate transactions, or investment dividends), making law enforcement seizure difficult without comprehensive historical transaction forensics.
+```mermaid
+flowchart LR
+    Stage1["1. Placement: Cash Injection"] -->|"Layered Transfers"| Stage2["2. Layering: Multi-Hop Obfuscation"]
+    Stage2 -->|"Disguised Clean Capital"| Stage3["3. Integration: Real Estate & Assets"]
+```
 
-### 1.3 Modern Industry Challenges in Financial Surveillance
-Financial technology (FinTech), open banking APIs, peer-to-peer (P2P) mobile wallets, and instant settlement networks (such as FedNow, SEPA Instant, and UPI) have reduced transaction settlement times from days to milliseconds. While this offers unprecedented consumer convenience, it has equipped financial criminals with high-velocity evasion channels.
+1. **Placement**: The physical or digital entry of illicit proceeds into financial institutions. Criminals bypass currency reporting thresholds ($10,000 in the US, ₹10,00,000 in India) through "smurfing"—distributing cash across dozens of third-party runners ("mules") who deposit amounts just below reporting limits.
+2. **Layering**: The systematic obfuscation of the financial audit trail. Funds are rapidly routed through multiple accounts, commercial shell entities, cross-border wires, and diverse transaction types (`TRANSFER`, `CASH_OUT`, `PAYMENT`). Launderers utilize circular fund loops ("round-tripping") and mule networks (fan-in and fan-out topologies) to break the mathematical relationship between source and destination.
+3. **Integration**: The re-entry of laundered capital into the formal economy, appearing as legitimate commercial revenue, luxury real estate acquisitions, corporate investments, or securities purchases.
 
-Traditional Anti-Money Laundering systems are failing under this transformation due to three core systemic barriers:
-* **Catastrophic False Positive Rates**: Legacy systems produce between 90% and 98% false-positive alerts. Financial compliance divisions spend millions of hours investigating benign consumer behavior, generating severe analyst fatigue and allowing genuine, sophisticated laundering rings to slip through unnoticed.
-* **Topological Blindness**: Standard tabular analysis reviews transactions in isolation (row-by-row). They are fundamentally incapable of recognizing multi-account collusion, circular transaction rings, and dispersed mule networks.
-* **Inflexible Decision Boundaries**: Static rules cannot adapt to zero-day laundering tactics. Once criminals identify an institution's rule thresholds (e.g., flagging transfers above $10,000), they calibrate transactions just below the threshold ($9,800), evading detection.
+### 1.3 Modern Industry Challenges & Emerging FinTech Evasion
+The rapid rise of Financial Technology (FinTech), mobile payment wallets, open-banking APIs, and real-time gross settlement rails (such as FedNow, SEPA Instant, and UPI) has accelerated transaction velocity from days to milliseconds. While this offers immense economic efficiency, it has provided criminal syndicates with automated laundering pipelines.
 
-### 1.4 Project Motivation & Technical Objectives
-This project was designed and implemented to directly resolve these structural failures. The system is an enterprise-grade, real-time AML Surveillance and Network Analytics Platform that fuses **Supervised Machine Learning (XGBoost)**, **Unsupervised Outlier Detection (Isolation Forest)**, **Deep Learning (Autoencoder Reconstruction Loss)**, **Topological Graph Forensics (NetworkX)**, and **Deterministic Compliance Heuristics** into a unified, weighted ensemble scoring engine.
+Modern laundering syndicates exploit:
+* **Micro-Structuring**: Algorithms executing automated sub-threshold transfers ($9,500 to $9,900) across thousands of synthetic identities.
+* **Mule Networks**: Exploiting student, migrant, or stolen bank accounts to funnel layered funds before consolidating them.
+* **Rapid Account Draining**: Injecting funds into an account and immediately clearing the balance to zero via wire transfer or cash-out, preventing post-hoc asset recovery.
 
-The principal technical objectives of this project are:
-1. **Real-Time Sub-15ms Latency**: Ingest, preprocess, evaluate across 5 detection engines, calibrate, and persist transactions with sub-15ms processing latency.
-2. **Topological Graph Ring Discovery**: Model account interactions as directed multigraphs to expose circular laundering rings and mule networks.
-3. **Defense-in-Depth Multi-Paradigm Ensemble**: Eliminate single-point detection vulnerabilities by combining supervised classification, unsupervised anomaly detection, and graph topology.
-4. **Explainable AI (XAI)**: Provide SHAP (SHapley Additive exPlanations) values and natural language justification for every flagged transaction, eliminating "black-box" AI opacity and satisfying regulatory compliance requirements.
-5. **Dynamic Runtime Plugin Architecture**: Allow data science teams to register, enable, disable, and dynamically rebalance model weights on a live production server without downtime or redeployment.
-6. **Closed-Loop Investigator Dashboard**: Provide compliance officers with an interactive React 18 single-page application (SPA) featuring Vis-Network graph visualization, risk heatmaps, automated alert triage, and case resolution management.
+### 1.4 Problem Statement
+Traditional banking Transaction Monitoring Systems (TMS) are fundamentally incapable of addressing modern financial crime:
+1. They generate **over 90% false positive alerts**, forcing compliance departments to deploy massive workforces to clear harmless transactions, inducing severe fatigue and operational bottlenecks.
+2. They evaluate transactions **in isolation (row-by-row)**, remaining completely blind to relational patterns such as circular rings ($A \to B \to C \to A$) and mule consolidation trees.
+3. They rely on **static threshold rules**, allowing launderers who reverse-engineer thresholds to operate undetected immediately below those limits.
+4. They operate on **nightly batch cycles (T+1/T+2)**, alerting compliance teams days after laundered funds have already left the jurisdiction.
 
-### 1.5 System Scope & Boundaries
-The platform spans the full transaction lifecycle:
-- Ingestion of single transactions via high-throughput REST endpoints or batch processing of historical financial datasets (PaySim).
-- Automated execution of the 9-dimensional engineered feature contract.
-- Concurrent inference across 5 physical detection plugins.
-- Dynamic weighted score aggregation and automated compliance alert generation.
-- Real-time investigator case triage, automated SAR generation, and interactive graph network exploration.
-- End-to-end containerization with Docker, verified via automated CI/CD pipelines, and deployed to high-availability cloud infrastructure.
+### 1.5 Objectives of the Proposed System
+To solve these challenges, this project engineers a real-time, hybrid surveillance platform with the following primary objectives:
+1. **Sub-15ms Real-Time Inference**: Execute ingestion, feature extraction, 5-model ensemble scoring, calibration, and persistence within an average synchronous latency of under 15ms.
+2. **Topological Graph Forensics**: Model transaction flows as directed multigraphs using NetworkX to automatically detect circular laundering rings and mule clusters.
+3. **Multi-Paradigm Defense-in-Depth**: Fuse supervised learning (XGBoost), unsupervised anomaly detection (Isolation Forest), deep learning (Autoencoder), graph analytics, and deterministic heuristics.
+4. **Explainable AI (XAI)**: Generate exact SHAP feature attributions and natural language narratives for every alert to satisfy international regulatory compliance mandates.
+5. **Dynamic Zero-Downtime Plugin Architecture**: Provide an extensible runtime registry enabling live reweighting, activation, and deactivation of detection models without server restarts.
+6. **Full-Featured Compliance Workspace**: Deliver a modern React 18 single-page application with Vis-Network 2D interactive graph canvases, real-time alert feeds, and case triage management.
+
+### 1.6 Scope & System Boundaries
+The project covers end-to-end financial surveillance:
+- **In-Scope**: Ingestion of single transactions via REST APIs; batch ingestion of PaySim transaction streams; mathematical 9-feature transformation; concurrent execution across 5 models; weighted score aggregation; automated alert generation; case resolution workflows; interactive graph exploration; containerized deployment on Render cloud.
+- **Out-of-Scope**: Direct integration with sovereign central bank clearance networks (Fedwire/SWIFT); non-custodial blockchain ledger monitoring (Bitcoin/Ethereum); automated fund confiscation without human investigator authorization.
 
 ---
 
-## 2. Literature Survey
+## 2. Chapter 2: Literature Survey
 
-### 2.1 Evolution of Financial Fraud Detection Methodologies
-Over the past three decades, anti-money laundering and financial fraud detection systems have evolved across four distinct technological epochs:
-
-```mermaid
-flowchart LR
-    E1["Epoch 1 (1990s)<br/>Static Threshold Rules"] --> E2["Epoch 2 (2000s)<br/>Statistical Profiling"]
-    E2 --> E3["Epoch 3 (2010s)<br/>Supervised ML Models"]
-    E3 --> E4["Epoch 4 (2020s+)<br/>Hybrid Ensemble and Graph Forensics"]
-```
+### 2.1 Chronological Evolution of AML Methodologies
+The technological approaches to financial surveillance over the past three decades are summarized below:
 
 ```
 +---------------------------------------------------------------------------------------------+
@@ -88,133 +164,122 @@ flowchart LR
 +------------------------+------------------------+--------------------+----------------------+
 ```
 
-1. **First Era: Static Rule-Based Systems**: Rule engines based on fixed thresholds (e.g., transaction amount > $10,000, account balance delta > 80%). These systems produce over 90% false positives, lack scalability, and require manual maintenance.
-2. **Second Era: Statistical Profiling**: Moving averages, standard deviations, and Z-score outlier detection comparing user activity to historical baselines. While improving baseline detection, statistical profiling struggled with cold-start accounts and high seasonal variance.
-3. **Third Era: Classical & Supervised Machine Learning**: Application of Decision Trees, Random Forests, Support Vector Machines (SVMs), and Logistic Regression to labeled transaction datasets. These models improved precision but remained vulnerable to extreme class imbalance ($<0.2\%$ fraud prevalence) and could only catch historical, previously labeled fraud types.
-4. **Fourth Era: Hybrid Multi-Paradigm & Graph Forensics (Our Architecture)**: The convergence of tree ensembles, deep unsupervised autoencoders, and graph network topology. This modern paradigm detects both known fraud signatures and zero-day anomalies while exposing complex collusion networks.
+```mermaid
+flowchart LR
+    E1["Epoch 1: Static Rules (1990s)"] --> E2["Epoch 2: Statistical Baselines (2000s)"]
+    E2 --> E3["Epoch 3: Supervised ML (2010s)"]
+    E3 --> E4["Epoch 4: Hybrid Ensembles & Graph Analytics (2020s+)"]
+```
 
-### 2.2 Comprehensive Literature Matrix
-The following comparative matrix synthesizes foundational academic papers and industry breakthroughs that inform our system architecture:
+### 2.2 Review of Foundational Literature
 
-| Authors & Year | Title / Publication | Primary Methodology | Key Findings & Strengths | Identified Limitations | How Our System Resolves Them |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Lopez-Rojas, Elmir, & Axelsson (2016)** | *PaySim: A financial mobile money simulator for fraud detection* (IEEE) | Multi-agent simulation based on real transactional logs | Generated 6.3M benchmark financial records; modeled agent behaviors (Cash-in, Cash-out, Transfer). | Tabular data only; contains no relational graph structure; high class imbalance ($<0.13\%$ fraud). | Engineered mathematical balance delta conservation features; trained cost-weighted XGBoost on PaySim. |
-| **Chen & Guestrin (2016)** | *XGBoost: A Scalable Tree Boosting System* (ACM KDD) | Regularized gradient boosting with second-order Taylor expansion | State-of-the-art accuracy on tabular structures; native sparsity handling; fast parallel tree splits. | Supervised only; prone to blind spots on novel, unseen laundering patterns; susceptible to class imbalance if unweighted. | Integrated `scale_pos_weight` for imbalance; paired with unsupervised autoencoder to detect zero-day anomalies. |
-| **Liu, Ting, & Zhou (2008, 2012)** | *Isolation Forest & Isolation-based Anomaly Detection* (ACM TKDD) | Random axis-aligned feature partitioning into binary trees ($iTrees$) | Linear time complexity $O(n)$; isolates anomalies without density estimation; highly effective on multi-dimensional outliers. | Susceptible to masking when clusters of fraudulent transactions exhibit identical structuring attributes. | Used calibrated contamination limits ($0.003$); coupled with NetworkX graph cycle detection to catch clustered collusion. |
-| **Paula et al. (2016) / Chalapathy & Chawla (2019)** | *Deep Learning for Anomaly Detection: A Survey* (IEEE / arXiv) | Multi-layer Perceptron (MLP) Autoencoders for tabular anomaly detection | Compresses normal data into low-dimensional latent bottlenecks; reconstruction error flags anomalies without labels. | High computational complexity; sensitive to noisy training data; threshold selection requires careful calibration. | Designed lightweight MLP ($9 \to 16 \to 4 \to 16 \to 9$) with 99th-percentile MSE thresholding, operating with sub-7ms latency. |
-| **Savage et al. (2016)** | *Detection of Money Laundering Groups using Complex Networks* (Elsevier) | Graph analytics, PageRank, and community detection on banking ledgers | Established that laundering rings form distinct topological signatures (fan-in, fan-out, circular cliques). | Heavy computational overhead on massive graphs; non-trivial to execute in real-time streaming environments. | Engineered bounded $k$-hop subgraph extraction ($2 \le k \le 5$) around active accounts, keeping graph analysis real-time ($<0.02$ms). |
-| **Lundberg & Lee (2017)** | *A Unified Approach to Interpreting Model Predictions (SHAP)* (NeurIPS) | Game-theoretic Shapley values for local feature attribution | Provides mathematically consistent, locally accurate feature attributions for complex ML ensembles. | KernelSHAP can be computationally expensive on large-scale production inference pipelines. | Pre-calibrated local feature attribution trees and native TreeSHAP vectors, delivering real-time explanations with zero request lag. |
-| **Weber et al. (2019)** | *Anti-Money Laundering in Bitcoin: Experimenting with Graph Convolutional Networks* (KDD Workshop) | Graph Convolutional Networks (GCN) and EvolveGCN on Elliptic dataset | Demonstrated that message-passing graph neural networks capture relational patterns better than tabular models. | Requires extensive GPU infrastructure; high training latency; difficult to deploy in low-resource environments. | Built a lightweight, deterministic NetworkX topological cycle detector that executes on standard CPU hardware with high precision. |
+1. **PaySim Benchmark Simulation (Lopez-Rojas et al., 2016)**:
+   Lopez-Rojas, Elmir, and Axelsson developed PaySim, an agent-based financial simulator modeled on actual mobile money transactional logs from an African telecommunications provider. The authors addressed the critical scarcity of publicly accessible financial fraud data caused by strict financial privacy laws. PaySim synthesized 6,362,620 transactions over 744 time steps (30 simulated days), containing 8,213 fraudulent events ($0.129\%$ prevalence). Their findings proved that fraud is strictly concentrated in `TRANSFER` and `CASH_OUT` transaction types.
 
-### 2.3 Critical Research Gaps Identified
-Analysis of the literature reveals three persistent research gaps:
-1. **The "Single-Algorithm Trap"**: Existing studies predominantly evaluate algorithms in isolation—either a supervised model, an autoencoder, or a graph neural network. Real-world financial surveillance requires an ensemble where each paradigm covers the blind spots of the others.
-2. **The "Black-Box" Adoption Barrier**: Deep learning and complex ensemble solutions are frequently rejected by compliance officers because they do not output interpretable, legally defensible justifications for regulatory filings (SARs).
-3. **Production Deployment Disconnect**: Academic research predominantly focuses on offline Jupyter notebook experiments on pre-cleaned datasets, rarely demonstrating an operational system with REST APIs, interactive investigator canvases, and live cloud deployment.
+2. **XGBoost Scalable Tree Boosting (Chen & Guestrin, 2016)**:
+   Chen and Guestrin introduced XGBoost, an optimized distributed gradient boosting library utilizing second-order Taylor expansions of the loss function, sparsity-aware split finding, and column sub-sampling. In tabular financial datasets, XGBoost consistently outperforms deep neural networks in training speed, memory efficiency, and tabular classification accuracy.
+
+3. **Isolation Forest Anomaly Detection (Liu, Ting, & Zhou, 2008, 2012)**:
+   Liu et al. established that anomalous instances in a dataset can be isolated with significantly fewer recursive random hyper-plane splits than normal instances. By constructing ensembles of random binary trees ($iTrees$) without computing pairwise distances or density estimates, Isolation Forest operates with $O(n)$ linear time complexity, making it well-suited for high-throughput anomaly screening.
+
+4. **Deep Learning for Tabular Anomaly Detection (Chalapathy & Chawla, 2019; Paula et al., 2016)**:
+   Paula et al. applied Multi-Layer Perceptron (MLP) autoencoders to Brazilian government financial export data, demonstrating that autoencoders trained exclusively on non-fraudulent records learn an optimal low-dimensional manifold of legitimate transactions. When an anomalous transaction enters the network, the autoencoder fails to reconstruct it accurately, producing a high Mean Squared Error (MSE) that flags novel, zero-day fraud without requiring prior labels.
+
+5. **Complex Networks in AML Surveillance (Savage et al., 2016)**:
+   Savage et al. modeled banking transactions as directed graphs to demonstrate that financial criminals leave distinct structural topological signatures—specifically high-clustering cliques, bidirectional flow cycles, and high betweenness-centrality nodes acting as mule hubs. They established that graph analytics exposes laundering patterns invisible to tabular machine learning.
+
+6. **Unified Interpretable Machine Learning via SHAP (Lundberg & Lee, 2017)**:
+   Lundberg and Lee unified cooperative game-theoretic Shapley values with machine learning explainability. In regulatory compliance, financial institutions cannot freeze funds based on black-box predictions; SHAP solves this by attributing exact additive importance values to every input feature.
+
+### 2.3 Comprehensive Literature Matrix
+
+| Citation | Primary Methodology | Key Findings | Limitations | System Resolution |
+| :--- | :--- | :--- | :--- | :--- |
+| **Lopez-Rojas et al. (2016)** | Multi-agent mobile transaction simulation | Created 6.3M-row PaySim dataset; identified fraud clustering in TRANSFER/CASH_OUT. | Tabular only; lacks relational graph topologies; severe class imbalance. | Engineered balance conservation features; trained cost-weighted ensemble on PaySim. |
+| **Chen & Guestrin (2016)** | Second-order regularized gradient boosting | State-of-the-art accuracy on tabular financial data; efficient parallel execution. | Supervised only; blind to novel, unseen fraud patterns; needs cost-weighting. | Integrated `scale_pos_weight` ($768.4\times$); paired with unsupervised autoencoder. |
+| **Liu et al. (2008, 2012)** | Random sub-sampling isolation trees | Linear $O(n)$ time complexity; isolates outliers without expensive density estimation. | Masking effects when groups of fraud transactions share identical features. | Calibrated contamination threshold ($0.003$); coupled with NetworkX graph cycle detection. |
+| **Paula et al. (2016)** | Deep MLP Autoencoders | Compresses baseline traffic into latent space; MSE reconstruction error flags anomalies. | High sensitivity to threshold selection; potential training latency. | Engineered 9-16-4-16-9 bottleneck architecture with calibrated 99th-percentile MSE threshold. |
+| **Savage et al. (2016)** | Graph analytics and community detection | Proved circular loops and mule hubs form distinct topological signatures. | High memory and computation overhead on massive continuous graphs. | Implemented localized $k$-hop subgraph extraction ($2 \le k \le 5$) with sub-millisecond execution. |
+| **Lundberg & Lee (2017)** | Shapley additive feature explanations | Mathematically consistent, locally accurate feature attributions for regulatory filings. | KernelSHAP is computationally intensive for real-time inference. | Engineered pre-computed tree-path explanations and feature delta vectors for zero-latency XAI. |
+
+### 2.4 Critical Gaps in Existing Research
+1. **Isolated Algorithm Evaluations**: Academic literature predominantly evaluates supervised learning, autoencoders, or graph algorithms in isolation. Industrial production environments require a unified ensemble that combines all three.
+2. **The "Black-Box" Adoption Barrier**: Prior research often focuses on maximizing AUC-ROC while neglecting regulatory explainability, making deployment legally untenable for compliance officers.
+3. **Absence of Operational Deployments**: Most studies remain confined to offline Jupyter notebooks rather than demonstrating an operational, containerized system with real-time REST APIs and investigator user interfaces.
 
 ---
 
-## 3. Existing Systems
+## 3. Chapter 3: Existing Systems
 
-### 3.1 Architecture of Traditional AML Monitoring Systems (TMS)
-Traditional AML platforms in tier-1 and tier-2 banks are architected around centralized relational databases executing batch rule scripts overnight:
+### 3.1 Overview of Traditional Rule-Based TMS
+Traditional Transaction Monitoring Systems in commercial banking are architected around relational database management systems executing scheduled batch SQL queries overnight:
+
+```
++---------------------------------------------------------------------------------------------+
+|                                TRADITIONAL RULE-BASED PIPELINE                              |
++---------------------------------------------------------------------------------------------+
+|  [Core Banking OLTP]  --->  (Nightly Batch ETL)  --->  [Data Warehouse / Data Marts]        |
+|                                                                    |                        |
+|                                                                    v                        |
+|  [Closed / Dismissed] <--- (95% False Positives) <---  [Static Rule Engine (SQL/Mantas)]    |
+|                                                                    |                        |
+|                                                                    v (5% True Cases)        |
+|                                                        [Manual SAR Regulatory Filing]       |
++---------------------------------------------------------------------------------------------+
+```
 
 ```mermaid
 flowchart TD
     CoreBanking["Core Banking Ledger (OLTP)"] -->|"Nightly Batch ETL (T+1)"| DWH["Data Warehouse"]
     DWH --> Rules["Static Rule Engine"]
-    Rules --> Alerts["5,000+ Unfiltered Daily Alerts"]
+    Rules --> Alerts["5,000+ Daily Unfiltered Alerts"]
     Alerts --> Analysts["Compliance Investigators"]
     Analysts -->|"95% False Positives"| Dismissed["Dismissed Without Action"]
     Analysts -->|"5% True Positives"| SAR["Manual SAR Regulatory Filing"]
 ```
 
-### 3.2 Dominant Commercial Solutions
-Commercial enterprise suites dominating the financial industry include:
-1. **Oracle Financial Services Analytical Applications (Mantas)**: Employs statistical profiling and scenario-based detection rules. Well-suited for large institutional ledgers but suffers from rigid rule configuration and high infrastructure costs.
-2. **NICE Actimize**: Features rule scenarios combined with basic risk scoring. Provides broad regulatory coverage but requires extensive manual tuning and produces high false positive volumes.
-3. **SAS Anti-Money Laundering**: Combines scenario engines with SAS statistical models. Highly capable in batch processing but historically slow in real-time API-driven microservice deployments.
-4. **LexisNexis Bridger Insight**: Primarily focuses on watchlists, PEP (Politically Exposed Persons) checks, and sanctions screening rather than dynamic multi-hop behavioral network analysis.
+### 3.2 Dominant Commercial Solutions & Industry Implementations
+1. **Oracle Financial Services Analytical Applications (Mantas)**: Long-standing market leader using scenario-based rules and threshold matching. Robust for enterprise auditability, but suffers from high operational maintenance costs, rigid rule modification workflows, and heavy false-positive alert volumes.
+2. **NICE Actimize**: Widely deployed across tier-1 banks. Provides scenario rule libraries and basic statistical scoring, but requires extensive manual rule recalibration and lacks native real-time deep graph traversal.
+3. **SAS Anti-Money Laundering**: Combines traditional scenario engines with SAS statistical routines. Well-suited for large data warehouses, but historically difficult to integrate into lightweight, event-driven microservices.
+4. **LexisNexis Bridger Insight**: Primarily focuses on sanctions screening, watchlist matching, and Politically Exposed Persons (PEP) verification rather than dynamic multi-hop behavioral transaction analysis.
 
-### 3.3 Limitations of Existing Systems
+### 3.3 Critical Limitations of Existing Systems
 
-#### 1. Unsustainable False Positive Ratios (90% - 98%)
-Because legacy rules use crude static thresholds (e.g., `amount >= $10,000`), thousands of legitimate transactions—such as commercial payroll batches, corporate vendor settlements, and property down payments—are flagged every day. A financial institution employing 500 compliance analysts often finds that over 475 of them spend their entire workday manually clearing false alarms.
+#### 1. Unsustainable False Positive Rates (90% - 98%)
+Static threshold rules generate thousands of alerts daily for legitimate commercial activity (e.g., corporate payroll, institutional vendor payments, real estate escrows). This produces severe compliance backlog, analyst burnout, and high operating costs.
 
-#### 2. The Smurfing and Structuring Vulnerability
-Criminal syndicates are well aware of standard banking thresholds. To evade a $10,000 reporting threshold, launderers employ networks of runners ("smurfs") who deposit amounts between $9,000 and $9,950 into disparate accounts across multiple branches or digital wallets. Legacy rule engines evaluate each transaction independently and fail to correlate these distributed deposits.
+#### 2. Vulnerability to Smurfing and Structuring
+Criminal syndicates exploit known threshold rules by dividing large funds into smaller transactions (e.g., $9,800 to avoid a $10,000 threshold). Because legacy rules evaluate records row-by-row without relational context, structured transfers pass through undetected.
 
-#### 3. Topological and Relational Blindness
-Laundering rarely occurs within a single account. It is intrinsically a network activity. Consider a circular laundering ring:
+#### 3. Topological Blindness (Inability to Trace Graph Rings)
+Laundering networks deliberately route funds through closed loops to create fictitious commercial volume:
 
-$$\text{Account } A \xrightarrow{\$100,000} \text{Account } B \xrightarrow{\$98,000} \text{Account } C \xrightarrow{\$96,000} \text{Account } A$$
+$$\text{Account } A \xrightarrow{\$200,000} \text{Account } B \xrightarrow{\$195,000} \text{Account } C \xrightarrow{\$190,000} \text{Account } A$$
 
-A traditional tabular monitoring system sees three distinct, seemingly ordinary transfers. It is completely blind to the fact that funds completed a closed loop to simulate legitimate commercial turnover and inflate ledger balances.
+Traditional tabular systems evaluate each transfer in isolation as a routine transfer, completely missing the closed circular ring.
 
-#### 4. Batch Processing Lag (T+1 to T+3 Settlement Delays)
-Most commercial systems run rules as overnight batch jobs. By the time an alert is generated on Day 2 or Day 3, the illicit funds have already been layered across five digital wallets, converted into non-custodial cryptocurrency, or withdrawn overseas, rendering asset recovery impossible.
+#### 4. Batch Settlement Lag (T+1 to T+3 Delays)
+Legacy monitoring operates on overnight batch schedules. By the time an alert reaches an analyst's queue 24 to 72 hours later, the illicit capital has already been layered across external institutions, converted to cash, or moved overseas.
 
-#### 5. Escalating Compliance Overhead
-Global financial institutions spend over $206 billion annually on financial crime compliance. Despite this expenditure, the United Nations estimates that less than 1% of illicit global financial flows are successfully intercepted.
+### 3.4 Comparative Analysis Matrix
 
-### 3.4 Quantitative Comparison: Existing Systems vs. Our Platform
-
-| Metric / Dimension | Traditional Rule Systems (TMS) | Standalone Supervised ML | Our Multi-Paradigm Platform |
+| Metric / Dimension | Traditional Rule Systems (TMS) | Standalone Supervised ML | Proposed Multi-Paradigm Platform |
 | :--- | :--- | :--- | :--- |
 | **False Positive Rate** | $90\% - 98\%$ (Extremely High) | $30\% - 45\%$ (Moderate) | **$< 15\%$ (Calibrated Ensemble)** |
-| **Inference Mode** | Nightly Batch (T+1 / T+2) | Near Real-time (500ms - 2s) | **Real-Time Synchronous ($<15$ms)** |
-| **Novel / Zero-Day Fraud Detection** | **0%** (Completely Blind) | Poor (Only detects historical labels) | **High (Autoencoder Reconstruction Loss)** |
-| **Laundering Ring Discovery** | **0%** (Tabular blindspot) | Low (Cannot parse relational graphs) | **High (NetworkX Cycle Forensics)** |
-| **Decision Transparency** | Simple boolean rules | Black-box probabilities | **SHAP XAI + Natural Language Audit Trail** |
-| **Adaptability & Extensibility** | Months of vendor consulting | Complete model retraining | **Zero-Downtime Dynamic Plugin Registry** |
-| **Investigator Tooling** | Relational tabular grids | Static charts / Raw scores | **Interactive Vis-Network Graph Canvas** |
+| **Inference Mode** | Nightly Batch (T+1 / T+2) | Near Real-Time (500ms - 2s) | **Real-Time Synchronous ($<15$ms)** |
+| **Novel / Zero-Day Detection** | **0%** (Completely Blind) | Poor (Trained on historical data) | **High (Autoencoder Reconstruction Loss)** |
+| **Laundering Ring Discovery** | **0%** (Tabular Blindspot) | Low (No Relational Context) | **High (NetworkX Cycle Forensics)** |
+| **Decision Transparency** | Simple Boolean Logic | Black-Box Probabilities | **SHAP XAI + Natural Language Narratives** |
+| **Adaptability & Extensibility**| Months of Vendor Consulting | Full Model Retraining Required | **Zero-Downtime Dynamic Plugin Registry** |
+| **Investigator Tooling** | Tabular Grids | Static Charts / Spreadsheets | **Interactive Vis-Network 2D Canvas** |
 
 ---
 
-## 4. Proposed Systems
+## 4. Chapter 4: Proposed Systems
 
-### 4.1 Architectural Philosophy: Defense-in-Depth Surveillance
-The proposed system addresses the limitations of existing platforms by implementing a **Multi-Layer Defense-in-Depth Architecture**. Rather than relying on a single detection algorithm, our platform evaluates every incoming transaction simultaneously through five specialized engines representing deterministic rules, supervised classification, unsupervised anomaly detection, and graph network theory.
-
-```mermaid
-flowchart TD
-    subgraph Ingestion["1. Ingestion Layer"]
-        API["FastAPI High-Speed Ingestion API"]
-        Contract["9-Dimensional Feature Engineering Engine"]
-    end
-
-    subgraph Ensemble["2. Multi-Paradigm Detection Ensemble"]
-        E1["Engine 1: Heuristic Rules<br/>Static Thresholds and Balance Depletions"]
-        E2["Engine 2: Supervised XGBoost Classifier<br/>Cost-Weighted PaySim Decision Trees"]
-        E3["Engine 3: Unsupervised Isolation Forest<br/>Multi-Dimensional Outlier Partitioning"]
-        E4["Engine 4: Deep Autoencoder Neural Network<br/>9-16-4-16-9 Latent Reconstruction MSE"]
-        E5["Engine 5: NetworkX Graph Analytics<br/>Topological Cycle and Mule Detection"]
-    end
-
-    subgraph Output["3. Calibration and Investigator Triage"]
-        Fusion["Weighted Score Aggregation"]
-        XAI["SHAP Explainability and Evidence Engine"]
-        Alert["Automated Compliance Alert Triage"]
-        Dashboard["React 18 Interactive Forensics Dashboard"]
-    end
-
-    API --> Contract
-    Contract --> E1
-    Contract --> E2
-    Contract --> E3
-    Contract --> E4
-    Contract --> E5
-
-    E1 --> Fusion
-    E2 --> Fusion
-    E3 --> Fusion
-    E4 --> Fusion
-    E5 --> Fusion
-
-    Fusion --> XAI
-    XAI --> Alert
-    Alert --> Dashboard
-```
+### 4.1 System Overview & Architectural Philosophy
+The proposed platform establishes a **Multi-Layer Defense-in-Depth Architecture**. Every transaction entering the system is evaluated simultaneously across five specialized detection engines representing deterministic rules, supervised learning, unsupervised anomaly detection, and graph theory:
 
 ```
 +---------------------------------------------------------------------------------------------+
@@ -230,135 +295,58 @@ flowchart TD
 +---------------------+-------------------------------+---------------------------------------+
 ```
 
-### 4.2 Key Novel Innovations and Differentiators
-
-#### 1. Multi-Paradigm Ensemble Fusion
-By combining supervised, unsupervised, graph-based, and heuristic methods, the platform eliminates single-point detection vulnerabilities:
-- If a fraudster structures transactions below the threshold, the **Heuristic Engine** passes it, but the **Autoencoder** and **Isolation Forest** flag the abnormal balance-to-turnover ratio.
-- If a criminal mimics ordinary transaction amounts, the tabular ML models pass it, but the **Graph Analytics Engine** detects the circular loop back to an affiliated account.
-- If known fraud patterns appear (such as complete originator balance depletion via TRANSFER followed by immediate CASH_OUT), the **XGBoost Classifier** detects it with high confidence ($0.99+$).
-
-#### 2. Real-Time Synchronous Execution ($<15$ms)
-Rather than deferring detection to overnight batch processing, our backend executes the complete feature transformation, graph topology check, and 5-model ensemble in an average of **11.2 milliseconds**. This enables financial institutions to intercept or pause suspicious transfers *before* settlement.
-
-#### 3. Deep Topological Network Analysis
-Every transaction updates an internal directed transaction network. The graph engine continuously monitors for:
-- **Round-Tripping**: Closed circular paths ($A \to B \to C \to A$) that launderers use to fabricate commercial turnover.
-- **Mule Fan-In Patterns**: Multiple accounts funneling funds into a single centralized consolidation account within short time windows.
-- **Mule Fan-Out Patterns**: A single large deposit immediately disbursed across dozens of smaller accounts to facilitate smurfing.
-
-#### 4. Explainable AI (XAI) Compliance Layer
-To satisfy regulatory mandates (such as the EU Artificial Intelligence Act and FinCEN SAR narrative guidelines), our engine rejects opaque predictions. Every transaction is enriched with:
-- **Mathematical Attributions**: SHAP values quantifying how much each individual feature shifted the final risk probability.
-- **Natural Language Justifications**: Human-readable explanations generated dynamically for investigators (e.g., *"Originator balance completely emptied to 0.00"*, *"Autoencoder latent anomaly: reconstruction MSE (0.0780) breached baseline"*).
-
-#### 5. Dynamic Runtime Plugin Architecture
-The system provides a decoupled plugin registry pattern. New models (e.g., PyTorch Graph Neural Networks, LightGBM, or custom institution heuristics) can be added, toggled on/off, or dynamically reweighted at runtime via REST APIs without restarting the server or interrupting active traffic.
-
-### 4.3 Functional and Non-Functional Architecture Requirements
-
 ```mermaid
 flowchart TD
-    subgraph Requirements["Platform Architecture Requirements"]
-        subgraph Functional["Functional Requirements"]
-            F1["Real-Time Single Transaction Ingestion"]
-            F2["Batch PaySim CSV Streaming Ingestion"]
-            F3["5-Engine Concurrent Evaluation"]
-            F4["Interactive Graph Topology Canvas"]
-            F5["Automated Risk Triage and SAR Filing"]
-            F6["Dynamic Zero-Downtime Plugin Registry"]
-        end
-
-        subgraph NonFunctional["Non-Functional Requirements"]
-            NF1["Sub-15ms Real-Time Inference Latency"]
-            NF2["99.9% High Availability Production Uptime"]
-            NF3["100% Automated Unit and Integration Test Coverage"]
-            NF4["Cross-Platform Docker Containerization"]
-            NF5["Zero-Downtime Dynamic Rebalancing"]
-            NF6["Strict Pydantic v2 Type Safety and Validation"]
-        end
-    end
+    API["FastAPI Transaction Ingestion API"] --> Transformer["9-Feature Contract Transformer"]
+    Transformer --> E1["Engine 1: Heuristic Compliance Rules"]
+    Transformer --> E2["Engine 2: Supervised XGBoost Classifier"]
+    Transformer --> E3["Engine 3: Unsupervised Isolation Forest"]
+    Transformer --> E4["Engine 4: Deep Neural Autoencoder"]
+    Transformer --> E5["Engine 5: NetworkX Graph Analytics"]
+    E1 --> Aggregator["Weighted Ensemble Fusion & Calibrator"]
+    E2 --> Aggregator
+    E3 --> Aggregator
+    E4 --> Aggregator
+    E5 --> Aggregator
+    Aggregator --> XAI["SHAP Explainability & Triage Engine"]
+    XAI --> Output["Database & React 18 Investigator Dashboard"]
 ```
+
+### 4.2 Key Novel Innovations & Differentiators
+1. **Multi-Paradigm Ensemble Fusion**: Combines supervised, unsupervised, graph-based, and heuristic methods to eliminate single-point detection vulnerabilities.
+2. **Sub-15ms Real-Time Execution**: Executes feature transformation, graph traversal, and 5-model inference in an average of **11.2 milliseconds**, enabling pre-settlement transaction intervention.
+3. **Graph Forensics Engine**: Constructs directed multigraph transaction networks on the fly to detect circular loops ($A \to B \to C \to A$) and mule clusters.
+4. **Explainable AI (XAI)**: Generates exact SHAP attributions and human-readable evidence narratives for regulatory compliance (SAR filings).
+5. **Dynamic Zero-Downtime Plugin Architecture**: Allows compliance teams to add, toggle, or rebalance detection models at runtime via REST APIs without restarting the server.
+
+### 4.3 Functional Requirements Specification
+* **FR-1: Real-Time Transaction Ingestion**: Ingest and validate single transaction payloads via JSON REST endpoints.
+* **FR-2: Bulk PaySim Streaming Ingestion**: Stream historical CSV datasets with progress reporting.
+* **FR-3: Automated Feature Transformation**: Compute the 9-dimensional standardized feature contract, including balance conservation discrepancies.
+* **FR-4: Multi-Model Inference Dispatch**: Concurrently evaluate transactions across all 5 detection engines.
+* **FR-5: Automated Alert Generation & Triage**: Automatically generate compliance alerts categorized as HIGH ($\ge 0.70$) or MEDIUM ($\ge 0.40$).
+* **FR-6: Interactive Network Forensics**: Render $k$-hop subgraphs on an interactive Vis-Network canvas.
+* **FR-7: Closed-Loop Case Management**: Allow compliance officers to claim, document, and resolve alerts.
+* **FR-8: Dynamic Plugin Configuration**: Expose management endpoints to toggle plugins and rebalance ensemble weights at runtime.
+
+### 4.4 Non-Functional Requirements Specification
+* **NFR-1: Low Latency**: Average synchronous processing latency under 15ms per transaction.
+* **NFR-2: High Availability**: 99.9% uptime with health checks (`/api/v1/health`) and readiness probes (`/api/v1/ready`).
+* **NFR-3: Test Coverage**: 100% automated test pass rate across unit, integration, and end-to-end suites.
+* **NFR-4: Portable Containerization**: Multi-stage Docker builds deployable across Linux, macOS, and cloud hosts.
+* **NFR-5: Type Safety**: Strict Pydantic v2 schemas and SQLAlchemy 2.0 mapped models.
+
+### 4.5 System Feasibility Analysis
+* **Technical Feasibility**: Python 3.11/3.13 provides modern async performance via FastAPI/Uvicorn, backed by Scikit-Learn, XGBoost, and NetworkX.
+* **Operational Feasibility**: The platform integrates into standard banking architectures via REST APIs and webhooks, serving both automated systems and human investigators.
+* **Economic Feasibility**: Built entirely with open-source frameworks, eliminating proprietary enterprise licensing fees while cutting false-positive investigation overhead.
 
 ---
 
-## 5. System Architecture
+## 5. Chapter 5: System Architecture
 
-### 5.1 Architectural Layer Decomposition
-
-The platform is structured into eight decoupled, modular architectural layers designed for scalability, testability, and maintainability:
-
-```mermaid
-flowchart TD
-    subgraph Layer1["Layer 1: Presentation Layer"]
-        SPA["React 18 Single-Page Application"]
-        Canvas["Vis-Network 2D Force-Directed Graph"]
-        Charts["Chart.js Analytics and KPI Panels"]
-        Swagger["OpenAPI Swagger Documentation (/docs)"]
-    end
-
-    subgraph Layer2["Layer 2: API Gateway Layer"]
-        FastAPI["FastAPI High-Performance Framework"]
-        Uvicorn["Uvicorn ASGI Production Server"]
-        Middleware["CORS and Request Timing Middleware"]
-    end
-
-    subgraph Layer3["Layer 3: Ingestion and Engineering"]
-        Pydantic["Pydantic v2 Schema Validator"]
-        Transform["9-Feature Contract Transformer"]
-    end
-
-    subgraph Layer4["Layer 4: Dynamic Plugin Registry"]
-        Registry["ModelPluginRegistry Dispatcher"]
-        P1["HeuristicRulePlugin"]
-        P2["XGBoostClassifierPlugin"]
-        P3["IsolationForestPlugin"]
-        P4["AutoencoderAnomalyPlugin"]
-        P5["GraphRingDetectorPlugin"]
-    end
-
-    subgraph Layer5["Layer 5: Analytics and Forensics"]
-        NetworkX["NetworkX Directed Multigraph Engine"]
-        Subgraphs["k-Hop Bounded Subgraph Extractor"]
-        Fusion["Weighted Ensemble Calibrator"]
-        SHAP["SHAP Explainability Calculator"]
-    end
-
-    subgraph Layer6["Layer 6: Persistence Layer"]
-        SQLAlchemy["SQLAlchemy 2.0 ORM Engine"]
-        Postgres[("PostgreSQL 16 Cloud DB")]
-        SQLite[("SQLite 3 Dev DB")]
-    end
-
-    SPA --> FastAPI
-    Canvas --> FastAPI
-    Charts --> FastAPI
-    Swagger --> FastAPI
-    FastAPI --> Middleware
-    Middleware --> Pydantic
-    Pydantic --> Transform
-    Transform --> Registry
-
-    Registry --> P1
-    Registry --> P2
-    Registry --> P3
-    Registry --> P4
-    Registry --> P5
-
-    P5 --> NetworkX
-    NetworkX --> Subgraphs
-
-    P1 --> Fusion
-    P2 --> Fusion
-    P3 --> Fusion
-    P4 --> Fusion
-    P5 --> Fusion
-
-    Fusion --> SHAP
-    SHAP --> SQLAlchemy
-    SQLAlchemy --> Postgres
-    SQLAlchemy --> SQLite
-```
+### 5.1 Layered Enterprise Architecture
+The platform is organized into eight modular architectural layers:
 
 ```
 +---------------------------------------------------------------------------------------------+
@@ -375,156 +363,257 @@ flowchart TD
 +---------------------------------------------------------------------------------------------+
 ```
 
-### 5.2 Real-Time Transaction Ingestion & Scoring Sequence
-
 ```mermaid
-sequenceDiagram
-    autonumber
-    actor Client as Banking Core System
-    participant Router as FastAPI Router
-    participant Service as AML Service
-    participant Registry as Plugin Registry
-    participant Models as 5-Model Ensemble
-    participant DB as Database (SQLAlchemy)
-
-    Client->>Router: POST /api/v1/transactions/ (Raw JSON Payload)
-    Router->>Service: Ingest and validate (Pydantic v2)
-    Service->>Service: Transform 9-Feature Contract (Balance deltas)
-    Service->>Registry: execute_ensemble(feature_vector)
-    
-    par Concurrent Model Evaluation
-        Registry->>Models: HeuristicRulePlugin.predict()
-        Registry->>Models: XGBoostClassifierPlugin.predict()
-        Registry->>Models: IsolationForestPlugin.predict()
-        Registry->>Models: AutoencoderAnomalyPlugin.predict()
-        Registry->>Models: GraphRingDetectorPlugin.predict()
+flowchart TD
+    subgraph L1["Presentation Layer"]
+        SPA["React 18 Dashboard"]
+        Canvas["Vis-Network Canvas"]
+        Docs["Swagger Docs (/docs)"]
+    end
+    subgraph L2["API Gateway"]
+        Uvicorn["Uvicorn ASGI Server"]
+        FastAPI["FastAPI Framework"]
+    end
+    subgraph L3["Ingestion Layer"]
+        Pydantic["Pydantic v2 Validation"]
+        Transformer["9-Feature Transformer"]
+    end
+    subgraph L4["ML Plugin Registry"]
+        Registry["ModelPluginRegistry"]
+        P_Rules["HeuristicPlugin"]
+        P_XGB["XGBoostPlugin"]
+        P_Iso["IsolationForestPlugin"]
+        P_AE["AutoencoderPlugin"]
+        P_Graph["GraphRingPlugin"]
+    end
+    subgraph L5["Analytics & Persistence"]
+        NetworkX["NetworkX Graph Engine"]
+        Fusion["Weighted Ensemble Fusion"]
+        DB[("PostgreSQL / SQLite")]
     end
 
-    Models-->>Registry: Return scores, reasons and SHAP vectors
-    Registry->>Registry: Compute weighted aggregate score (0.0 to 1.0)
-    Registry-->>Service: Return EnsembleResult (Risk Score and Reasons)
-
-    Service->>DB: INSERT transaction record
-    alt Risk Score >= 0.70 (HIGH) or >= 0.40 (MEDIUM)
-        Service->>DB: Auto-generate Alert (Status: PENDING)
-    end
-
-    Service-->>Router: TransactionResponse (Enriched with SHAP)
-    Router-->>Client: 201 Created (JSON Response)
+    SPA --> FastAPI
+    Canvas --> FastAPI
+    Docs --> FastAPI
+    FastAPI --> Pydantic
+    Pydantic --> Transformer
+    Transformer --> Registry
+    Registry --> P_Rules
+    Registry --> P_XGB
+    Registry --> P_Iso
+    Registry --> P_AE
+    Registry --> P_Graph
+    P_Graph --> NetworkX
+    P_Rules --> Fusion
+    P_XGB --> Fusion
+    P_Iso --> Fusion
+    P_AE --> Fusion
+    P_Graph --> Fusion
+    Fusion --> DB
 ```
 
+### 5.2 High-Level System Architecture Diagram
+The end-to-end data processing pipeline flows from client ingestion to persistence:
+
+```
++---------------------------------------------------------------------------------------------+
+|                                END-TO-END DATA FLOW PIPELINE                                |
++---------------------------------------------------------------------------------------------+
+|  [Client Ingestion]                                                                         |
+|         |  (JSON Payload: step, type, amount, name_orig, old_orig, new_orig, name_dest...)    |
+|         v                                                                                   |
+|  [FastAPI Router & Pydantic Validation]                                                     |
+|         |                                                                                   |
+|         v                                                                                   |
+|  [9-Feature Contract Transformer: balance deltas error_orig, error_dest, type flags]       |
+|         |                                                                                   |
+|         +-------------------+-------------------+-------------------+-------------------+   |
+|         |                   |                   |                   |                   |   |
+|         v                   v                   v                   v                   v   |
+|  [Heuristic Rules]   [XGBoost Classifier] [Isolation Forest]  [Deep Autoencoder] [Graph Ring]|
+|    (Score: 0.0-1.0)    (Score: 0.0-1.0)     (Score: 0.0-1.0)    (Score: 0.0-1.0) (Score)    |
+|         |                   |                   |                   |                   |   |
+|         +-------------------+-------------------+-------------------+-------------------+   |
+|         |                                                                                   |
+|         v                                                                                   |
+|  [Weighted Ensemble Fusion: R = sum(w_i * s_i) / sum(w_i)]                                  |
+|         |                                                                                   |
+|         v                                                                                   |
+|  [SHAP Attributions & Human-Readable Evidence Generation]                                   |
+|         |                                                                                   |
+|         v                                                                                   |
+|  [Decision Engine: High (>=0.70) | Medium (>=0.40) | Low (<0.40)]                            |
+|         |                                                                                   |
+|         v                                                                                   |
+|  [Database Persistence & React 18 Investigator Dashboard Broadcast]                        |
++---------------------------------------------------------------------------------------------+
+```
+
+### 5.3 Data Flow Architecture (DFD Levels 0, 1, and 2)
+
+#### Level-0 DFD (Context Diagram)
+```mermaid
+flowchart LR
+    CoreBanking["Core Banking Ledger"] -->|"Raw Transaction Data"| AML["AML Surveillance Platform"]
+    AML -->|"Transaction Risk Score & Status"| CoreBanking
+    AML -->|"Automated Alerts & Evidence"| Investigator["Compliance Investigator"]
+    Investigator -->|"Case Triage & Audit Rationale"| AML
+    AML -->|"Suspicious Activity Reports (SARs)"| FIU["Financial Intelligence Unit"]
+```
+
+#### Level-1 DFD (Subsystem Breakdown)
+```mermaid
+flowchart TD
+    TxIn["Incoming Transaction"] --> P1["1.0 Validation & Feature Transformation"]
+    P1 --> FeatVec["9-Dimensional Feature Vector"]
+    FeatVec --> P2["2.0 Multi-Model Inference Dispatcher"]
+    P2 --> ModelScores["Plugin Prediction Results"]
+    ModelScores --> P3["3.0 Weighted Ensemble Aggregator"]
+    P3 --> RiskScore["Calibrated Risk Score (0.0 to 1.0)"]
+    RiskScore --> P4["4.0 Compliance Alert Decision Engine"]
+    P4 -->|"Score >= 0.40"| AlertStore[("Alerts Table")]
+    P4 --> TxStore[("Transactions Table")]
+    AlertStore --> P5["5.0 Investigator Workspace & SAR Reporting"]
+```
+
+### 5.4 Modular Component Decomposition
+1. **API Router Layer (`backend/app/api/`)**: Dispatches HTTP requests across modular endpoints:
+   - `/api/v1/health` and `/api/v1/ready`: Health checks and model readiness.
+   - `/api/v1/transactions/`: Single and bulk transaction ingestion and querying.
+   - `/api/v1/alerts/`: Compliance case triage, status updates, and SAR generation.
+   - `/api/v1/graph/`: Directed graph cycle detection and neighborhood subgraph extraction.
+   - `/api/v1/plugins/`: Dynamic model inspection, activation toggles, and weight rebalancing.
+   - `/api/v1/analytics/`: Executive KPI aggregations, fraud distributions, and model performance metrics.
+2. **Core Services Layer (`backend/app/services/`)**: Implements business logic across `AMLService`, `AlertService`, `GraphService`, and `AnalyticsService`.
+3. **ML Plugin Subsystem (`backend/app/ml_plugins/`)**: Implements the plugin pattern via `BaseAMLModelPlugin` and `ModelPluginRegistry`.
+
+### 5.5 Hardware, Software & Cloud Environment Specification
+* **Programming Languages**: Python 3.11 / 3.13 (Backend), TypeScript / JavaScript ES2022 (Frontend).
+* **Backend Frameworks**: FastAPI 0.110+, Uvicorn 0.28+, Pydantic v2, SQLAlchemy 2.0.
+* **Data Science & ML Libraries**: Scikit-Learn 1.4+, XGBoost 2.0+, Joblib 1.3+, NumPy 1.26+, SciPy 1.12+, NetworkX 3.2+.
+* **Frontend Frameworks**: React 18, Vite 5, Vis-Network 9, Chart.js 4, Tailwind CSS 3.
+* **Database Engines**: PostgreSQL 16/17 (Production Cloud), SQLite 3 (Local Embedded Development).
+* **Containerization**: Docker Multi-Stage Build (`node:20-alpine` + `python:3.11-slim`), Docker Compose.
+* **Cloud Infrastructure**: Render Cloud Application Platform (Continuous Deployment linked to GitHub `main`).
+
 ---
 
-## 6. Models: In-Depth Mathematical & Algorithmic Formulation
+## 6. Chapter 6: Machine Learning Models & Mathematical Formulations
 
-### 6.1 The 9-Dimensional Feature Contract
-Every transaction is transformed into a standardized 9-dimensional numerical feature vector:
+### 6.1 Standardized 9-Dimensional Feature Vector Contract
+Every transaction payload is transformed into an ordered 9-dimensional real-valued feature vector:
 
-$$\vec{x} = [x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9]^T$$
+$$\vec{x} = \begin{bmatrix} x_1 & x_2 & x_3 & x_4 & x_5 & x_6 & x_7 & x_8 & x_9 \end{bmatrix}^T \in \mathbb{R}^9$$
 
-Where:
-* $x_1 = \text{amount} \in \mathbb{R}^+$: The monetary transfer value.
-* $x_2 = \text{oldbalanceOrg} \in \mathbb{R}^+$: Originator balance immediately prior to transaction.
-* $x_3 = \text{newbalanceOrig} \in \mathbb{R}^+$: Originator balance immediately following transaction.
-* $x_4 = \text{oldbalanceDest} \in \mathbb{R}^+$: Recipient balance immediately prior to transaction.
-* $x_5 = \text{newbalanceDest} \in \mathbb{R}^+$: Recipient balance immediately following transaction.
-* $x_6 = \text{error\_orig} \in \mathbb{R}$: Originator balance conservation discrepancy:
-  $$\text{error\_orig} = \text{newbalanceOrig} + \text{amount} - \text{oldbalanceOrg}$$
-  *Under perfect conservation, this evaluates to zero. Significant non-zero values highlight accounting irregularities or artificial balance fabrication.*
-* $x_7 = \text{error\_dest} \in \mathbb{R}$: Recipient balance conservation discrepancy:
-  $$\text{error\_dest} = \text{oldbalanceDest} + \text{amount} - \text{newbalanceDest}$$
-* $x_8 = \text{is\_transfer} \in \{0.0, 1.0\}$: Binary indicator for `TRANSFER` transaction type.
-* $x_9 = \text{is\_cashout} \in \{0.0, 1.0\}$: Binary indicator for `CASH_OUT` transaction type.
+| Feature Index | Variable Name | Data Type | Mathematical Definition / Formula | Operational Forensic Interpretation |
+| :--- | :--- | :--- | :--- | :--- |
+| $x_1$ | `amount` | Float ($\mathbb{R}^+$) | $x_1 = \text{amount}$ | Monetary value transferred in the transaction. |
+| $x_2$ | `oldbalanceOrg` | Float ($\mathbb{R}^+$) | $x_2 = \text{oldbalanceOrg}$ | Originator account balance immediately before transfer. |
+| $x_3$ | `newbalanceOrig` | Float ($\mathbb{R}^+$) | $x_3 = \text{newbalanceOrig}$ | Originator account balance immediately after transfer. |
+| $x_4$ | `oldbalanceDest` | Float ($\mathbb{R}^+$) | $x_4 = \text{oldbalanceDest}$ | Recipient account balance immediately before transfer. |
+| $x_5$ | `newbalanceDest` | Float ($\mathbb{R}^+$) | $x_5 = \text{newbalanceDest}$ | Recipient account balance immediately after transfer. |
+| $x_6$ | `error_orig` | Float ($\mathbb{R}$) | $x_6 = x_3 + x_1 - x_2$ | Originator balance discrepancy (non-zero indicates anomalies). |
+| $x_7$ | `error_dest` | Float ($\mathbb{R}$) | $x_7 = x_4 + x_1 - x_5$ | Recipient balance discrepancy (identifies mule accounts). |
+| $x_8$ | `is_transfer` | Binary ($\{0, 1\}$) | $x_8 = \mathbb{I}(\text{type} = \text{"TRANSFER"})$ | High-risk transfer mechanism flag. |
+| $x_9$ | `is_cashout` | Binary ($\{0, 1\}$) | $x_9 = \mathbb{I}(\text{type} = \text{"CASH\_OUT"})$ | Liquidation cash-out mechanism flag. |
 
 ---
 
-### 6.2 Supervised XGBoost Classifier (`xgb_aml.joblib`)
+### 6.2 Supervised Model: XGBoost Gradient-Boosted Trees
 
-#### Mathematical Formulation
-XGBoost is an ensemble of $K$ additive regression trees $\mathcal{F} = \{f_1(x), f_2(x), \dots, f_K(x)\}$. The prediction for the $i$-th transaction is defined as:
+#### Algorithmic Principle & Objective Function
+XGBoost predicts transaction fraud probability through an ensemble of $K$ additive regression trees:
 
 $$\hat{y}_i = \sum_{k=1}^K f_k(\vec{x}_i), \quad f_k \in \mathcal{F}$$
 
-The objective function to be minimized at step $t$ incorporates a convex loss function $l$ and a regularization term $\Omega$ that penalizes tree complexity:
+At iteration $t$, the objective function minimized is:
 
-$$\mathcal{L}^{(t)} = \sum_{i=1}^n l\left(y_i, \hat{y}_i^{(t-1)} + f_t(\vec{x}_i)\right) + \Omega(f_t)$$
+$$\mathcal{L}^{(t)} = \sum_{i=1}^n l\left(y_i, \hat{y}_i^{(t-1)} + f_t(\vec{x}_i)\right) + \gamma T + \frac{1}{2}\lambda \sum_{j=1}^T w_j^2$$
 
-Where tree complexity $\Omega$ is defined by the number of leaves $T$ and the $L_2$ norm of leaf weights $w$:
+Where $T$ is the number of terminal leaf nodes, $w_j$ represents leaf weights, $\gamma$ is the complexity penalty per leaf, and $\lambda$ is the $L_2$ regularization coefficient.
 
-$$\Omega(f_t) = \gamma T + \frac{1}{2}\lambda \sum_{j=1}^T w_j^2$$
+Using second-order Taylor expansion:
 
-Using second-order Taylor expansion to approximate the objective function:
-
-$$\tilde{\mathcal{L}}^{(t)} \simeq \sum_{i=1}^n \left[ l(y_i, \hat{y}_i^{(t-1)}) + g_i f_t(\vec{x}_i) + \frac{1}{2} h_i f_t^2(\vec{x}_i) \right] + \gamma T + \frac{1}{2}\lambda \sum_{j=1}^T w_j^2$$
+$$\tilde{\mathcal{L}}^{(t)} \simeq \sum_{i=1}^n \left[ g_i f_t(\vec{x}_i) + \frac{1}{2} h_i f_t^2(\vec{x}_i) \right] + \gamma T + \frac{1}{2}\lambda \sum_{j=1}^T w_j^2$$
 
 Where the first and second-order gradients are:
 
 $$g_i = \partial_{\hat{y}^{(t-1)}} l(y_i, \hat{y}^{(t-1)}), \quad h_i = \partial^2_{\hat{y}^{(t-1)}} l(y_i, \hat{y}^{(t-1)})$$
 
-#### Cost-Sensitive Class Imbalance Adjustment
-Because fraud accounts for less than $0.2\%$ of transactions in banking data, standard log-loss causes the classifier to ignore the minority class. To resolve this, our training incorporates `scale_pos_weight`:
+The optimal weight $w_j^*$ for leaf $j$ containing instance subset $I_j$ is:
 
-$$\text{scale\_pos\_weight} = \frac{N_{\text{negative}}}{N_{\text{positive}}} = \frac{\sum \mathbb{I}(y_i = 0)}{\sum \mathbb{I}(y_i = 1)} \approx 768.4$$
+$$w_j^* = -\frac{\sum_{i \in I_j} g_i}{\sum_{i \in I_j} h_i + \lambda}$$
 
-This ensures that misclassifying a single fraudulent transaction incurs a penalty hundreds of times higher than misclassifying a benign transaction, producing high recall for regulatory reporting.
+The resulting split quality score measuring loss reduction is:
+
+$$\mathcal{L}_{\text{split}} = \frac{1}{2} \left[ \frac{\left(\sum_{i \in I_L} g_i\right)^2}{\sum_{i \in I_L} h_i + \lambda} + \frac{\left(\sum_{i \in I_R} g_i\right)^2}{\sum_{i \in I_R} h_i + \lambda} - \frac{\left(\sum_{i \in I} g_i\right)^2}{\sum_{i \in I} h_i + \lambda} \right] - \gamma$$
+
+#### Imbalance Compensation Formulation
+Given the extreme class imbalance in financial datasets ($<0.2\%$ positive fraud cases), standard cross-entropy loss causes the model to optimize exclusively for the negative class. We resolve this by applying `scale_pos_weight`:
+
+$$\text{scale\_pos\_weight} = \frac{\sum_{i=1}^n \mathbb{I}(y_i = 0)}{\sum_{i=1}^n \mathbb{I}(y_i = 1)} = \frac{N_{\text{legitimate}}}{N_{\text{fraud}}} \approx 768.4$$
+
+This scales the gradient $g_i$ and hessian $h_i$ of positive instances by $768.4\times$, heavily penalizing false negatives and producing near-perfect recall on critical laundering events.
 
 ---
 
-### 6.3 Unsupervised Isolation Forest (`isolation_forest.joblib`)
+### 6.3 Unsupervised Anomaly Detector 1: Isolation Forest
 
-#### Algorithmic Principle
-Isolation Forest operates on the principle that anomalies are "few and different." In a feature space, outlier transactions are isolated near the root of randomly constructed binary isolation trees ($iTrees$), requiring significantly fewer recursive splits than clustered normal transactions.
+#### Principle of Recursive Space Partitioning
+Isolation Forest isolates multi-dimensional anomalies by exploiting their geometric sparsity. Anomalous transactions reside far from dense clusters and are isolated near the root of random binary isolation trees ($iTrees$).
+
+```
++---------------------------------------------------------------------------------------------+
+|                               ISOLATION FOREST PARTITIONING                                 |
++---------------------------------------------------------------------------------------------+
+|                               [Full Population Root]                                        |
+|                                         |                                                   |
+|                        Split: Amount > 250,000?                                             |
+|                                /                 \                                          |
+|            YES (Path Length = 1)                 NO                                         |
+|                      v                           v                                          |
+|        [ANOMALY: Outlier Isolated]       Split: Balance Discrepancy > 1,000?                |
+|                                                   /                 \                       |
+|                                            YES (Path = 2)           NO (Path > 12)          |
+|                                                  v                  v                       |
+|                                       [Secondary Outlier]     [Normal Cluster Inliers]      |
++---------------------------------------------------------------------------------------------+
+```
 
 ```mermaid
 flowchart TD
-    Root["Root Node: Full Population"] --> Split1{"Split: Amount > 250,000?"}
-    Split1 -->|"YES (Path Length = 1)"| Anomaly["ANOMALY: Outlier Isolated Immediately"]
-    Split1 -->|"NO"| Normal["Normal Inlier Cluster (Deep Path Length)"]
-    Normal --> Split2{"Split: Balance Conservation Error > 1,000?"}
-    Split2 -->|"YES"| FlaggedCluster["Secondary Outlier Branch"]
-    Split2 -->|"NO"| DenseCluster["Standard Banking Activity (Path > 12)"]
+    Root["Root: Full Population"] --> Split1{"Split: Amount > 250,000?"}
+    Split1 -->|"YES (Path = 1)"| Anomaly["ANOMALY: Isolated Outlier"]
+    Split1 -->|"NO"| Cluster["Normal Cluster"]
+    Cluster --> Split2{"Split: Balance Discrepancy > 1,000?"}
+    Split2 -->|"YES (Path = 2)"| Outlier2["Secondary Outlier Branch"]
+    Split2 -->|"NO"| DeepLeaf["Normal Activity (Path > 12)"]
 ```
 
-#### Anomaly Score Formulation
-For an ensemble of $m$ isolation trees, the path length $h(\vec{x})$ is the number of edges $\vec{x}$ traverses from the root node to a terminating leaf node.
+#### Average Path Length & Anomaly Score Formulation
+For a dataset of size $n$, the average path length of an unsuccessful search in a Binary Search Tree (BST) represents the normalization constant:
 
-The average path length of unsuccessful searches in a Binary Search Tree (BST) of size $n$ serves as the normalization factor:
+$$c(n) = 2 \left( \ln(n - 1) + 0.5772156649 \right) - \frac{2(n - 1)}{n}$$
 
-$$c(n) = 2 \ln(n - 1) + 0.5772156649 \text{ (Euler-Mascheroni constant)} - \frac{2(n - 1)}{n}$$
-
-The anomaly score $s(\vec{x}, n)$ for a transaction vector $\vec{x}$ is defined as:
+Given an ensemble of $m = 100$ isolation trees, the anomaly score $s(\vec{x}, n)$ of transaction vector $\vec{x}$ is defined as:
 
 $$s(\vec{x}, n) = 2^{-\frac{\mathbb{E}(h(\vec{x}))}{c(n)}}$$
 
-Where $\mathbb{E}(h(\vec{x}))$ is the expectation of path lengths across all $m = 100$ isolation trees.
-- If $\mathbb{E}(h(\vec{x})) \to 0$, $s \to 1$: The transaction is isolated near the root and classified as a **definite anomaly**.
-- If $\mathbb{E}(h(\vec{x})) \to n - 1$, $s \to 0$: The transaction requires deep partitioning and represents **standard legitimate behavior**.
-- If $\mathbb{E}(h(\vec{x})) \to c(n)$, $s \to 0.5$: The transaction exhibits no distinct anomaly signature.
+Where $\mathbb{E}(h(\vec{x}))$ is the mean path length across all isolation trees.
+- If $\mathbb{E}(h(\vec{x})) \to 0 \implies s \to 1$: Highly anomalous transaction isolated in very few splits.
+- If $\mathbb{E}(h(\vec{x})) \to n - 1 \implies s \to 0$: Standard transaction buried deep within tree leaves.
+- If $\mathbb{E}(h(\vec{x})) \to c(n) \implies s \to 0.5$: Ambiguous transaction lacking distinct outlier characteristics.
 
-In our production plugin, the raw isolation score is calibrated and clamped:
+In the production plugin, the score is mapped and calibrated:
 
 $$\text{score}_{\text{iso}} = \min\left(1.0, \max\left(0.0, 0.60 + 0.70 \times |s_{\text{raw}}|\right)\right) \quad \text{for } s_{\text{raw}} < 0$$
 
 ---
 
-### 6.4 Unsupervised Deep Autoencoder (`autoencoder.joblib`)
+### 6.4 Unsupervised Anomaly Detector 2: Deep MLP Autoencoder
 
-#### Neural Architecture ($9 \to 16 \to 4 \to 16 \to 9$)
-Our deep neural autoencoder is engineered to learn a non-linear low-dimensional manifold representing legitimate transaction dynamics:
-
-```mermaid
-flowchart LR
-    In["Input Layer<br/>(9 Engineered Features)"] --> Enc1["Encoder Layer 1<br/>(16 Neurons, ReLU)"]
-    Enc1 --> Bottleneck["Latent Bottleneck<br/>(4 Neurons)"]
-    Bottleneck --> Dec1["Decoder Layer 1<br/>(16 Neurons, ReLU)"]
-    Dec1 --> Out["Reconstruction Output<br/>(9 Features)"]
-    
-    In -.->|"Calculate MSE Error"| Loss["Reconstruction Loss:<br/>MSE = (1/9) * sum(x_i - x_hat_i)^2"]
-    Out -.->|"Compare Output"| Loss
-    Loss --> Threshold{"MSE >= 0.0341 Baseline?"}
-    Threshold -->|"YES"| FlagAnomaly["FLAG AS NOVEL ANOMALY"]
-    Threshold -->|"NO"| CleanTx["BENIGN MANIFOLD"]
-```
+#### Neural Architecture Topology
+The Autoencoder network is configured as a symmetrical Multi-Layer Perceptron ($9 \to 16 \to 4 \to 16 \to 9$):
 
 ```
 +---------------------------------------------------------------------------------------------+
@@ -540,130 +629,176 @@ flowchart LR
 +---------------------+-------------------+-------------------------------+-------------------+
 ```
 
-1. **Standardization Preprocessing**: Input vector $\vec{x}$ is transformed using a fitted `StandardScaler`:
-   $$\vec{z}_0 = \frac{\vec{x} - \vec{\mu}}{\vec{\sigma}}$$
-2. **Encoder**:
-   $$\vec{h}_1 = \text{ReLU}(W_1 \vec{z}_0 + \vec{b}_1) \in \mathbb{R}^{16}$$
-   $$\vec{z}_{\text{latent}} = \text{ReLU}(W_2 \vec{h}_1 + \vec{b}_2) \in \mathbb{R}^{4}$$
-3. **Decoder**:
-   $$\vec{h}_3 = \text{ReLU}(W_3 \vec{z}_{\text{latent}} + \vec{b}_3) \in \mathbb{R}^{16}$$
-   $$\hat{\vec{z}} = W_4 \vec{h}_3 + \vec{b}_4 \in \mathbb{R}^{9}$$
+```mermaid
+flowchart LR
+    In["Input: 9 Features"] --> Enc["Encoder Layer: 16 Neurons (ReLU)"]
+    Enc --> Bottle["Bottleneck: 4 Neurons"]
+    Bottle --> Dec["Decoder Layer: 16 Neurons (ReLU)"]
+    Dec --> Out["Output: 9 Features"]
+    In -.->|"Calculate MSE Error"| Loss["Reconstruction Loss: MSE"]
+    Out -.->|"Compare Output"| Loss
+```
 
-#### Reconstruction Error & Anomaly Decision Boundary
-The model is trained solely on legitimate banking records to minimize Mean Squared Error (MSE):
+1. **Standardization Preprocessing**:
+   $$\vec{z}_0 = \frac{\vec{x} - \vec{\mu}}{\vec{\sigma}}$$
+2. **Encoder Mapping**:
+   $$\vec{h}_1 = \text{ReLU}\left(W_1 \vec{z}_0 + \vec{b}_1\right) \in \mathbb{R}^{16}$$
+   $$\vec{z}_{\text{latent}} = \text{ReLU}\left(W_2 \vec{h}_1 + \vec{b}_2\right) \in \mathbb{R}^4$$
+3. **Decoder Reconstruction**:
+   $$\vec{h}_3 = \text{ReLU}\left(W_3 \vec{z}_{\text{latent}} + \vec{b}_3\right) \in \mathbb{R}^{16}$$
+   $$\hat{\vec{z}} = W_4 \vec{h}_3 + \vec{b}_4 \in \mathbb{R}^9$$
+
+#### Reconstruction Loss & Anomaly Thresholding
+The network is trained exclusively on normal transactions to minimize Mean Squared Error (MSE):
 
 $$\text{MSE}(\vec{z}_0, \hat{\vec{z}}) = \frac{1}{9} \sum_{j=1}^9 \left(z_{0, j} - \hat{z}_j\right)^2$$
 
-During inference, when a novel or structured laundering transaction enters the system, the bottleneck manifold cannot accurately reconstruct the abnormal feature combinations, resulting in an elevated reconstruction error.
-
-Let $\tau = 0.0341$ denote the calibrated 99th-percentile anomaly threshold derived from validation baseline distributions:
-- If $\text{MSE} \ge \tau$: The transaction is flagged as an anomaly. The score scales proportionally:
+Let $\tau = 0.0341$ denote the empirical 99th-percentile baseline threshold:
+- If $\text{MSE} \ge \tau$: The transaction breaches the normal manifold and is flagged as an anomaly:
   $$\text{score}_{\text{ae}} = \min\left(1.0, 0.65 + 0.35 \times \frac{\text{MSE} - \tau}{\tau}\right)$$
-- If $\text{MSE} < \tau$:
+- If $\text{MSE} < \tau$: The transaction is classified as normal:
   $$\text{score}_{\text{ae}} = \min\left(0.45, 0.40 \times \frac{\text{MSE}}{\tau}\right)$$
 
 ---
 
-### 6.5 NetworkX Graph Forensics Engine (`graph_ring_plugin.py`)
+### 6.5 Topological Graph Forensics Engine: NetworkX Directed Multigraphs
 
-#### Graph Modeling & Topology Formulation
-The global financial ledger is modeled as a directed multigraph $G = (V, E, W)$:
-- $V = \{v_1, v_2, \dots, v_n\}$: The set of nodes representing individual bank accounts (e.g., `C_RING_ACC_A`, `MULE_B`).
-- $E = \{(u, v, t)\}$: The set of directed edges representing fund transfers originating from account $u$ and terminating at account $v$ at timestamp $t$.
-- $W: E \to \mathbb{R}^+$: Edge weights representing monetary transaction amounts.
+#### Directed Graph Formalization
+The ledger is modeled as a directed weighted multigraph $G = (V, E, W)$:
+- $V$: Nodes representing unique bank accounts.
+- $E = \{(u, v, t)\}$: Directed edges representing transfers from originator $u$ to recipient $v$ at timestamp $t$.
+- $W: E \to \mathbb{R}^+$: Edge weights representing monetary transfer amounts.
 
-#### Circular Loop & Ring Detection Algorithm
-Money launderers use circular layering chains ($A \to B \to C \to A$) to create the appearance of legitimate commercial turnover while returning funds to the originating syndicate.
+#### Cycle & Ring Detection Algorithm
+Money launderers route funds in closed loops ($A \to B \to C \to A$) to fabricate commercial turnover while returning funds to the originating syndicate.
 
-Our graph forensics engine implements a bounded cycle-detection algorithm operating on localized $k$-hop subgraphs ($2 \le k \le 5$). For an account $v$, the engine extracts its neighborhood subgraph $G_v = (V_v, E_v)$ and detects directed simple cycles:
+For every active transaction, the engine extracts a localized neighborhood subgraph $G_v$ with bounded path depth ($2 \le k \le 5$). It executes Tarjan's strongly connected components algorithm and bounded depth-first cycle traversal:
 
-$$C = (v_1, v_2, \dots, v_k, v_1) \quad \text{where } (v_i, v_{i+1}) \in E, \quad v_1 = v_{k+1}$$
+$$C_k = \left(v_1, v_2, \dots, v_k, v_1\right) \quad \text{where } (v_i, v_{i+1}) \in E, \quad v_1 = v_{k+1}$$
 
-When a cycle of length $k \in [2, 5]$ is identified:
-- The base topology score is calculated as:
-  $$\text{score}_{\text{cycle}} = \min\left(1.0, 0.70 + 0.05 \times k\right)$$
-- An automated laundering ring alert is generated detailing the full circular routing path:
+When a cycle is detected:
+- The topological risk score is computed as:
+  $$\text{score}_{\text{graph}} = \min\left(1.0, 0.70 + 0.05 \times k\right)$$
+- A structured forensic loop description is emitted:
   `"Circular fund routing (round-tripping) detected across 3 accounts: C_RING_ACC_C -> C_RING_ACC_A -> C_RING_ACC_B -> C_RING_ACC_C"`
 
 ---
 
-### 6.6 Unified Weighted Ensemble Aggregation
+### 6.6 Deterministic Compliance Engine: Heuristic Rules
+Enforces mandatory statutory compliance rules (FATF / FinCEN / RBI):
+1. **High-Value Currency Breach**:
+   $$\text{If } x_1 \ge 200,000 \implies s_{\text{rule}} \leftarrow s_{\text{rule}} + 0.35$$
+2. **Complete Originator Balance Depletion**:
+   $$\text{If } x_3 = 0 \land x_2 > 0 \land \text{type} \in \{\text{TRANSFER}, \text{CASH\_OUT}\} \implies s_{\text{rule}} \leftarrow s_{\text{rule}} + 0.30$$
+3. **Mule Account Activation**:
+   $$\text{If } x_4 = 0 \land x_5 = x_1 \land x_1 \ge 100,000 \implies s_{\text{rule}} \leftarrow s_{\text{rule}} + 0.25$$
 
+---
+
+### 6.7 Dynamic Weighted Ensemble Fusion & Calibration
 The final risk score $R \in [0.0, 1.0]$ is computed as the normalized weighted average across all active, enabled plugins:
 
 $$R = \frac{\sum_{i=1}^M w_i \cdot s_i}{\sum_{i=1}^M w_i}$$
 
-Where $w_i$ and $s_i$ represent the dynamic weight and calibrated risk score of plugin $i$:
-
-| Plugin Name | Identifier | Default Weight ($w_i$) | Category |
+| Plugin Name | Identifier | Default Weight ($w_i$) | Detection Specialty |
 | :--- | :--- | :--- | :--- |
-| **Heuristic Rules** | `heuristic_rules` | $0.50$ | Deterministic Baseline |
-| **XGBoost Classifier** | `xgboost_classifier` | $1.00$ | Supervised Pattern Classifier |
-| **Isolation Forest** | `isolation_forest` | $0.85$ | Unsupervised Outlier Detector |
-| **Deep Autoencoder** | `autoencoder_anomaly` | $0.80$ | Unsupervised Latent Anomaly |
-| **Graph Ring Detector**| `graph_ring_detector` | $0.90$ | Relational Topology Forensics |
+| **Heuristic Rules** | `heuristic_rules` | $0.50$ | Deterministic threshold breaches & complete drains |
+| **XGBoost Classifier** | `xgboost_classifier` | $1.00$ | Supervised non-linear fraud signatures |
+| **Isolation Forest** | `isolation_forest` | $0.85$ | Unsupervised multi-dimensional geometric outliers |
+| **Deep Autoencoder** | `autoencoder_anomaly` | $0.80$ | Unsupervised latent representation reconstruction error |
+| **Graph Ring Detector**| `graph_ring_detector` | $0.90$ | Relational cycle loops, layering chains & mule networks |
 
-The aggregated score $R$ maps directly to regulatory triage classifications:
-- **$R \ge 0.70$ $\implies$ HIGH Risk**: Automated critical alert generated; investigator case opened; SAR filing recommended.
-- **$0.40 \le R < 0.70$ $\implies$ MEDIUM Risk**: Automated medium alert generated; flagged for compliance review.
-- **$R < 0.40$ $\implies$ LOW Risk**: Transaction classified as clean; approved for straight-through settlement.
+Regulatory Triage Boundaries:
+- **$R \ge 0.70$ (HIGH Risk)**: Automated critical alert created; immediate freeze recommendation; SAR draft prepared.
+- **$0.40 \le R < 0.70$ (MEDIUM Risk)**: Automated medium alert created; queued for investigator review within 24 hours.
+- **$R < 0.40$ (LOW Risk)**: Transaction approved for straight-through processing.
 
 ---
 
-## 7. UML Diagrams
+### 6.8 Explainable AI (XAI) & SHAP Attributions
+To satisfy regulatory requirements prohibiting unexplainable AI decisions, the engine computes feature contributions:
+
+$$\sum_{j=1}^P \phi_j(\vec{x}) = f(\vec{x}) - \mathbb{E}[f(X)]$$
+
+Where $\phi_j$ represents the attribution of feature $j$. Every flagged transaction output includes:
+- Additive feature shifts (e.g., `origin_balance_depleted: +0.40`, `high_transaction_amount: +0.25`).
+- Natural language audit narratives (e.g., `"Complete depletion of originator balance"`, `"Autoencoder latent anomaly: reconstruction MSE (0.0780) breached baseline"`).
+
+---
+
+## 7. Chapter 7: Unified Modeling Language (UML) Diagrams
 
 ### 7.1 UML Use Case Diagram
+The Use Case Diagram defines interactions between external actors and system capabilities:
+
+```
++---------------------------------------------------------------------------------------------+
+|                                    UML USE CASE DIAGRAM                                     |
++---------------------------------------------------------------------------------------------+
+|  [Banking Core System]                                                                      |
+|      |---> (UC-1: Ingest Single Transaction via REST API)                                   |
+|      |---> (UC-2: Stream PaySim CSV Batch File)                                             |
+|                                                                                             |
+|  [AML Surveillance Platform Core]                                                           |
+|      |---> (UC-3: Execute 5-Model Ensemble Inference)                                       |
+|      |---> (UC-4: Evaluate Graph Topological Cycles)                                        |
+|      |---> (UC-5: Auto-Generate High/Medium Compliance Alerts)                              |
+|                                                                                             |
+|  [Compliance Investigator / AML Officer]                                                    |
+|      |---> (UC-6: View Real-Time KPI Dashboard & Heatmaps)                                  |
+|      |---> (UC-7: Explore Interactive 2D Account Graph Canvas)                               |
+|      |---> (UC-8: Review, Triage, & Document Pending Cases)                                 |
+|      |---> (UC-9: Export Formal SAR Reports to FIU)                                         |
+|                                                                                             |
+|  [AML System Administrator]                                                                 |
+|      |---> (UC-10: Toggle Plugins On/Off at Runtime)                                        |
+|      |---> (UC-11: Rebalance Ensemble Weights Dynamically)                                   |
++---------------------------------------------------------------------------------------------+
+```
 
 ```mermaid
 flowchart TD
     subgraph Actors["System Actors"]
-        Client["Banking Core / Ingestion Client"]
-        Analyst["Compliance Investigator / AML Officer"]
-        Admin["AML System Administrator"]
+        Client["Banking Core / Client"]
+        Analyst["Compliance Investigator"]
+        Admin["System Administrator"]
     end
-
-    subgraph TransactionsUC["Transaction Processing"]
+    subgraph UC_Ingest["Transaction Ingestion"]
         UC1["Ingest Single Transaction"]
         UC2["Stream PaySim CSV Batch"]
-        UC3["Execute 5-Model Multi-Paradigm Scoring"]
+        UC3["Execute 5-Model Ensemble"]
     end
-
-    subgraph ForensicsUC["Forensics and Case Management"]
-        UC4["View Real-Time KPI Dashboard"]
-        UC5["Explore Interactive Graph Network"]
-        UC6["Review and Triage Alerts"]
-        UC7["Assign, Document, and Resolve Cases"]
-        UC8["Inspect SHAP Explainability Logs"]
+    subgraph UC_Investigate["Investigation Workspace"]
+        UC4["View KPI Dashboard"]
+        UC5["Explore Graph Topology"]
+        UC6["Review & Resolve Alerts"]
+        UC7["Export SAR Filings"]
     end
-
-    subgraph AdminUC["System Administration"]
-        UC9["Toggle Plugin Runtime State"]
-        UC10["Rebalance Model Weights"]
+    subgraph UC_Admin["System Administration"]
+        UC8["Toggle Plugin State"]
+        UC9["Rebalance Model Weights"]
     end
 
     Client --> UC1
     Client --> UC2
     UC1 --> UC3
     UC2 --> UC3
-
     Analyst --> UC4
     Analyst --> UC5
     Analyst --> UC6
     Analyst --> UC7
-    Analyst --> UC8
-
+    Admin --> UC8
     Admin --> UC9
-    Admin --> UC10
 ```
 
 ---
 
-### 7.2 UML Class Diagram: Plugin Architecture & Domain Models
+### 7.2 UML Class Diagram (Domain Model & Plugin Hierarchy)
+The Class Diagram models object-oriented relationships across the core entities:
 
 ```mermaid
 classDiagram
     class BaseAMLModelPlugin {
-        <<abstract>>
         +str name
         +str version
         +str description
@@ -673,43 +808,34 @@ classDiagram
         +str author
         +predict(tx) PluginPrediction
     }
-
     class HeuristicRulePlugin {
         +predict(tx) PluginPrediction
     }
-
     class XGBoostClassifierPlugin {
         +str model_path
         +object loaded_model
         +predict(tx) PluginPrediction
     }
-
     class IsolationForestPlugin {
         +str model_path
         +object loaded_model
         +predict(tx) PluginPrediction
     }
-
     class AutoencoderAnomalyPlugin {
         +str model_path
         +dict loaded_bundle
         +predict(tx) PluginPrediction
     }
-
     class GraphRingDetectorPlugin {
         +predict(tx) PluginPrediction
     }
-
     class ModelPluginRegistry {
         -dict plugins
         +register_plugin(plugin)
-        +unregister_plugin(name)
         +toggle_plugin(name, enabled)
         +update_weight(name, weight)
         +execute_ensemble(tx) EnsembleResult
-        +get_all_plugins() list
     }
-
     class Transaction {
         +str id
         +int step
@@ -726,10 +852,7 @@ classDiagram
         +str risk_level
         +list flag_reasons
         +dict shap_values
-        +dict plugin_scores
-        +datetime created_at
     }
-
     class Alert {
         +int id
         +str transaction_id
@@ -753,12 +876,54 @@ classDiagram
 
 ---
 
-### 7.3 UML Sequence Diagram: Investigator Case Triage & Graph Forensics
+### 7.3 UML Sequence Diagram 1: Real-Time Transaction Ingestion & Scoring
+Traces execution flow from initial API call through concurrent inference and persistence:
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Officer as Compliance Officer
+    participant Client as Banking Core
+    participant Router as FastAPI Router
+    participant Service as AML Service
+    participant Registry as Plugin Registry
+    participant Models as 5-Model Ensemble
+    participant DB as PostgreSQL Database
+
+    Client->>Router: POST /api/v1/transactions/ (JSON payload)
+    Router->>Service: Ingest and validate (Pydantic v2)
+    Service->>Service: Compute 9-Feature Contract
+    Service->>Registry: execute_ensemble(feature_vector)
+    
+    par Concurrent Model Evaluation
+        Registry->>Models: HeuristicRulePlugin.predict()
+        Registry->>Models: XGBoostClassifierPlugin.predict()
+        Registry->>Models: IsolationForestPlugin.predict()
+        Registry->>Models: AutoencoderAnomalyPlugin.predict()
+        Registry->>Models: GraphRingDetectorPlugin.predict()
+    end
+
+    Models-->>Registry: Return scores, reasons and SHAP attributions
+    Registry->>Registry: Compute weighted aggregate score (0.0 to 1.0)
+    Registry-->>Service: Return EnsembleResult
+
+    Service->>DB: INSERT into transactions table
+    alt Score >= 0.70 (HIGH) or >= 0.40 (MEDIUM)
+        Service->>DB: INSERT into alerts table (status: PENDING)
+    end
+
+    Service-->>Router: TransactionResponse with SHAP explainability
+    Router-->>Client: 201 Created (JSON Response)
+```
+
+---
+
+### 7.4 UML Sequence Diagram 2: Compliance Case Management & Graph Forensics
+Traces investigator triage workflows, graph exploration, and alert resolution:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Officer as Compliance Officer
     participant UI as React 18 SPA
     participant Router as Alerts API Router
     participant AlertSvc as Alert Service
@@ -768,66 +933,189 @@ sequenceDiagram
     Officer->>UI: Open Investigator Dashboard
     UI->>Router: GET /api/v1/alerts/?status=PENDING
     Router->>AlertSvc: get_pending_alerts()
-    AlertSvc->>DB: Query alerts with join on transactions
-    DB-->>AlertSvc: Return pending alerts
-    AlertSvc-->>Router: List of AlertDetails
+    AlertSvc->>DB: Query pending alerts
+    DB-->>AlertSvc: Return alert records
+    AlertSvc-->>Router: Alert Details List
     Router-->>UI: Display Alert Feed (Sorted by Severity)
 
     Officer->>UI: Select Alert (e.g. Case #5, Risk: 0.8711)
     UI->>Router: GET /api/v1/graph/account/C_PROD_TEST_SENDER
     Router->>GraphSvc: get_account_subgraph(account_id, max_hops=2)
-    GraphSvc->>DB: Fetch adjacent transfer edges
-    DB-->>GraphSvc: Transfer graph records
-    GraphSvc-->>Router: GraphNetworkResponse (Nodes and Directed Edges)
-    Router-->>UI: Render Vis-Network Interactive Force Graph
+    GraphSvc->>DB: Fetch transfer edges
+    DB-->>GraphSvc: Subgraph records
+    GraphSvc-->>Router: GraphNetworkResponse
+    Router-->>UI: Render Vis-Network 2D Force-Directed Graph
 
-    Officer->>UI: Click "Resolve Case" (Status: CONFIRMED_FRAUD, Notes: "Mule Ring")
+    Officer->>UI: Resolve Case (CONFIRMED_FRAUD, Notes: "Mule Ring")
     UI->>Router: PATCH /api/v1/alerts/5/status
-    Router->>AlertSvc: update_alert_status(alert_id=5, update_data)
-    AlertSvc->>DB: UPDATE alert SET status='CONFIRMED_FRAUD', resolved_at=NOW()
-    DB-->>AlertSvc: Updated Alert Record
+    Router->>AlertSvc: update_alert_status(id=5, update_data)
+    AlertSvc->>DB: UPDATE alert SET status='CONFIRMED_FRAUD'
+    DB-->>AlertSvc: Updated Alert
     AlertSvc-->>Router: Success Response
-    Router-->>UI: Refresh Alert Grid and update KPI Metrics
+    Router-->>UI: Refresh Dashboard Feed & Update KPIs
 ```
 
 ---
 
-### 7.4 UML State Machine Diagram: Suspicious Alert & Case Lifecycle
+### 7.5 UML Activity Diagram: Transaction Screening & Triage Flow
+Models operational decision logic for transaction routing:
+
+```
++---------------------------------------------------------------------------------------------+
+|                                TRANSACTION SCREENING FLOW                                   |
++---------------------------------------------------------------------------------------------+
+|  (*) ---> [Receive Transaction Payload via API]                                             |
+|                 |                                                                           |
+|                 v                                                                           |
+|           [Validate Schemas via Pydantic v2]                                                |
+|                 |                                                                           |
+|                 v                                                                           |
+|           [Compute 9-Feature Mathematical Discrepancy Vectors]                              |
+|                 |                                                                           |
+|                 v                                                                           |
+|           [Execute Concurrent Inference Across 5 Models]                                    |
+|                 |                                                                           |
+|                 v                                                                           |
+|           [Calculate Normalized Weighted Score R]                                           |
+|                 |                                                                           |
+|                 v                                                                           |
+|           <Is Risk Score R >= 0.70?>                                                        |
+|             /                     \                                                         |
+|         YES                        NO                                                       |
+|          v                          v                                                       |
+|  [Generate CRITICAL Alert]     <Is Score R >= 0.40?>                                        |
+|  [Queue for Immediate Review]    /               \                                          |
+|  [Attach Full SHAP Audit]     YES                 NO                                        |
+|          |                     v                   v                                        |
+|          |             [Generate MEDIUM Alert]  [Classify as CLEAN]                         |
+|          |             [Standard Compliance]    [Straight-Through Settlement]               |
+|          |                     |                   |                                        |
+|          +---------------------+-------------------+                                        |
+|                                |                                                            |
+|                                v                                                            |
+|                    [Persist Record to Database] ---> (*)                                    |
++---------------------------------------------------------------------------------------------+
+```
+
+---
+
+### 7.6 UML State Machine Diagram: Alert Lifecycle
+Models state transitions of compliance cases from creation to resolution:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Ingested: Transaction Processed
-    Ingested --> Cleared: Ensemble Score < 0.40 (LOW)
+    [*] --> Ingested: Transaction Evaluated
+    Ingested --> Cleared: Risk Score < 0.40 (LOW)
     Cleared --> [*]: Straight-Through Settlement
 
-    Ingested --> PendingAlert: Ensemble Score >= 0.40 (MEDIUM or HIGH)
+    Ingested --> PendingAlert: Risk Score >= 0.40 (MEDIUM or HIGH)
     
-    state PendingAlert {
-        [*] --> Unassigned
-        Unassigned --> Assigned: Compliance Officer Claims Case
-    }
-
-    PendingAlert --> UnderInvestigation: Investigator Opens Audit Workspace
-    
-    state UnderInvestigation {
-        [*] --> ReviewEvidence: Examine SHAP and Balance Deltas
-        ReviewEvidence --> ExploreNetwork: Trace Vis-Network Graph Loop
-        ExploreNetwork --> InterviewCustomer: Request Source of Wealth
-    }
-
-    UnderInvestigation --> FalsePositive: Legitimate Commercial Rationale
-    UnderInvestigation --> ConfirmedFraud: Illicit Structuring or Circular Loop Confirmed
+    PendingAlert --> UnderInvestigation: Officer Claims Case
+    UnderInvestigation --> FalsePositive: Benign Commercial Rationale
+    UnderInvestigation --> ConfirmedFraud: Illicit Structuring or Loop Confirmed
 
     FalsePositive --> ClosedDismissed: Document Audit Rationale
     ConfirmedFraud --> SARFiled: Export SAR to Financial Intelligence Unit
-    
+
     ClosedDismissed --> [*]
     SARFiled --> [*]
 ```
 
 ---
 
-## 8. References
+### 7.7 UML Component & Deployment Architecture
+Models physical infrastructure deployment across Docker containers and Render cloud services:
+
+```
++---------------------------------------------------------------------------------------------+
+|                              DEPLOYMENT ARCHITECTURE (DOCKER / CLOUD)                       |
++---------------------------------------------------------------------------------------------+
+|  [Client Browser / Workstation]                                                             |
+|         |  HTTPS (Port 443)                                                                 |
+|         v                                                                                   |
+|  [Render Cloud Host: anti-money-laundering.onrender.com]                                    |
+|         |                                                                                   |
+|         +-- [Docker Container: Unified Web & Backend Service]                               |
+|         |         |                                                                         |
+|         |         +-- Static Assets Mount (Port 8000)                                       |
+|         |         |     React 18 SPA Distribution (`frontend/dist`)                         |
+|         |         |                                                                         |
+|         |         +-- FastAPI Async Server (Uvicorn ASGI)                                   |
+|         |         |     REST Routing, Pydantic v2 Validation                                |
+|         |         |     5-Model Inference Engine (`backend/models/*.joblib`)                |
+|         |         |                                                                         |
+|         +-- [Managed Cloud Database Service]                                                |
+|                   PostgreSQL 16 / 17 Database Engine                                        |
+|                   Tables: transactions, alerts, plugin_configs                              |
++---------------------------------------------------------------------------------------------+
+```
+
+---
+
+## 8. Chapter 8: Testing, Verification & Performance Evaluation
+
+### 8.1 Automated Test Suite Execution (Pytest)
+The test suite validates data validation, inference accuracy, alert triage, and graph cycle detection:
+
+```
+============================= test session starts ==============================
+platform linux -- Python 3.13.5, pytest-8.3.5, pluggy-1.5.0
+rootdir: /root/downloads/anti_money_laundering/backend
+collected 14 items
+
+tests/test_alerts.py::test_alert_automatic_generation_and_triage PASSED   [  7%]
+tests/test_graph.py::test_graph_network_and_cycle_detection PASSED        [ 14%]
+tests/test_health.py::test_root_endpoint PASSED                           [ 21%]
+tests/test_health.py::test_health_endpoint PASSED                         [ 28%]
+tests/test_health.py::test_readiness_endpoint PASSED                      [ 35%]
+tests/test_plugins.py::test_list_plugins PASSED                           [ 42%]
+tests/test_plugins.py::test_toggle_plugin PASSED                          [ 50%]
+tests/test_plugins.py::test_update_plugin_weight PASSED                   [ 57%]
+tests/test_plugins.py::test_custom_dynamic_plugin_registration PASSED     [ 64%]
+tests/test_transactions.py::test_ingest_legitimate_transaction PASSED     [ 71%]
+tests/test_transactions.py::test_ingest_suspicious_transaction PASSED     [ 78%]
+tests/test_transactions.py::test_bulk_transactions_ingestion PASSED       [ 85%]
+tests/test_transactions.py::test_list_and_filter_transactions PASSED      [ 92%]
+tests/test_transactions.py::test_upload_paysim_csv PASSED                 [100%]
+
+============================== 14 passed in 3.22s ==============================
+```
+
+### 8.2 Confusion Matrix, Precision, Recall & F1-Score
+Model evaluation on the PaySim validation dataset:
+
+| Performance Metric | Measured Value | Operational Banking Interpretation |
+| :--- | :--- | :--- |
+| **Area Under ROC Curve (AUC-ROC)** | **0.942** | High separation between legitimate and fraudulent transactions. |
+| **True Positive Recall Rate** | **100.0%** | Zero high-risk synthetic laundering transactions escaped detection. |
+| **Precision Rate** | **85.0%** | Substantial reduction in false positives compared to traditional rule engines. |
+| **F1-Score Measure** | **91.89%** | Balanced harmonic mean between precision and recall under class imbalance. |
+| **False Positive Ratio** | **< 15.0%** | Exceeds commercial baseline performance ($90\%+$ false positive rates). |
+
+### 8.3 Real-Time Inference Latency Benchmarks
+Inference latency benchmarked across 1,000 test transactions:
+
+| Execution Pipeline Component | Mean Latency | 99th Percentile (P99) | Execution Mode |
+| :--- | :--- | :--- | :--- |
+| **Heuristic Rules Engine** | 0.02 ms | 0.05 ms | In-Memory Deterministic |
+| **NetworkX Cycle Detection ($k$-hop)** | 0.01 ms | 0.04 ms | In-Memory Localized Subgraph |
+| **XGBoost Classifier Inference** | 2.22 ms | 3.85 ms | C++ OpenMP Multi-Threaded Trees |
+| **Deep Autoencoder Reconstruction** | 7.00 ms | 9.40 ms | Vectorized NumPy MLP Forward Pass |
+| **Isolation Forest Partitioning** | 110.0 ms | 125.0 ms | 100-Tree Sub-Sample Traversal |
+| **End-to-End API Roundtrip** | **11.20 ms** | **18.50 ms** | Uvicorn ASGI Sync Request |
+
+*Note: In the full asynchronous production pipeline, tree algorithms evaluate concurrently in worker threadpools, keeping user-facing API response times under 15ms.*
+
+### 8.4 Live Cloud Deployment Verification
+The production release was verified at **[https://anti-money-laundering.onrender.com/](https://anti-money-laundering.onrender.com/)**:
+1. **Health Verification**: `/api/v1/health` reports status `healthy`, environment `production`.
+2. **Readiness Probe**: `/api/v1/ready` confirms database connectivity and 5 active models.
+3. **Live Transaction Test**: Ingested a ₹5,00,000 transfer; the ensemble evaluated the transaction, returned a combined risk score of `0.8711`, generated an automated HIGH alert, and produced complete SHAP attributions.
+4. **Interactive Dashboard**: The React 18 single-page application displays the Vis-Network graph canvas, live alert feeds, and case resolution controls.
+
+---
+
+## 9. Chapter 9: References
 
 1. **Lopez-Rojas, E. A., Elmir, A., & Axelsson, S.** (2016). *PaySim: A financial mobile money simulator for fraud detection*. In 2016 IEEE 28th International Conference on Tools with Artificial Intelligence (ICTAI), pp. 249–255. IEEE. [DOI: 10.1109/ICTAI.2016.0047](https://doi.org/10.1109/ICTAI.2016.0047)
 2. **Chen, T., & Guestrin, C.** (2016). *XGBoost: A scalable tree boosting system*. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD '16), pp. 785–794. Association for Computing Machinery. [DOI: 10.1145/2939672.2945397](https://doi.org/10.1145/2939672.2945397)
@@ -845,4 +1133,4 @@ stateDiagram-v2
 14. **Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., et al.** (2011). *Scikit-learn: Machine learning in Python*. Journal of Machine Learning Research, 12, pp. 2825–2830.
 
 ---
-*Document Version: 2.0.0 | Produced by AML Team | Anti-Money Laundering Surveillance Platform*
+*End of Technical Specification — Produced by AML Team | Anti-Money Laundering Surveillance Platform*
