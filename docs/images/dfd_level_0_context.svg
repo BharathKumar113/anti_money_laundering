@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520">
+    <defs>
+        <filter id="shadow0" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#64748b" flood-opacity="0.08" />
+        </filter>
+        <marker id="arrow0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+        </marker>
+        <marker id="arrowGreen0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+        </marker>
+        <marker id="arrowPurple0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+        </marker>
+        <marker id="arrowAmber0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706" />
+        </marker>
+    </defs>
+
+    <!-- Canvas Background -->
+    <rect width="960" height="520" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" />
+    <text x="480" y="34" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#0f172a">Data Flow Diagram (DFD) — Level 0 Context Diagram</text>
+    <text x="480" y="54" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">Macro boundary view: External entities, central AML engine, and primary data streams</text>
+
+    <!-- CENTRAL PROCESS: 0.0 AML System -->
+    <g transform="translate(370, 180)" class="interactive-node" role="button">
+        <circle cx="110" cy="90" r="88" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" filter="url(#shadow0)" />
+        <line x1="22" y1="56" x2="198" y2="56" stroke="#bfdbfe" stroke-width="1" />
+        <text x="110" y="44" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#1e40af">PROCESS 0.0</text>
+        <text x="110" y="80" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="800" fill="#0f172a">AI Anti-Money</text>
+        <text x="110" y="100" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="800" fill="#0f172a">Laundering</text>
+        <text x="110" y="120" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="800" fill="#0f172a">Platform</text>
+        <line x1="30" y1="134" x2="190" y2="134" stroke="#bfdbfe" stroke-width="1" />
+        <text x="110" y="150" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#2563eb">FastAPI + 5 ML Engines</text>
+    </g>
+
+    <!-- EXTERNAL ENTITY 1: Core Banking & Payment Systems (Top Left) -->
+    <g transform="translate(40, 90)" class="interactive-node">
+        <rect width="190" height="90" rx="6" fill="#f8fafc" stroke="#334155" stroke-width="2" filter="url(#shadow0)" />
+        <rect width="190" height="26" rx="6" fill="#1e293b" />
+        <text x="95" y="18" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#ffffff">EXTERNAL ENTITY</text>
+        <text x="95" y="48" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#0f172a">Core Banking &amp; Rails</text>
+        <text x="95" y="66" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">SWIFT, Fedwire, ACH, Cards</text>
+        <text x="95" y="80" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#2563eb">PaySim Simulated Feeds</text>
+    </g>
+
+    <!-- EXTERNAL ENTITY 2: Compliance Officer / AML Analyst (Bottom Left) -->
+    <g transform="translate(40, 340)" class="interactive-node">
+        <rect width="190" height="90" rx="6" fill="#f8fafc" stroke="#334155" stroke-width="2" filter="url(#shadow0)" />
+        <rect width="190" height="26" rx="6" fill="#1e293b" />
+        <text x="95" y="18" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#ffffff">EXTERNAL ENTITY</text>
+        <text x="95" y="48" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#0f172a">Compliance Analyst</text>
+        <text x="95" y="66" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Human-in-the-Loop Review</text>
+        <text x="95" y="80" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#059669">Case Closure / Escalation</text>
+    </g>
+
+    <!-- EXTERNAL ENTITY 3: FinCEN & Regulatory Authorities (Top Right) -->
+    <g transform="translate(730, 90)" class="interactive-node">
+        <rect width="190" height="90" rx="6" fill="#f8fafc" stroke="#334155" stroke-width="2" filter="url(#shadow0)" />
+        <rect width="190" height="26" rx="6" fill="#1e293b" />
+        <text x="95" y="18" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#ffffff">EXTERNAL ENTITY</text>
+        <text x="95" y="48" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#0f172a">FinCEN / Regulators</text>
+        <text x="95" y="66" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Bank Secrecy Act (BSA)</text>
+        <text x="95" y="80" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#dc2626">SAR / CTR Submission</text>
+    </g>
+
+    <!-- EXTERNAL ENTITY 4: Notification Gateway & Slack/Email (Bottom Right) -->
+    <g transform="translate(730, 340)" class="interactive-node">
+        <rect width="190" height="90" rx="6" fill="#f8fafc" stroke="#334155" stroke-width="2" filter="url(#shadow0)" />
+        <rect width="190" height="26" rx="6" fill="#1e293b" />
+        <text x="95" y="18" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#ffffff">EXTERNAL ENTITY</text>
+        <text x="95" y="48" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#0f172a">Notification Gateway</text>
+        <text x="95" y="66" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Automated Dispatcher</text>
+        <text x="95" y="80" text-anchor="middle" font-family="sans-serif" font-size="10.5" fill="#7c3aed">Webhooks / Email / Pager</text>
+    </g>
+
+    <!-- DATA FLOWS -->
+    <!-- 1. Banking -> AML System (Transactions) -->
+    <path d="M 230 135 L 380 220" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow0)" />
+    <rect x="250" y="155" width="130" height="22" rx="4" fill="#ffffff" stroke="#bfdbfe" />
+    <text x="315" y="170" text-anchor="middle" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#1e40af">Raw Transactions (JSON)</text>
+
+    <!-- 2. AML System -> Banking (Disposition / Account Hold) -->
+    <path d="M 390 250 L 230 160" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#arrow0)" />
+    <rect x="245" y="210" width="135" height="20" rx="4" fill="#ffffff" stroke="#fecaca" />
+    <text x="312" y="224" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#dc2626">Real-Time Hold Directive</text>
+
+    <!-- 3. AML System -> Analyst (Alert Feed & Explanations) -->
+    <path d="M 380 310 L 230 365" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#arrowGreen0)" />
+    <rect x="245" y="320" width="135" height="22" rx="4" fill="#ffffff" stroke="#a7f3d0" />
+    <text x="312" y="335" text-anchor="middle" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#065f46">Scored Alerts + SHAP</text>
+
+    <!-- 4. Analyst -> AML System (Disposition & Rule Feedback) -->
+    <path d="M 230 405 L 390 330" fill="none" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow0)" />
+    <rect x="250" y="380" width="135" height="20" rx="4" fill="#ffffff" stroke="#cbd5e1" />
+    <text x="317" y="394" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#334155">Investigator Decision</text>
+
+    <!-- 5. AML System -> FinCEN (SAR Reports XML/JSON) -->
+    <path d="M 580 220 L 730 145" fill="none" stroke="#d97706" stroke-width="2" marker-end="url(#arrowAmber0)" />
+    <rect x="600" y="160" width="130" height="22" rx="4" fill="#ffffff" stroke="#fde68a" />
+    <text x="665" y="175" text-anchor="middle" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#92400e">Automated SAR Reports</text>
+
+    <!-- 6. AML System -> Notification Gateway -->
+    <path d="M 580 310 L 730 370" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrowPurple0)" />
+    <rect x="595" y="325" width="140" height="22" rx="4" fill="#ffffff" stroke="#ddd6fe" />
+    <text x="665" y="340" text-anchor="middle" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#5b21b6">Critical Tier-1 Alert Push</text>
+</svg>

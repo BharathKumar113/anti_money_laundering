@@ -284,12 +284,53 @@ The platform coordinates clients, microservices, and persistence layers:
 
 ### 5.3 Data Flow Architecture (DFD Levels 0, 1, and 2)
 
-#### Level-0 DFD (Context Diagram)
-1. **Core Banking System** transmits raw transaction payloads via JSON REST endpoints.
-2. **Surveillance Engine** validates data, computes feature contracts, and executes 5 models.
-3. **Decision Engine** returns real-time risk scores and triggers compliance alerts.
-4. **Compliance Officer** accesses the investigation workspace to inspect SHAP narratives and graph networks.
-5. **Regulatory Export** generates standardized SAR reports for sovereign Financial Intelligence Units (FIUs).
+The data flow architecture formalizes the trajectory of transactional financial telemetry across system boundaries, analytical transformations, concurrent ML scoring, and compliance triage.
+
+#### Level-0 DFD (a): Macro Context Boundary Diagram
+The Level-0 Context Diagram establishes the macroscopic boundary of the AML platform, modeling the external client systems, compliance officers, and regulatory bodies exchanging structured data streams with Process 0.0:
+
+![Figure 6: Data Flow Diagram (a) — Level 0 Context Boundary Diagram](docs/images/dfd_level_0_context.svg)
+
+* **External Entity 1 (Core Banking & Payment Rails)**: Streams continuous payment requests (SWIFT, Fedwire, ACH, and simulated PaySim payloads) via secure JSON REST endpoints; receives immediate account hold and freeze directives when risk thresholds are breached.
+* **External Entity 2 (AML Compliance Analyst)**: Consumes prioritized alert feeds accompanied by mathematical SHAP attributions and 2D topological graph subgraphs; submits human-in-the-loop triage decisions (case escalation, note documentation, or closure).
+* **External Entity 3 (FinCEN / Regulatory Authorities)**: Automatically ingests electronic Suspicious Activity Reports (SAR) and Currency Transaction Reports (CTR) formatted in compliance with sovereign Bank Secrecy Act (BSA) XML/JSON schemas.
+* **External Entity 4 (Notification Gateway)**: Dispatches automated real-time webhooks, emails, and emergency on-call pager notifications for Tier-1 critical risk alerts.
+
+---
+
+#### Level-1 DFD (b): Subsystem Architecture & Shared Data Stores
+The Level-1 Data Flow Diagram decomposes the central surveillance process into five decoupled functional subsystems exchanging data through three shared persistent and caching data stores:
+
+![Figure 7: Data Flow Diagram (b) — Level 1 Subsystem Architecture & Data Stores](docs/images/dfd_level_1_subsystems.svg)
+
+* **Process 1.0 (Transaction Ingestion & Schema Validation)**: Asynchronous REST endpoint verifying Bearer JWT tokens, checking Pydantic v2 schemas, and writing validated raw payloads into Store D1.
+* **Process 2.0 (Hybrid Multi-Model Ensemble Scoring)**: Retrieves historical account state from Store D2, computes the 18-dimensional PaySim feature contract, and executes the 5 detection engines concurrently.
+* **Process 3.0 (Graph Network Forensics)**: Analyzes multi-hop transaction topology to uncover circular layering chains and money mule rings, writing flagged topologies to Store D3.
+* **Process 4.0 (Alert Engine & Case Management)**: Triages scored transactions from Process 2.0, enqueuing high-risk cases ($R \ge 0.70$) into the investigator review queue in Store D3.
+* **Process 5.0 (Audit Trail & SAR Dispatch)**: Formats confirmed fraud cases into standardized FinCEN XML/JSON SAR dossiers and cryptographically records all triage actions.
+* **Shared Data Stores**:
+  - **D1 (Transaction Ledger Store)**: Relational database table storing raw financial transactions, balance snapshots, and timestamps.
+  - **D2 (Entity Feature Cache)**: Sliding in-memory velocity window store tracking 1-hour, 24-hour, and 7-day account transfer frequencies and delta balance buffers.
+  - **D3 (AML Alerts & Investigation Cases Store)**: Relational database table containing risk probabilities, model breakdowns, officer review statuses, and SAR filings.
+
+---
+
+#### Level-2 DFD (c): Real-Time 5-Engine Scoring Pipeline Flow
+The Level-2 Data Flow Diagram exposes the internal algorithmic routing of Process 2.0, showing the exact vectorization, parallel execution, and calibrated decision gating:
+
+![Figure 8: Data Flow Diagram (c) — Level 2 Ingestion & 5-Model Scoring Pipeline](docs/images/dfd_level_2_scoring_pipeline.svg)
+
+1. **Feature Vectorizer (Sub-Process 2.1)**: Transforms incoming transaction payloads into normalized 18-dimensional numerical vectors.
+2. **Parallel Fan-Out**: The vector is simultaneously evaluated across:
+   - *Engine 1 (Deterministic Rules)*: Evaluates BSA $10k CTR and smurfing rules.
+   - *Engine 2 (XGBoost Classifier)*: Evaluates supervised non-linear tree fraud boundaries.
+   - *Engine 3 (Isolation Forest)*: Computes spatial partitioning isolation distances.
+   - *Engine 4 (Deep Autoencoder)*: Measures latent bottleneck reconstruction error (MSE).
+   - *Engine 5 (NetworkX Forensics)*: Traverses the directed multigraph for $k$-hop cycle loops.
+3. **Meta-Ensemble Aggregation (Sub-Process 2.7)**: Computes the weighted dot product and applies Platt scaling calibration to produce an interpretable risk score from $0$ to $100$ ($0.0$ to $1.0$).
+4. **Decision Gate**: Transactions with risk $\ge 70$ trigger immediate SAR generation and hold directives; transactions with risk $< 70$ are cleared for straight-through settlement.
+
+---
 
 ### 5.4 Modular Component Decomposition
 1. **API Router Layer (`backend/app/api/`)**: Dispatches HTTP requests across modular endpoints:
@@ -402,7 +443,7 @@ $$\text{score}_{\text{iso}} = \min\left(1.0, \max\left(0.0, 0.60 + 0.70 \times |
 #### Neural Architecture Topology
 The Autoencoder network is configured as a symmetrical Multi-Layer Perceptron ($9 \to 16 \to 4 \to 16 \to 9$):
 
-![Figure 6: Deep Autoencoder Neural Network Topology and MSE Thresholding](docs/images/autoencoder_neural_topology.svg)
+![Figure 9: Deep Autoencoder Neural Network Topology and MSE Thresholding](docs/images/autoencoder_neural_topology.svg)
 
 1. **Standardization Preprocessing**:
    $$\vec{z}_0 = \frac{\vec{x} - \vec{\mu}}{\vec{\sigma}}$$
@@ -434,7 +475,7 @@ The ledger is modeled as a directed weighted multigraph $G = (V, E, W)$:
 - $E = \{(u, v, t)\}$: Directed edges representing transfers from originator $u$ to recipient $v$ at timestamp $t$.
 - $W: E \to \mathbb{R}^+$: Edge weights representing monetary transfer amounts.
 
-![Figure 7: Topological Graph Forensics & Circular Laundering Ring Detection](docs/images/graph_cycle_forensics.svg)
+![Figure 10: Topological Graph Forensics & Circular Laundering Ring Detection](docs/images/graph_cycle_forensics.svg)
 
 #### Cycle & Ring Detection Algorithm
 Money launderers route funds in closed loops ($A \to B \to C \to A$) to fabricate commercial turnover while returning funds to the originating syndicate.
@@ -498,7 +539,7 @@ Where $\phi_j$ represents the attribution of feature $j$. Every flagged transact
 ### 7.1 UML Use Case Diagram & Actor Descriptions
 The Use Case Diagram defines interactions between external actors and system capabilities:
 
-![Figure 8: UML Use Case Diagram](docs/images/uml_use_case_diagram.svg)
+![Figure 11: UML Use Case Diagram](docs/images/uml_use_case_diagram.svg)
 
 * **Banking Core System**: Primary transactional client submitting JSON payment streams and CSV batch files.
 * **Compliance Investigator**: Reviews high-risk alerts, traces graph network rings, documents evidence, and exports SARs.
@@ -509,14 +550,14 @@ The Use Case Diagram defines interactions between external actors and system cap
 ### 7.2 UML Class Diagram (Domain Model & Plugin Hierarchy)
 The Class Diagram models object-oriented relationships across the core entities:
 
-![Figure 9: UML Class Diagram: Plugin Architecture & Domain Entities](docs/images/uml_class_diagram.svg)
+![Figure 12: UML Class Diagram: Plugin Architecture & Domain Entities](docs/images/uml_class_diagram.svg)
 
 ---
 
 ### 7.3 UML Sequence Diagram 1: Real-Time Transaction Ingestion & Scoring
 Traces execution flow from initial API call through concurrent inference and persistence:
 
-![Figure 10: UML Sequence Diagram: Transaction Ingestion & Scoring](docs/images/uml_sequence_ingestion.svg)
+![Figure 13: UML Sequence Diagram: Transaction Ingestion & Scoring](docs/images/uml_sequence_ingestion.svg)
 
 ---
 
@@ -549,7 +590,7 @@ Models operational decision logic for transaction routing:
 ### 7.6 UML State Machine Diagram: Alert Lifecycle
 Models state transitions of compliance cases from creation to resolution:
 
-![Figure 11: UML State Machine Diagram: Compliance Alert Lifecycle](docs/images/uml_state_machine.svg)
+![Figure 14: UML State Machine Diagram: Compliance Alert Lifecycle](docs/images/uml_state_machine.svg)
 
 ---
 
