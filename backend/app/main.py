@@ -61,10 +61,26 @@ app.add_exception_handler(AMLBaseException, aml_exception_handler)
 # Mount API Routers
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
-# Serve Frontend SPA build if present
+# Serve Interactive Architecture & UML Diagrams Dashboard
 import os
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+
+diagrams_candidates = [
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "../../diagrams")),
+    os.path.abspath("/app/diagrams"),
+    os.path.abspath("./diagrams"),
+]
+diagrams_dir = None
+for d in diagrams_candidates:
+    if os.path.exists(os.path.join(d, "index.html")):
+        diagrams_dir = d
+        break
+
+if diagrams_dir:
+    app.mount("/diagrams", StaticFiles(directory=diagrams_dir, html=True), name="diagrams")
+
+# Serve Frontend SPA build if present
 
 candidate_dirs = [
     os.path.abspath(os.path.join(os.path.dirname(__file__), "../../frontend/dist")),

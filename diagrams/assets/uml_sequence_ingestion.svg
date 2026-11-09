@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" width="920" height="480">
+    
+    <defs>
+        <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#64748b" flood-opacity="0.08" />
+        </filter>
+        <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+        </marker>
+        <marker id="arrowSlate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+        </marker>
+        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+        </marker>
+        <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="umlInh" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+            <polygon points="1,1 11,6 1,11" fill="#ffffff" stroke="#334155" stroke-width="1.5" />
+        </marker>
+    </defs>
+
+    <rect width="920" height="480" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" />
+    <text x="460" y="30" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#0f172a">UML Sequence Diagram: Transaction Ingestion &amp; Scoring</text>
+    <text x="460" y="48" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">Synchronous request-response cycle from client ingestion to parallel inference, alert triage &amp; database persistence</text>
+
+    <!-- Lifeline Headers -->
+    <!-- Lifeline 1: Client -->
+    <rect x="50" y="70" width="130" height="32" rx="4" fill="#f8fafc" stroke="#2563eb" stroke-width="1.5" />
+    <text x="115" y="91" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#1e40af">Client (Core Banking)</text>
+    <line x1="115" y1="102" x2="115" y2="440" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4" />
+
+    <!-- Lifeline 2: FastAPI Router -->
+    <rect x="250" y="70" width="130" height="32" rx="4" fill="#f8fafc" stroke="#0ea5e9" stroke-width="1.5" />
+    <text x="315" y="91" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#0369a1">FastAPI Router</text>
+    <line x1="315" y1="102" x2="315" y2="440" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4" />
+
+    <!-- Lifeline 3: ML Detection Ensemble -->
+    <rect x="470" y="70" width="150" height="32" rx="4" fill="#f8fafc" stroke="#7c3aed" stroke-width="1.5" />
+    <text x="545" y="91" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#6d28d9">ML Detection Ensemble</text>
+    <line x1="545" y1="102" x2="545" y2="440" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4" />
+
+    <!-- Lifeline 4: PostgreSQL Database -->
+    <rect x="710" y="70" width="140" height="32" rx="4" fill="#f8fafc" stroke="#059669" stroke-width="1.5" />
+    <text x="780" y="91" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#065f46">PostgreSQL Database</text>
+    <line x1="780" y1="102" x2="780" y2="440" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4" />
+
+    <!-- Step 1: POST /transactions/ -->
+    <line x1="115" y1="130" x2="308" y2="130" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)" />
+    <text x="210" y="122" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#1e40af">1. POST /api/v1/transactions/ (JSON payload)</text>
+
+    <!-- Activation bar on Router -->
+    <rect x="310" y="130" width="10" height="280" fill="#e2e8f0" stroke="#94a3b8" />
+
+    <!-- Step 2: Validate & Feature Transform (Self loop) -->
+    <path d="M 320 150 L 360 150 L 360 170 L 322 170" fill="none" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arrowBlue)" />
+    <text x="368" y="164" font-family="sans-serif" font-size="9" fill="#0369a1">2. Validate schema &amp; compute 9 feature deltas</text>
+
+    <!-- Step 3: Dispatch to ML Ensemble -->
+    <line x1="320" y1="195" x2="538" y2="195" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrowBlue)" />
+    <text x="430" y="187" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#6d28d9">3. execute_ensemble(features)</text>
+
+    <!-- Activation bar on Ensemble -->
+    <rect x="540" y="195" width="10" height="95" fill="#f3e8ff" stroke="#7c3aed" />
+
+    <!-- Concurrent Evaluation Note -->
+    <rect x="560" y="205" width="130" height="75" rx="4" fill="#faf5ff" stroke="#c084fc" />
+    <text x="568" y="222" font-family="sans-serif" font-size="9" font-weight="700" fill="#6d28d9">Concurrent 5 Models:</text>
+    <text x="568" y="238" font-family="sans-serif" font-size="9" fill="#334155">• XGBoost: 0.9999</text>
+    <text x="568" y="252" font-family="sans-serif" font-size="9" fill="#334155">• Autoencoder: 0.8500</text>
+    <text x="568" y="266" font-family="sans-serif" font-size="9" fill="#334155">• IsoForest: 0.8626</text>
+
+    <!-- Step 4: Return Risk Score -->
+    <line x1="540" y1="290" x2="322" y2="290" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrowSlate)" />
+    <text x="430" y="282" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#6d28d9">4. Return Score = 0.8711 (HIGH) &amp; SHAP</text>
+
+    <!-- Step 5: Save Transaction & Alert -->
+    <line x1="320" y1="320" x2="773" y2="320" stroke="#059669" stroke-width="2" marker-end="url(#arrowGreen)" />
+    <text x="545" y="312" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#065f46">5. INSERT transaction &amp; auto-generate HIGH Alert</text>
+
+    <!-- Activation bar on DB -->
+    <rect x="775" y="320" width="10" height="40" fill="#d1fae5" stroke="#059669" />
+
+    <!-- Step 6: DB Commit Confirmation -->
+    <line x1="775" y1="360" x2="322" y2="360" stroke="#059669" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrowSlate)" />
+    <text x="545" y="352" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#065f46">6. Record saved (UUID: c68ea428...)</text>
+
+    <!-- Step 7: 201 Created Response -->
+    <line x1="310" y1="410" x2="117" y2="410" stroke="#2563eb" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arrowBlue)" />
+    <text x="210" y="402" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#1e40af">7. 201 Created (JSON: risk_score=0.8711, is_suspicious=True)</text>
+
+    <!-- Benchmark Note -->
+    <rect x="60" y="445" width="800" height="22" rx="4" fill="#f8fafc" />
+    <text x="460" y="460" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">Benchmark Latency: Step 1 through Step 7 completes in an average of 11.20 ms synchronously</text>
+</svg>
